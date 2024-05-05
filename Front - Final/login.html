@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 
 <head>
-    <title>Gerenciador</title>
+    <title>Login</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,71 +11,56 @@
 </head>
 
 <body>
-    <div class="nav-bar">
-        <div class="logo">
-            <a href="index.html"><img src="assets/shared/logo.svg" alt="company logo"></a>
-        </div>
-        <div class="toggle-button-open" id="toggle-ham-menu" onclick="imgClick()">
-            <!--<img src="assets/shared/icon-hamburger.svg">-->
-        </div>
-        <div class="navbar-links" id="nav-links">
-            <ul>
-                <li id="home-nav-btn"><a href="index.html">HOME</a></li>
-                <li id="home-nav-btn"><a href="filmes.html">FILMES</a></li>
-                <li id="dest-nav-btn"><a href="series.html">SÉRIES</a></li>
-                <li id="crew-nav-btn"><a href="livros.html">LIVROS</a></li>
-                <li id="tech-nav-btn"><a href="login.html">LOGIN</a></li>
-            </ul>
-        </div>
-    </div>
-
-    <section id="sectionLoginSignUp" class="sectionLoginSignUp">
-        <div class="login-container" id="login-container">
-            <div class="form-container">
-                <form class="form form-login">
-                    <h2 class="form-title">Login</h2>
-                    <div class="form-input-container">
-                        <input type="email" class="form-input" placeholder="Email">
-                        <input type="password" class="form-input" placeholder="Senha">
-                    </div>
-                    <a href="#" class="form-link">Esqueceu a senha?</a>
-                    <button type="button" class="form-button">Logar</button>
-                    <p class="mobile-text">
-                        Não tem conta?
-                        <a href="#" id="open-register-mobile">Registre-se</a>
-                    </p>
-                </form>
-                <form class="form form-register">
-                    <h2 class="form-title">Criar Conta</h2>
-                    <div class="form-input-container">
-                        <input type="text" class="form-input" placeholder="Nome">
-                        <input type="text" class="form-input" placeholder="Nome">
-                        <input type="email" class="form-input" placeholder="Email">
-                        <input type="password" class="form-input" placeholder="Senha">
-                    </div>
-                    <button type="button" class="form-button">Cadastrar</button>
-                    <p class="mobile-text">
-                        Já tem conta?
-                        <a href="#" id="open-login-mobile">Login</a>
-                    </p>
-                </form>
-            </div>
-            <div class="overlay-container">
-                <div class="overlay">
-                    <h2 class="form-title form-title-light">Já tem conta?</h2>
-                    <p class="form-text">Faça login com as suas informações</p>
-                    <button class="form-button form-button-light" id="open-login">Entrar</button>
+    <main>
+        <!-- Tela de Login -->
+        <section id="sectionLoginSignUp" class="sectionLoginSignUp">
+            <div class="login-container" id="login-container">
+                <div class="form-container">
+                    <form class="form form-login" id="login-form">
+                        <h2 class="form-title">Login</h2>
+                        <div id="message-login"></div>
+                        <div class="form-input-container">
+                            <input id="username" type="username" class="form-input" placeholder="Username">
+                            <input id="password" type="password" class="form-input" placeholder="Senha">
+                        </div>
+                        <button type="submit" class="form-button">Logar</button>
+                        <p class="mobile-text">
+                            Não tem conta?
+                            <a href="#" id="open-register-mobile">Registre-se</a>
+                        </p>
+                    </form>
+                    <form class="form form-register" id="signup-form">
+                        <h2 class="form-title">Criar Conta</h2>
+                        <div id="message-cadastro"></div>
+                        <div class="form-input-container">
+                            <input id="username-cd" type="text" class="form-input" placeholder="Username">
+                            <input id="cidade-cd" type="text" class="form-input" placeholder="Cidade">
+                            <input id="estado-cd" type="text" class="form-input" placeholder="Estado">
+                            <input id="nascimento-cd" type="number" class="form-input" placeholder="Ano Nascimento">
+                            <input id="password-cd"type="password" class="form-input" placeholder="Senha">
+                        </div>
+                        <button type="submit" class="form-button" id="submit-cadastro">Cadastrar</button>
+                        <p class="mobile-text">
+                            Já tem conta?
+                            <a href="#" id="open-login-mobile">Login</a>
+                        </p>
+                    </form>
                 </div>
-                <div class="overlay">
-                    <h2 class="form-title form-title-light">Cadastre-se</h2>
-                    <p class="form-text">Cadastro rápido e fácil</p>
-                    <button class="form-button form-button-light" id="open-register">Cadastrar</button>
+                <div class="overlay-container">
+                    <div class="overlay">
+                        <h2 class="form-title form-title-light">Já tem conta?</h2>
+                        <p class="form-text">Faça login com as suas informações</p>
+                        <button class="form-button form-button-light" id="open-login">Entrar</button>
+                    </div>
+                    <div class="overlay">
+                        <h2 class="form-title form-title-light">Cadastre-se</h2>
+                        <p class="form-text">Cadastro rápido e fácil</p>
+                        <button class="form-button form-button-light" id="open-register">Cadastrar</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    
+        </section>
+    </main>
     <script src="scripts/loginGerenciador.js"></script>
     <script src="scripts/jwt-login.js"></script>
 </body>

@@ -23,10 +23,10 @@
         <div class="navbar-links" id="nav-links">
             <ul>
                 <li id="home-nav-btn"><a href="index.html">HOME</a></li>
-                <li id="home-nav-btn"><a href="filmes.html">FILMES</a></li>
-                <li id="dest-nav-btn"><a href="series.html">SÉRIES</a></li>
-                <li id="crew-nav-btn"><a href="livros.html">LIVROS</a></li>
-                <li id="tech-nav-btn"><a href="login.html">LOGIN</a></li>
+                <li id="filmes-nav-btn"><a href="filmes.html">FILMES</a></li>
+                <li id="series-nav-btn"><a href="series.html">SÉRIES</a></li>
+                <li id="livros-nav-btn"><a href="livros.html">LIVROS</a></li>
+                <li id="login-nav-btn"><a href="login.html">LOGIN</a></li>
             </ul>
         </div>
     </div>
@@ -41,26 +41,31 @@
 
         </section>
         <section id="sectionFilmes" style="display: none;">
-            <a href="#" class="botao" id="btnVoltar">Voltar</a>
+            <input type="button" value="Voltar" onclick="reloadPage()" id="btnVoltar" class="botao">
             <h1>Avaliação de Filmes</h1>
             <p style="font-weight:bold" id="paragrafoMensagemFilmes"></p>
 
-            <table id="tabelaFilmes" style="display: none;">
-                <input type="button" value="Novo" onclick="novoFilme()" id="btnNovoFilme" class="botao">
-                <table class="camp">
-                    <tr>
-                        <th>ID</th>
-                        <th>Titulo</th>
-                        <th>País</th>
-                        <th>Ano de Lançamento</th>
-                        <th>URL Capa</th>
-                        <th>Diretor</th>
-                        <th>Elenco Principal</th>
-                        <th>Nota</th>
-                    </tr>
-                    <tbody id="corpoTabelaFilmes"> </tbody>
+            <div class="table-container">
+                
+            </div>
+            <div class="table-container">
+                <table id="tabelaFilmes" style="display: none;">
+                    <input type="button" value="Novo" onclick="novoFilme()" id="btnNovoFilme" class="botao">
+                    <table class="camp">
+                        <tr>
+                            <th>ID</th>
+                            <th>Titulo</th>
+                            <th>País</th>
+                            <th>Ano de Lançamento</th>
+                            <th>URL Capa</th>
+                            <th>Diretor</th>
+                            <th>Elenco Principal</th>
+                            <th>Nota</th>
+                        </tr>
+                        <tbody id="corpoTabelaFilmes"> </tbody>
+                    </table>
                 </table>
-            </table>
+            </div>
 
             <table id="tabelaFormularioFilmes" style="display: none">
                 <tr>

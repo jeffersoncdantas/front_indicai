@@ -1,3 +1,7 @@
+*{
+    
+    font-family: "Barlow Condensed", sans-serif;
+}
 body {
     background-image: url(assets/bg/bg.png);
     background-size: cover;
@@ -10,7 +14,7 @@ body {
 #landing button {
     font-weight: 900;
     padding: 10px 5px;
-    font-size: 18px;
+    font-size: 30px;
     border-radius: 15px;
     border: 1px solid rgba(190, 255, 85, 0.8);
     background: rgba(190, 255, 85, 0.8);
@@ -43,22 +47,18 @@ body {
 
 .botao {
     font-weight: 900;
-    padding: 10px 5px;
-    font-size: 18px;
+    font-size: 20px;
     border-radius: 15px;
     border: 1px solid rgba(190, 255, 85, 0.8);
     background: rgba(190, 255, 85, 0.8);
     color: #333;
-    padding: 10px 20px;
     border: none;
     cursor: pointer;
-    transition: .4s;
-    margin-top: 10px;
+    padding: 10px 15px; /* Adicionando padding para manter o tamanho constante */
 }
 
 .botao:hover {
     background: rgba(20, 20, 20, .8);
-    padding: 10px 40px;
     color: white;
 }
 
@@ -66,7 +66,11 @@ body {
     border: 1px solid rgba(66, 66, 66, 0.8);
     background: rgba(66, 66, 66, 0.8);
     color: #ffffff;
-    padding: 10px 20px;
+}
+
+/*CSS da Tabela*/
+.table-container {
+    overflow-x: auto;
 }
 
 .camp {
@@ -77,6 +81,7 @@ body {
     color: #333;
     font-weight: bold;
     border-radius: 8px;
+    overflow-x: auto; /* Adicionando overflow-x para permitir rolagem horizontal */
 }
 
 .camp th {
@@ -84,7 +89,7 @@ body {
     color: #333;
     font-weight: bold;
     padding: 8px;
-    text-align: left;
+    text-align: left; /* Evita que o conteúdo da célula seja quebrado em várias linhas */
 }
 
 .camp td {
@@ -111,6 +116,8 @@ th:last-child {
 table {
     border-collapse: separate;
     border-spacing: 0 10px;
+    width: 70%; /* Definindo largura da tabela como 100% */
+    
 }
 
 td,
@@ -118,6 +125,84 @@ a {
     font-weight: 600;
     font-size: 18px;
 }
+
+/* Estilos para telas menores que 375px */
+@media only screen and (max-width: 375px) {
+    .table-container {
+        overflow-x: auto;
+    }
+
+    .camp th, .camp td {
+        font-size: 14px;
+    }
+
+    .camp th {
+        padding: 6px;
+    }
+
+    .camp td {
+        padding: 6px;
+    }
+}
+
+/* Estilos para telas entre 375px e 767px */
+@media only screen and (min-width: 376px) and (max-width: 767px) {
+    .table-container {
+        overflow-x: auto;
+    }
+
+    .camp th, .camp td {
+        font-size: 16px;
+    }
+
+    .camp th {
+        padding: 8px;
+    }
+
+    .camp td {
+        padding: 8px;
+    }
+}
+
+/* Estilos para telas entre 768px e 1279px */
+@media only screen and (min-width: 768px) and (max-width: 1279px) {
+    .table-container {
+        overflow-x: auto;
+    }
+
+    .camp th, .camp td {
+        font-size: 18px;
+    }
+
+    .camp th {
+        padding: 10px;
+    }
+
+    .camp td {
+        padding: 10px;
+    }
+}
+
+/* Estilos para telas maiores ou iguais a 1280px */
+@media only screen and (min-width: 1280px) {
+    .table-container {
+        overflow-x: auto;
+    }
+
+    .camp th, .camp td {
+        font-size: 20px;
+    }
+
+    .camp th {
+        padding: 12px;
+    }
+
+    .camp td {
+        padding: 12px;
+    }
+}
+
+
 
 #btnVoltar {
     font-weight: 900;

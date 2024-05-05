@@ -10,7 +10,7 @@
     border-radius: 8px;
     margin: 10px;
     padding: 20px;
-    width: 300px;
+    width: 250px;
     text-align: center;
 }
 
@@ -25,4 +25,18 @@
 
 .card p {
     margin: 10px 0;
+}
+.recomendacoes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.titulosH1 {
+    margin: 2rem; /* Para remover margem padrão do h1 */
+    font-size: 40px;
+}
+
+.botao {
+    margin-left: 2rem; /* Isso empurra o botão para a direita */
 }

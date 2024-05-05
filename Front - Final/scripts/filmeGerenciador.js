@@ -7,7 +7,7 @@ var destaquesFilmes = document.querySelector('#filmes-container');
 var landing = document.querySelector("#landing");
 
 btnGerenciarFilmes.addEventListener("click", function () {
-    tabela.style.display = "block"
+    tabela.style.display = "block";
     sectionFilmes.style.display = "block";
     destaquesFilmes.style.display = "none";
 })

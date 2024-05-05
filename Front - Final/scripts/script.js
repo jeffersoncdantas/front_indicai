@@ -1,46 +1,55 @@
-//Start of navigation bar js
 console.log("Script loaded nav bar");
+
+// Carrega as imagens do menu
 var menu1 = new Image;
-menu1.src=("assets/shared/icon-hamburger.svg");
+menu1.src = "assets/shared/icon-hamburger.svg";
 var menu2 = new Image;
-menu2.src=("assets/shared/icon-close.svg");
+menu2.src = "assets/shared/icon-close.svg";
 
+// Elementos do DOM
 var navLinks = document.getElementById("nav-links");
-var hamMenu = document.getElementById("toggle-ham-menu");
-
-var homeNavBtn = document.getElementById("home-nav-btn");
-var destNavBtn = document.getElementById("dest-nav-btn");
-var crewNavBtn = document.getElementById("crew-nav-btn");
-var techNavBtn = document.getElementById("tech-nav-btn");
-
 var hamMenuIcon = document.getElementById("toggle-ham-menu").appendChild(menu1);
+var homeNavBtn = document.getElementById("home-nav-btn");
+var filmesNavBtn = document.getElementById("filmes-nav-btn");
+var seriesNavBtn = document.getElementById("series-nav-btn");
+var livrosNavBtn = document.getElementById("livros-nav-btn");
+var loginNavBtn = document.getElementById("login-nav-btn");
 
-function imgClick(){
-    if (hamMenuIcon.src.match("assets/shared/icon-hamburger.svg")){
+// Função para alternar o ícone do menu e mostrar/ocultar os links de navegação
+function imgClick() {
+    if (hamMenuIcon.src.match("assets/shared/icon-hamburger.svg")) {
         hamMenuIcon.src = "assets/shared/icon-close.svg";
         navLinks.classList.add("navbar-links-active");
-    }
-    else{
+    } else {
         hamMenuIcon.src = "assets/shared/icon-hamburger.svg";
         navLinks.classList.remove("navbar-links-active");
     }
 }
-homeNavBtn.classList.add("nav-btn-active");
-if(window.location.href.indexOf("index") != -1){
-    homeNavBtn.classList.add("nav-btn-active");
-}
-else if(window.location.href.indexOf("destination") != -1){
-    destNavBtn.classList.add("nav-btn-active");
+
+// Ativa o botão de navegação correspondente à página atual
+function setActiveNavBtn() {
+    var currentLocation = window.location.href;
     homeNavBtn.classList.remove("nav-btn-active");
+    filmesNavBtn.classList.remove("nav-btn-active");
+    seriesNavBtn.classList.remove("nav-btn-active");
+    livrosNavBtn.classList.remove("nav-btn-active");
+    loginNavBtn.classList.remove("nav-btn-active");
+
+    if (currentLocation.includes("index")) {
+        homeNavBtn.classList.add("nav-btn-active");
+    } else if (currentLocation.includes("filmes")) {
+        filmesNavBtn.classList.add("nav-btn-active");
+    } else if (currentLocation.includes("series")) {
+        seriesNavBtn.classList.add("nav-btn-active");
+    } else if (currentLocation.includes("livros")) {
+        livrosNavBtn.classList.add("nav-btn-active");
+    } else if (currentLocation.includes("login")) {
+        loginNavBtn.classList.add("nav-btn-active");
+    }
 }
-else if(window.location.href.indexOf("crew") != -1){
-    crewNavBtn.classList.add("nav-btn-active");
-    homeNavBtn.classList.remove("nav-btn-active");
-}
-else if(window.location.href.indexOf("tech") != -1){
-    techNavBtn.classList.add("nav-btn-active");
-    homeNavBtn.classList.remove("nav-btn-active");
-}
+
+// Define o botão de navegação ativo ao carregar a página
+setActiveNavBtn();
 //End of navigation bar js
 document.addEventListener('DOMContentLoaded', function() {
     const loginContainer = document.getElementById('login-container');
@@ -65,4 +74,8 @@ document.addEventListener('DOMContentLoaded', function() {
         openLoginMobile.addEventListener('click', moveOverlay);
     }
 });
+
+function reloadPage() {
+    location.reload();
+}
 

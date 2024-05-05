@@ -51,7 +51,6 @@ function inicializarFilme() {
     tabelaFilmes.style.display = 'inline';
 
     listarTodosFilmes();
-    exibirFilmes(filmes);
 }
 
 function listarTodosFilmes() {
@@ -60,6 +59,7 @@ function listarTodosFilmes() {
 
 function preencherTabelaFilme(filmes) {
     corpoTabelaFilmes.innerHTML = "";
+    exibirFilmes(filmes);
     var n = filmes.length;
     for (var i = 0; i < n; i++) {
         let filme = filmes[i];
@@ -210,9 +210,9 @@ function apagarFilme() {
     asyncApagarFilme(id, inicializarFilme, errorHandler);
 }
 
-
 function exibirFilmes(filmes) {
     const filmesContainer = document.getElementById('filmes-container');
+    filmesContainer.innerHTML = ""; // Limpa o conteúdo anterior
 
     filmes.forEach(filme => {
         // Cria um elemento card para cada filme
@@ -222,12 +222,12 @@ function exibirFilmes(filmes) {
         // Adiciona a imagem do filme ao card
         const imagem = document.createElement('img');
         imagem.src = filme.urlCapa;
-        imagem.alt = filme.tituloFilme;
+        imagem.alt = filme.titulo;
         card.appendChild(imagem);
 
         // Adiciona o título do filme ao card
         const titulo = document.createElement('h2');
-        titulo.textContent = filme.tituloFilme;
+        titulo.textContent = filme.titulo;
         card.appendChild(titulo);
 
         // Adiciona outras informações do filme ao card
@@ -236,12 +236,8 @@ function exibirFilmes(filmes) {
         card.appendChild(diretor);
 
         const ano = document.createElement('p');
-        ano.textContent = `Ano: ${filme.ano}`;
+        ano.textContent = `Ano: ${filme.anoLancamento}`;
         card.appendChild(ano);
-
-        const sinopse = document.createElement('p');
-        sinopse.textContent = `Sinopse: ${filme.sinopse}`;
-        card.appendChild(sinopse);
 
         // Adiciona o card ao container de filmes
         filmesContainer.appendChild(card);
