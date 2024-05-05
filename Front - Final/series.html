@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="navbar.css" type="text/css">
     <link rel="stylesheet" href="style.css" type="text/css">
 
 </head>
@@ -15,7 +16,8 @@
         <div class="logo">
             <a href="index.html"><img src="assets/shared/logo.svg" alt="company logo"></a>
         </div>
-        <div class="toggle-button-open" id="toggle-ham-menu" onclick="imgClick()"><!--<img src="assets/shared/icon-hamburger.svg">--> </div>
+        <div class="toggle-button-open" id="toggle-ham-menu" onclick="imgClick()">
+            <!--<img src="assets/shared/icon-hamburger.svg">--> </div>
         <div class="navbar-links" id="nav-links">
             <ul>
                 <li id="home-nav-btn"><a href="index.html">HOME</a></li>
@@ -27,85 +29,101 @@
         </div>
     </div>
     <main class="content">
-        <div class="transparencia">
-            <section id="landing">
-                <h1>Sugestões e Avaliações de Filmes, Livros e Séries</h1>
-                <ul>
-                    <button id="btnGerenciarFilmes">Gerenciar Filmes</button>
-                </ul>
-            </section>
+        <!-- Recomendações Séries -->
+        <section id="recomendacoesSeries" class="recomendacoes">
+            <div class="container">
+                <a href="#" class="botao" id="btnGerenciar">Gerenciar Séries</a>
+                <h1 class="titulosH1">Destaques da Semana</h1>
+                <br>
 
-            <section id="sectionFilmes" style="display: none">
-                <input type="button" value="Voltar" id="btnVoltar" onclick="voltarPagInicial()">
-                <h1>Avaliação de Filmes</h1>
-                <p style="font-weight:bold" id="paragrafoMensagemFilmes"></p>
-                
-                <!-- <input type="text" id="cargoInput" class="inputText" placeholder="Digite as letras iniciais do cargo">
-                <button onclick="buscarEmpregadosCargo()" class="botao">Buscar</button> -->
-                
-                <table id="tabelaFilmes">
-                    <input type="button" value="Novo" onclick="novoFilme()" id="btnNovoFilme" class="botao">
-                    <table class="camp">
-                        <tr>
-                            <th>ID</th>
-                            <th>Titulo</th>
-                            <th>Diretor</th>
-                            <th>Elenco Principal</th>
-                            <th>País</th>
-                            <th>Ano de Lançamento</th>
-                            <th>Nota</th>
-                        </tr>
-                        <tbody id="corpoTabelaFilmes"> </tbody>
-                    </table>
-                </table>
+                <div class="recomendacoes-grid">
+                    <div class="card">
+                        <img src="" alt="Avatar" style="width:100%">
+                        <div class="container">
+                            <h4 id="tituloSerie">Título: <b></b></h4>
+                            <p id="anoLancamento">Ano de Lançamento: </p>
+                            <p id="elencoPrincipal">Elenco Principal: </p>
+                            <p id="numeroTemporadas">Número de Temporadas: </p>
+                        </div>
+                    </div>
+                </div>
+        </section>
+        <section id="sesctionSeries">
+            <input type="button" value="Voltar" id="btnVoltar" onclick="voltarPagInicial()">
+            <h1>Avaliação de Séries</h1>
+            <p style="font-weight:bold" id="paragrafoMensagem"></p>
 
-                <table id="tabelaFormularioFilmes" style="display: none">
+            <table id="tabelaSeries">
+                <input type="button" value="Novo" onclick="novoItem()" id="btnNovo" class="botao">
+                <table class="camp">
                     <tr>
-                        <td>ID:</td>
-                        <td><input type="text" id="txtIdFilme" class="inputText"></td>
+                        <th>ID</th>
+                        <th>Titulo</th>
+                        <th>País</th>
+                        <th>Ano de Lançamento</th>
+                        <th>URL Capa</th>
+                        <th>Diretor</th>
+                        <th>Elenco Principal</th>
+                        <th>Número de Temporadas</th>
+                        <th>Nota</th>
                     </tr>
-                    <tr>
-                        <td>Título:</td>
-                        <td><input type="text" id="txtTituloFilme" class="inputText"></td>
-                    </tr>
-                    <tr>
-                        <td>Diretor:</td>
-                        <td><input type="text" id="txtDiretorFilme" class="inputText"></td>
-                    </tr>
-                    <tr>
-                        <td>Elenco Principal:</td>
-                        <td><input type="text" id="txtElencoFilme" class="inputText"></td>
-                    </tr>
-                    <tr>
-                        <td>País:</td>
-                        <td><input type="text" id="txtPaisFilme" class="inputText"></td>
-                    </tr>
-                    <tr>
-                        <td>Ano de Lançamento:</td>
-                        <td><input type="text" id="txtAnoLancamentoFilme" class="inputText"></td>
-                    </tr>
-                    <tr>
-                        <td>Nota:</td>
-                        <td><input type="text" id="txtNotaFilme" class="inputText"></td>
-                    </tr>
-                    
-                    <tr>
-                        <td></td>
-                        <td>
-                            <input type="button" value="Salvar" onclick="salvarFilme()" id="btnSalvarFilme"
-                                class="botao">
-                            <input type="button" value="Apagar" onclick="apagarFilme()" id="btnApagarFilme"
-                                class="botao">
-                            <input type="button" value="Cancelar" onclick="cancelarEdicaoFilme()"
-                                id="btnCancelarFilme" class="botao">
-                        </td>
-                    </tr>
+                    <tbody id="corpoTabelaSeries"> </tbody>
                 </table>
-            </section>
+            </table>
+
+            <table id="tabelaFormularioSeries" style="display: none">
+                <tr>
+                    <td>ID:</td>
+                    <td><input type="text" id="txtId" class="inputText"></td>
+                </tr>
+                <tr>
+                    <td>Título:</td>
+                    <td><input type="text" id="txtTitulo" class="inputText"></td>
+                </tr>
+                <tr>
+                    <td>País:</td>
+                    <td><input type="text" id="txtPais" class="inputText"></td>
+                </tr>
+                <tr>
+                    <td>Ano de Lançamento:</td>
+                    <td><input type="text" id="txtAnoLancamento" class="inputText"></td>
+                </tr>
+                <tr>
+                    <td>URL Capa:</td>
+                    <td><input type="text" id="txtUrlCapa" class="inputText"></td>
+                </tr>
+                <tr>
+                    <td>Diretor:</td>
+                    <td><input type="text" id="txtDiretor" class="inputText"></td>
+                </tr>
+                <tr>
+                    <td>Elenco Principal:</td>
+                    <td><input type="text" id="txtElenco" class="inputText"></td>
+                </tr>
+                <tr>
+                    <td>Número de Temporadas:</td>
+                    <td><input type="text" id="txtNumTemp" class="inputText"></td>
+                </tr>
+                <tr>
+                    <td>Nota:</td>
+                    <td><input type="text" id="txtNota" class="inputText"></td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="button" value="Salvar" onclick="salvar()" id="btnSalvar" class="botao">
+                        <input type="button" value="Apagar" onclick="apagar()" id="btnApagar" class="botao">
+                        <input type="button" value="Cancelar" onclick="cancelarEdicao()" id="btnCancelar"
+                            class="botao">
+                    </td>
+                </tr>
+            </table>
+        </section>
         </div>
     </main>
     <script src="scripts/gerenciadorInicial.js"></script>
-    <script src="scripts/filmes.js"></script>
+    <script src="scripts/series.js"></script>
     <script src="scripts/script.js"></script>
 </body>
 

@@ -10,7 +10,10 @@ const txtUrlCapa = document.querySelector('#txtUrlCapa');
 const txtDiretorFilme = document.querySelector('#txtDiretorFilme');
 const txtElencoPrincipalFilme = document.querySelector('#txtElencoFilme');
 const txtNotaFilme = document.querySelector('#txtNotaFilme');
-var sectionFilmes = document.querySelector("#sectionFilmes");
+
+const tituloFilme = document.getElementById("tituloFilme");
+const anoLancamento = document.getElementById("anoLancamento");
+const elencoPrincipal = document.getElementById("elencoPrincipal");
 
 const btnNovoFilme = document.querySelector('#btnNovoFilme');
 const btnSalvarFilme = document.querySelector('#btnSalvarFilme');
@@ -20,6 +23,11 @@ var criandoNovoFilme = false;
 
 
 inicializarFilme();
+
+function voltarPagInicial(){
+    landing.style.display = "block";
+    sectionFilmes.style.display = "none";
+}
 
 function inicializarFilme() {
     criandoNovoFilme = false;
@@ -51,10 +59,12 @@ function inicializarFilme() {
     tabelaFilmes.style.display = 'inline';
 
     listarTodosFilmes();
-    exibirFilmes(filmes);
 }
 
 function listarTodosFilmes() {
+    const errorHandler = function (error) {
+        paragrafoMensagemFilmes.textContent = "Erro ao listar Filmes (código " + error.message + ")";
+    }
     asyncLerFilmes(preencherTabelaFilme, errorHandler);
 }
 
@@ -85,18 +95,16 @@ function preencherTabelaFilme(filmes) {
         celulaDiretor.textContent = filme.diretor;
         celulaElencoPrincipal.textContent = filme.elencoPrincipal;
         celulaNota.textContent = filme.nota;
-    };
-}
-
-function errorHandler(error) {
-    paragrafoMensagemFilmes.textContent = "Erro ao listar Filmes (código " + error.message + ")";
+    }
 }
 
 function selecionarFilme(id) {
     criandoNovoFilme = false;
+    const errorHandler = function (error) {
+        paragrafoMensagemFilmes.textContent = "Erro ao selecionar Filme (código " + error.message + ")";
+    }
     asyncLerFilmeById(id, preencherFormularioFilme, errorHandler);
 }
-
 
 function preencherFormularioFilme(filme) {
     paragrafoMensagemFilmes.textContent = 'Altere e salve os dados do Filme, ou então apague o registro do Filme.'
@@ -209,45 +217,6 @@ function apagarFilme() {
     }
     asyncApagarFilme(id, inicializarFilme, errorHandler);
 }
-
-
-function exibirFilmes(filmes) {
-    const filmesContainer = document.getElementById('filmes-container');
-
-    filmes.forEach(filme => {
-        // Cria um elemento card para cada filme
-        const card = document.createElement('div');
-        card.classList.add('card');
-
-        // Adiciona a imagem do filme ao card
-        const imagem = document.createElement('img');
-        imagem.src = filme.urlCapa;
-        imagem.alt = filme.tituloFilme;
-        card.appendChild(imagem);
-
-        // Adiciona o título do filme ao card
-        const titulo = document.createElement('h2');
-        titulo.textContent = filme.tituloFilme;
-        card.appendChild(titulo);
-
-        // Adiciona outras informações do filme ao card
-        const diretor = document.createElement('p');
-        diretor.textContent = `Diretor: ${filme.diretor}`;
-        card.appendChild(diretor);
-
-        const ano = document.createElement('p');
-        ano.textContent = `Ano: ${filme.ano}`;
-        card.appendChild(ano);
-
-        const sinopse = document.createElement('p');
-        sinopse.textContent = `Sinopse: ${filme.sinopse}`;
-        card.appendChild(sinopse);
-
-        // Adiciona o card ao container de filmes
-        filmesContainer.appendChild(card);
-    });
-}
-
 
 //Funcoes Rest
 async function asyncCriarFilme(dadosFilme, proxsucesso, proxerro) {

@@ -6,7 +6,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="navbar.css" type="text/css">
     <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="stylesheet" href="filmes.css" type="text/css">
 
 </head>
 
@@ -16,7 +18,8 @@
             <a href="index.html"><img src="assets/shared/logo.svg" alt="company logo"></a>
         </div>
         <div class="toggle-button-open" id="toggle-ham-menu" onclick="imgClick()">
-            <!--<img src="assets/shared/icon-hamburger.svg">--> </div>
+            <!--<img src="assets/shared/icon-hamburger.svg">-->
+        </div>
         <div class="navbar-links" id="nav-links">
             <ul>
                 <li id="home-nav-btn"><a href="index.html">HOME</a></li>
@@ -31,27 +34,18 @@
         <!-- Recomendações Filmes -->
         <section id="recomendacoesFilmes" class="recomendacoes">
             <div class="container">
-                <a href="#" class="botao" id="btnGerenciarFilmes">Gerenciar Filmes</a>
                 <h1 class="titulosH1">Destaques da Semana</h1>
+                <a href="#" class="botao" id="btnGerenciarFilmes">Gerenciar Filmes</a>
                 <br>
+                <div id="filmes-container" class="container"></div>
 
-                <div class="recomendacoes-grid">
-                    <div class="card">
-                        <img src="" alt="Avatar" style="width:100%">
-                        <div class="container">
-                            <h4 id="tituloFilme">Título: <b></b></h4>
-                            <p id="anoLancamento">Ano de Lançamento: </p>
-                            <p id="elencoPrincipal">Elenco Principal: </p>
-                        </div>
-                    </div>
-                </div>
         </section>
-        <section id="sectionFilmes" style="display: none">
-            <input type="button" value="Voltar" id="btnVoltar" onclick="voltarPagInicial()">
+        <section id="sectionFilmes" style="display: none;">
+            <a href="#" class="botao" id="btnVoltar">Voltar</a>
             <h1>Avaliação de Filmes</h1>
             <p style="font-weight:bold" id="paragrafoMensagemFilmes"></p>
 
-            <table id="tabelaFilmes">
+            <table id="tabelaFilmes" style="display: none;">
                 <input type="button" value="Novo" onclick="novoFilme()" id="btnNovoFilme" class="botao">
                 <table class="camp">
                     <tr>
@@ -115,7 +109,8 @@
         </section>
         </div>
     </main>
-    <script src="scripts/gerenciadorInicial.js"></script>
+
+    <script src="scripts/filmeGerenciador.js"></script>
     <script src="scripts/filmes.js"></script>
     <script src="scripts/script.js"></script>
 </body>

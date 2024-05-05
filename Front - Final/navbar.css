@@ -1,6 +1,7 @@
-.navbar{
-    z-index: 1000;
+body{
+    margin: 0;
 }
+
 .logo {
     margin-left: 30px;
 }
@@ -9,10 +10,6 @@
     width: 30px;
 }
 
-.navbar-links ul li a {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
 
 .navbar-links ul {
     margin: 0;
