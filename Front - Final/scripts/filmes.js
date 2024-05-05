@@ -10,11 +10,16 @@ const txtPaisFilme = document.querySelector('#txtPaisFilme');
 const txtAnoLancamentoFilme = document.querySelector('#txtAnoLancamentoFilme');
 const txtNotaFilme = document.querySelector('#txtNotaFilme');
 
+const tituloFilme = document.getElementById("tituloFilme");
+const anoLancamento = document.getElementById("anoLancamento");
+const elencoPrincipal = document.getElementById("elencoPrincipal");
+
 const btnNovoFilme = document.querySelector('#btnNovoFilme');
 const btnSalvarFilme = document.querySelector('#btnSalvarFilme');
 const btnApagarFilme = document.querySelector('#btnApagarFilme');
 const btnCancelarFilme = document.querySelector('#btnCancelarFilme');
 var criandoNovoFilme = false;
+
 
 inicializarFilme();
 
@@ -33,6 +38,7 @@ function inicializarFilme() {
     txtPaisFilme.value = '';
     txtAnoLancamentoFilme.value = '';
     txtNotaFilme.value = '';
+    txtUrlCapa.value = '';
 
     txtIdFilme.disabled = true;
     txtTituloFilme.disabled = true;
@@ -41,6 +47,7 @@ function inicializarFilme() {
     txtPaisFilme.disabled = true;
     txtAnoLancamentoFilme.disabled = true;
     txtNotaFilme.disabled = true;
+    txtUrlCapa.disabled = true;
 
     btnNovoFilme.disabled = false;
     btnSalvarFilme.disabled = true;
@@ -105,6 +112,7 @@ function preencherFormularioFilme(filme) {
     txtPaisFilme.value = filme.pais;
     txtAnoLancamentoFilme.value = filme.anoLancamento;
     txtNotaFilme.value = filme.nota;
+    txtUrlCapa.value = filme.urlCapa;
 
     txtIdFilme.disabled = true;
     txtTituloFilme.disabled = false;
@@ -113,6 +121,7 @@ function preencherFormularioFilme(filme) {
     txtPaisFilme.disabled = false;
     txtAnoLancamentoFilme.disabled = false;
     txtNotaFilme.disabled = false;
+    txtAnoLancamentoFilme.urlCapa = false;
 
     btnNovoFilme.disabled = true;
     btnSalvarFilme.disabled = false;
@@ -134,6 +143,7 @@ function novoFilme() {
     txtPaisFilme.value = '';
     txtAnoLancamentoFilme.value = '';
     txtNotaFilme.value = '';
+    txtUrlCapa.value = '';
 
     txtIdFilme.disabled = true;
     txtTituloFilme.disabled = false;
@@ -142,6 +152,7 @@ function novoFilme() {
     txtPaisFilme.disabled = false;
     txtAnoLancamentoFilme.disabled = false;
     txtNotaFilme.disabled = false;
+    txtUrlCapa.disabled = false;
 
     btnNovoFilme.disabled = true;
     btnSalvarFilme.disabled = false;
@@ -163,10 +174,11 @@ function salvarFilme() {
 function criarFilme() {
     const dadosFilme = {
         'titulo': txtTituloFilme.value,
-        'diretor': txtDiretorFilme.value,
-        'elencoPrincipal': txtElencoFilme.value,
         'pais': txtPaisFilme.value,
         'anoLancamento': txtAnoLancamentoFilme.value,
+        'urlCapa' : txtUrlCapa.value,
+        'diretor': txtDiretorFilme.value,
+        'elencoPrincipal': txtElencoFilme.value,
         'nota': txtNotaFilme.value
     };
     const errorHandler = function (error) {
@@ -180,12 +192,12 @@ function alterarFilme() {
         paragrafoMensagemFilmes.textContent = 'Erro ao alterar Filme (código ' + error.message + ')';
     }
     const dadosFilme = {
-        'id': txtIdFilme.value,
         'titulo': txtTituloFilme.value,
-        'diretor': txtDiretorFilme.value,
-        'elencoPrincipal': txtElencoFilme.value,
         'pais': txtPaisFilme.value,
         'anoLancamento': txtAnoLancamentoFilme.value,
+        'urlCapa' : txtUrlCapa.value,
+        'diretor': txtDiretorFilme.value,
+        'elencoPrincipal': txtElencoFilme.value,
         'nota': txtNotaFilme.value
     };
     asyncAlterarFilme(dadosFilme, inicializarFilme, errorHandler);
@@ -224,7 +236,7 @@ async function asyncLerFilmes(proxsucesso, proxerro) {
         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
         .then(resposta => resposta.json())
         .then(jsonResponse => proxsucesso(jsonResponse))
-        .catch(proxerro);
+        .catch(proxerro)
 }
 
 async function asyncLerFilmeById(id, proxsucesso, proxerro) {

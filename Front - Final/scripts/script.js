@@ -42,13 +42,27 @@ else if(window.location.href.indexOf("tech") != -1){
     homeNavBtn.classList.remove("nav-btn-active");
 }
 //End of navigation bar js
+document.addEventListener('DOMContentLoaded', function() {
+    const loginContainer = document.getElementById('login-container');
 
-const loginContainer = document.getElementById('login-container')
+    const moveOverlay = () => loginContainer.classList.toggle('move');
 
-const moveOverlay = () => loginContainer.classList.toggle('move')
+    const openRegister = document.getElementById('open-register');
+    const openLogin = document.getElementById('open-login');
+    const openRegisterMobile = document.getElementById('open-register-mobile');
+    const openLoginMobile = document.getElementById('open-login-mobile');
 
-document.getElementById('open-register').addEventListener('click', moveOverlay)
-document.getElementById('open-login').addEventListener('click', moveOverlay)
+    if (openRegister) {
+        openRegister.addEventListener('click', moveOverlay);
+    }
+    if (openLogin) {
+        openLogin.addEventListener('click', moveOverlay);
+    }
+    if (openRegisterMobile) {
+        openRegisterMobile.addEventListener('click', moveOverlay);
+    }
+    if (openLoginMobile) {
+        openLoginMobile.addEventListener('click', moveOverlay);
+    }
+});
 
-document.getElementById('open-register-mobile').addEventListener('click', moveOverlay)
-document.getElementById('open-login-mobile').addEventListener('click', moveOverlay)

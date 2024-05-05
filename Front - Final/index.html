@@ -6,44 +6,55 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="stylesheet" href="homepage.css" type="text/css">
+    <link rel="stylesheet" href="navbar.css" type="text/css">
+
 </head>
 
 <body>
-    <div class="nav-bar">
-        <div class="logo">
-            <a href="index.html"><img src="assets/shared/logo.svg" alt="company logo"></a>
+    <header class="showcase">
+        <div class="nav-bar">
+            <div class="logo">
+                <a href="index.html"><img src="assets/shared/logo.svg" alt="company logo"></a>
+            </div>
+            <div class="toggle-button-open" id="toggle-ham-menu" onclick="imgClick()">
+                <!--<img src="assets/shared/icon-hamburger.svg">-->
+            </div>
+            <div class="navbar-links" id="nav-links">
+                <ul>
+                    <li id="home-nav-btn"><a href="index.html">HOME</a></li>
+                    <li id="home-nav-btn"><a href="filmes.html">FILMES</a></li>
+                    <li id="dest-nav-btn"><a href="series.html">SÉRIES</a></li>
+                    <li id="crew-nav-btn"><a href="livros.html">LIVROS</a></li>
+                    <li id="tech-nav-btn"><a href="login.html">LOGIN</a></li>
+                </ul>
+            </div>
         </div>
-        <div class="toggle-button-open" id="toggle-ham-menu" onclick="imgClick()">
-            <!--<img src="assets/shared/icon-hamburger.svg">-->
-        </div>
-        <div class="navbar-links" id="nav-links">
-            <ul>
-                <li id="home-nav-btn"><a href="index.html">HOME</a></li>
-                <li id="home-nav-btn"><a href="filmes.html">FILMES</a></li>
-                <li id="dest-nav-btn"><a href="series.html">SÉRIES</a></li>
-                <li id="crew-nav-btn"><a href="livros.html">LIVROS</a></li>
-                <li id="tech-nav-btn"><a href="login.html">LOGIN</a></li>
-            </ul>
-        </div>
-    </div>
-
-    <section id="landingPage" class="banner">
-        <div class="container">
-            <h1>Sugestões e Avaliações de Filmes, Livros e Séries</h1>
-            <a href="#" class="botao" id="btnGerenciarFilmes">Gerenciar Filmes</a>
-        </div>
-    </section>
     
-    <div class="page">
-        <div class="container">
-            <h5 class="f-text">AVALIE SEUS FILMES, SÉRIES E LIVROS</h5>
-            <h1 class="main-text">FAVORITOS</h1>
-            <p> Compartilhe opiniões com seus amigos!</p>
+        <div class="showcase-content">
+            <h1>See what's next</h1>
+            <p>Watch anywhere. Cancel Anytime</p>
+            <a href="#" class="btn btn-xl"
+                >Watch Free For 30 Days <i class="fas fa-chevron-right btn-icon"></i
+            ></a>
         </div>
-        <br>
-        <a href="" class="btn"></a>    
-    </div>
+    </header>
+    <!-- <section class="tabs">
+        <div class="container">
+           <d iv id="tab-1" class="tab-item tab-border">
+                <i class="fas fa-door-open fa-3x"></i>
+                <p class="hide-sm">Cancel at any time</p>
+            </div>
+            <div id="tab-2" class="tab-item">
+                <i class="fas fa-tablet-alt fa-3x"></i>
+                <p class="hide-sm">Watch anywhere</p>
+            </div>
+            <div id="tab-3" class="tab-item">
+                <i class="fas fa-tags fa-3x"></i>
+                <p class="hide-sm">Pick your price</p>
+            </div>
+        </div>
+    </section> -->
 
     <script src="scripts/gerenciadorInicial.js"></script>
     <script src="scripts/filmes.js"></script>

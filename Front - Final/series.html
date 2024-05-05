@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <title>Gerenciador</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" type="text/css">
+
+</head>
+
+<body>
+    <div class="nav-bar">
+        <div class="logo">
+            <a href="index.html"><img src="assets/shared/logo.svg" alt="company logo"></a>
+        </div>
+        <div class="toggle-button-open" id="toggle-ham-menu" onclick="imgClick()"><!--<img src="assets/shared/icon-hamburger.svg">--> </div>
+        <div class="navbar-links" id="nav-links">
+            <ul>
+                <li id="home-nav-btn"><a href="index.html">HOME</a></li>
+                <li id="home-nav-btn"><a href="filmes.html">FILMES</a></li>
+                <li id="dest-nav-btn"><a href="series.html">SÉRIES</a></li>
+                <li id="crew-nav-btn"><a href="livros.html">LIVROS</a></li>
+                <li id="tech-nav-btn"><a href="login.html">LOGIN</a></li>
+            </ul>
+        </div>
+    </div>
+    <main class="content">
+        <div class="transparencia">
+            <section id="landing">
+                <h1>Sugestões e Avaliações de Filmes, Livros e Séries</h1>
+                <ul>
+                    <button id="btnGerenciarFilmes">Gerenciar Filmes</button>
+                </ul>
+            </section>
+
+            <section id="sectionFilmes" style="display: none">
+                <input type="button" value="Voltar" id="btnVoltar" onclick="voltarPagInicial()">
+                <h1>Avaliação de Filmes</h1>
+                <p style="font-weight:bold" id="paragrafoMensagemFilmes"></p>
+                
+                <!-- <input type="text" id="cargoInput" class="inputText" placeholder="Digite as letras iniciais do cargo">
+                <button onclick="buscarEmpregadosCargo()" class="botao">Buscar</button> -->
+                
+                <table id="tabelaFilmes">
+                    <input type="button" value="Novo" onclick="novoFilme()" id="btnNovoFilme" class="botao">
+                    <table class="camp">
+                        <tr>
+                            <th>ID</th>
+                            <th>Titulo</th>
+                            <th>Diretor</th>
+                            <th>Elenco Principal</th>
+                            <th>País</th>
+                            <th>Ano de Lançamento</th>
+                            <th>Nota</th>
+                        </tr>
+                        <tbody id="corpoTabelaFilmes"> </tbody>
+                    </table>
+                </table>
+
+                <table id="tabelaFormularioFilmes" style="display: none">
+                    <tr>
+                        <td>ID:</td>
+                        <td><input type="text" id="txtIdFilme" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Título:</td>
+                        <td><input type="text" id="txtTituloFilme" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Diretor:</td>
+                        <td><input type="text" id="txtDiretorFilme" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Elenco Principal:</td>
+                        <td><input type="text" id="txtElencoFilme" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>País:</td>
+                        <td><input type="text" id="txtPaisFilme" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Ano de Lançamento:</td>
+                        <td><input type="text" id="txtAnoLancamentoFilme" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Nota:</td>
+                        <td><input type="text" id="txtNotaFilme" class="inputText"></td>
+                    </tr>
+                    
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="button" value="Salvar" onclick="salvarFilme()" id="btnSalvarFilme"
+                                class="botao">
+                            <input type="button" value="Apagar" onclick="apagarFilme()" id="btnApagarFilme"
+                                class="botao">
+                            <input type="button" value="Cancelar" onclick="cancelarEdicaoFilme()"
+                                id="btnCancelarFilme" class="botao">
+                        </td>
+                    </tr>
+                </table>
+            </section>
+        </div>
+    </main>
+    <script src="scripts/gerenciadorInicial.js"></script>
+    <script src="scripts/filmes.js"></script>
+    <script src="scripts/script.js"></script>
+</body>
+
+</html>
