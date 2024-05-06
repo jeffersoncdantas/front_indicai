@@ -47,14 +47,17 @@ body {
 
 .botao {
     font-weight: 900;
-    font-size: 20px;
+    font-size: 25px;
     border-radius: 15px;
     border: 1px solid rgba(190, 255, 85, 0.8);
     background: rgba(190, 255, 85, 0.8);
     color: #333;
     border: none;
     cursor: pointer;
-    padding: 10px 15px; /* Adicionando padding para manter o tamanho constante */
+    display: flex;
+    align-items: center;
+    padding: 10px;
+   
 }
 
 .botao:hover {

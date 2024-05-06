@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <title>Gerenciador</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="navbar.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="stylesheet" href="filmes.css" type="text/css">
+
+</head>
+
+<body>
+    <div class="nav-bar">
+        <div class="logo">
+            <a href="index.html"><img src="assets/shared/logo.svg" alt="company logo"></a>
+        </div>
+        <div class="toggle-button-open" id="toggle-ham-menu" onclick="imgClick()">
+            <!--<img src="assets/shared/icon-hamburger.svg">-->
+        </div>
+        <div class="navbar-links" id="nav-links">
+            <ul>
+                <li id="home-nav-btn"><a href="index.html">HOME</a></li>
+                <li id="filmes-nav-btn"><a href="filmes.html">FILMES</a></li>
+                <li id="series-nav-btn"><a href="series.html">SÉRIES</a></li>
+                <li id="livros-nav-btn"><a href="livros.html">LIVROS</a></li>
+                <li id="login-nav-btn"><a href="login.html">LOGIN</a></li>
+            </ul>
+        </div>
+    </div>
+    <main class="content">
+        <!-- Recomendações Filmes -->
+        <section id="recomendacoesFilmes" class="recomendacoes">
+            <div class="container">
+                <h1 class="titulosH1">Destaques da Semana</h1>
+                <a href="#" class="botao" id="btnGerenciarFilmes">Gerenciar Filmes</a>
+                <br>
+                <div id="filmes-container" class="container"></div>
+
+        </section>
+        <section id="sectionAvaliação" style="display: none;">
+            <input type="button" value="Voltar" onclick="reloadPage()" id="btnVoltar" class="botao">
+            <h1>Avaliação de Filmes</h1>
+            <p style="font-weight:bold" id="paragrafoMensagemFilmes"></p>
+
+            <div class="table-container">
+                
+            </div>
+            <table id="tabelaFormularioFilmes" style="display: none">
+                <tr>
+                    <td>Nota:</td>
+                    <td><input type="text" id="txtIdFilme" class="inputText"></td>
+                </tr>
+                <tr>
+                    <td>Comentário:</td>
+                    <td><input type="text" id="txtTituloFilme" class="inputText"></td>
+                </tr>
+                    <td></td>
+                    <td>
+                        <input type="button" value="Salvar" onclick="salvarFilme()" id="btnSalvarFilme" class="botao">
+                        <input type="button" value="Apagar" onclick="apagarFilme()" id="btnApagarFilme" class="botao">
+                        <input type="button" value="Cancelar" onclick="cancelarEdicaoFilme()" id="btnCancelarFilme"
+                            class="botao">
+                    </td>
+                </tr>
+            </table>
+        </section>
+        </div>
+    </main>
+
+    <script src="scripts/filmeGerenciador.js"></script>
+    <script src="scripts/filmes.js"></script>
+    <script src="scripts/script.js"></script>
+</body>
+
+</html>

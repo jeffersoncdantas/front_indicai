@@ -46,7 +46,7 @@
             <p style="font-weight:bold" id="paragrafoMensagemFilmes"></p>
 
             <div class="table-container">
-                
+
             </div>
             <div class="table-container">
                 <table id="tabelaFilmes" style="display: none;">
@@ -112,11 +112,68 @@
                 </tr>
             </table>
         </section>
+
+        <section id="sectionAvaliação" style="display: none;">
+            <input type="button" value="Voltar" onclick="reloadPage()" id="btnVoltar" class="botao">
+            <h1>Avaliação de Filmes</h1>
+            <p style="font-weight:bold" id="paragrafoMensagemFilmes"></p>
+
+            <div class="table-container">
+                <table id="tabelaAvaliacaoFilme" style="display: none;">
+                    <input type="button" value="Novo" onclick="novaAvaliacao()" id="btnNovoFilme" class="botao">
+                    <table class="camp">
+                        <tr>
+                            <th>Nota</th>
+                            <th>Comentário</th>
+                            <th>Usuário</th>
+                            <th>ID do Filme</th>
+                        </tr>
+                        <tbody id="corpoTabelaAvaliacaoFilme"> </tbody>
+                    </table>
+                </table>
+            </div>
+
+            </div>
+            <table id="tabelaFormularioAvaliacao">
+                <tr>
+                    <td>ID:</td>
+                    <td><input type="text" id="txtIdAvaliacao" class="inputText"></td>
+                </tr>
+                <tr>
+                    <p style="font-weight:bold" id="filmeClicadoId" id="txtIdFilme"></p>
+                    <img id="imagemFilmeAvaliacao" src="" alt="Imagem do Filme">
+                    <p id="tituloFilmeAvaliacao"></p>
+                    <td>Nota:</td>
+                    <td><input type="text" id="txtNotaFilme" class="inputText"></td>
+                </tr>
+                <tr>
+                    <td>Comentário:</td>
+                    <td><input type="text" id="txtComentarioFilme" class="inputText"></td>
+                </tr>
+                <tr>
+                    <td>Usuário:</td>
+                    <td><input type="text" id="txtIdUsuarioA" class="inputText"></td>
+                </tr>
+                <tr>
+                    <td>Filme:</td>
+                    <td><input type="text" id="txtIdFilme" class="inputText"></td>
+                </tr>
+                <td></td>
+                <td>
+                    <input type="button" value="Salvar" onclick="salvarAvaliacao()" id="btnSalvarAvaliacao" class="botao">
+                    <input type="button" value="Apagar" onclick="apagarAvaliacao()" id="btnApagarAvaliacao" class="botao">
+                    <input type="button" value="Cancelar" onclick="cancelarEdicaoAvaliacao()" id="btnCancelarAvaliacao"
+                        class="botao">
+                </td>
+                </tr>
+            </table>
+        </section>
         </div>
     </main>
 
     <script src="scripts/filmeGerenciador.js"></script>
     <script src="scripts/filmes.js"></script>
+    <script src="scripts/avaliacaoFilme.js"></script>
     <script src="scripts/script.js"></script>
 </body>
 

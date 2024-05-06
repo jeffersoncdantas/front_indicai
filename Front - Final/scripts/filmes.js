@@ -210,6 +210,10 @@ function apagarFilme() {
     asyncApagarFilme(id, inicializarFilme, errorHandler);
 }
 
+let filmeClicadoId = null;
+let filmeClicadoUrl = null;
+let filmeClicadoTitulo = null;
+
 function exibirFilmes(filmes) {
     const filmesContainer = document.getElementById('filmes-container');
     filmesContainer.innerHTML = ""; // Limpa o conteúdo anterior
@@ -218,6 +222,7 @@ function exibirFilmes(filmes) {
         // Cria um elemento card para cada filme
         const card = document.createElement('div');
         card.classList.add('card');
+        card.dataset.idFilme = filme.id;
 
         // Adiciona a imagem do filme ao card
         const imagem = document.createElement('img');
@@ -226,11 +231,24 @@ function exibirFilmes(filmes) {
         card.appendChild(imagem);
 
         // Adiciona o título do filme ao card
-        const titulo = document.createElement('h2');
-        titulo.textContent = filme.titulo;
-        card.appendChild(titulo);
+        const linkTitulo = document.createElement('a');
+        linkTitulo.textContent = filme.titulo;
+        linkTitulo.href = `#`;
+        linkTitulo.addEventListener('click', function(event) {
+            // Impede o comportamento padrão do link para evitar a navegação
+            event.preventDefault();
+            filmeClicadoId = filme.id;
+            filmeClicadoUrl = filme.urlCapa;
+            filmeClicadoTitulo = filme.titulo;
+            // Altera a visibilidade das seções para mostrar a seção de avaliação
+            document.getElementById('recomendacoesFilmes').style.display = 'none';
+            document.getElementById('sectionAvaliação').style.display = 'block';
+            exibirDetalhesFilmeAvaliacao();
 
-        // Adiciona outras informações do filme ao card
+        });
+        card.appendChild(linkTitulo);
+
+        // Adiciona outrass informações do filme ao card
         const diretor = document.createElement('p');
         diretor.textContent = `Diretor: ${filme.diretor}`;
         card.appendChild(diretor);
@@ -244,6 +262,12 @@ function exibirFilmes(filmes) {
     });
 }
 
+function exibirDetalhesFilmeAvaliacao() {
+    // Exibe a imagem e o título do filme na seção de avaliação
+    document.getElementById('filmeClicadoId').textContent = `ID do Filme: ${filmeClicadoId}`;
+    document.getElementById('imagemFilmeAvaliacao').src = filmeClicadoUrl;
+    document.getElementById('tituloFilmeAvaliacao').textContent = filmeClicadoTitulo;
+}
 
 //Funcoes Rest
 async function asyncCriarFilme(dadosFilme, proxsucesso, proxerro) {

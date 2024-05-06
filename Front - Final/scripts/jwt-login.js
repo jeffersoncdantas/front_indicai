@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('password').value='';
 
             console.log(localStorage.getItem("idUsuario"))
+            console.log(localStorage.getItem("username"))
 
 
         })
