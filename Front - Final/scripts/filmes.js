@@ -17,7 +17,7 @@ const tabelaFormularioAvaliacao = document.querySelector('#tabelaFormularioAvali
 const corpoTabelaAvaliacaoFilme = document.querySelector('#corpoTabelaAvaliacaoFilme');
 const paragrafoMensagemAvaliacao = document.querySelector('#paragrafoMensagemAvaliacao');
 const txtIdAvaliacao = document.querySelector('#txtIdAvaliacao');
-const txtNotaFilmeAvaliacao = document.querySelector('#txtNotaFilme');
+const txtNotaFilmeAvaliacao = document.querySelector('#txtNotaFilmeAvaliacao');
 const txtComentarioFilme = document.querySelector('#txtComentarioFilme');
 const txtIdUsuarioA = document.querySelector('#txtIdUsuarioA');
 
@@ -317,17 +317,17 @@ function preencherTabelaAvaliacoes(avaliacoes) {
     for (var i = 0; i < n; i++) {
         let avaliacao = avaliacoes[i];
         let linha = corpoTabelaAvaliacaoFilme.insertRow();
-        let celulaId = linha.insertCell();
-        let celulaNotaFilme = linha.insertCell();
-        let celulaComentario = linha.insertCell();
-        let celulaIdUsuario = linha.insertCell();
-        let celulaIdFilme = linha.insertCell();
-
-        celulaId.textContent = avaliacao.id;
-        celulaNotaFilme.textContent = avaliacao.notaFilme;
+	let celulaNotaFilme = linha.insertCell();
+	let celulaComentario = linha.insertCell();
+	let celulaIdUsuario = linha.insertCell();
+	let celulaIdFilme = linha.insertCell();
+        //let celulaId = linha.insertCell();
+        
+        //celulaId.textContent = avaliacao.id;
+        celulaNotaFilme.textContent = avaliacao.nota;
         celulaComentario.textContent = avaliacao.comentario;
-        celulaIdUsuario.textContent = avaliacao.usuario;
-        celulaIdFilme.textContent = avaliacao.item;
+        celulaIdUsuario.textContent = avaliacao.usuario.id;
+        celulaIdFilme.textContent = avaliacao.item.id;
     };
 }
 
@@ -337,10 +337,10 @@ function errorHandler(error) {
 
 function salvarAvaliacao() {
     const dadosAvaliacao = { // Aqui era dadosFilme, corrigido para dadosAvaliacao
-        'notaFilme': txtNotaFilme.value, // Aqui era nota, corrigido para notaFilme
+        'nota': txtNotaFilmeAvaliacao.value, // Aqui era nota, corrigido para notaFilme
         'comentario': txtComentarioFilme.value,
-        'usuario': txtIdUsuarioA.value,
-        'item': filmeClicadoId,
+        'usuario': {"id": txtIdUsuarioA.value},
+        'item': {"id": filmeClicadoId},
     };
     const errorHandler = function (error) {
         paragrafoMensagemAvaliacao.textContent = 'Erro ao criar nova Avaliação (código ' + error.message + ')';
@@ -428,6 +428,3 @@ async function asyncLerAvaliacoes(proxsucesso, proxerro) {
         .then(jsonResponse => proxsucesso(jsonResponse))
         .catch(proxerro);
 }
-
-
-
