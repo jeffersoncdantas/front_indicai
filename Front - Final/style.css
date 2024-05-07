@@ -1,7 +1,7 @@
 *{
-    
     font-family: "Barlow Condensed", sans-serif;
 }
+
 body {
     background-image: url(assets/bg/bg.png);
     background-size: cover;
@@ -74,59 +74,58 @@ body {
 /*CSS da Tabela*/
 .table-container {
     overflow-x: auto;
-}
-
-.camp {
-    margin-bottom: 15px;
-    margin-top: 15px;
-    border-collapse: collapse;
-    background-color: #f2f2f2;
-    color: #333;
-    font-weight: bold;
-    border-radius: 8px;
-    overflow-x: auto; /* Adicionando overflow-x para permitir rolagem horizontal */
-}
-
-.camp th {
-    background-color: #f2f2f2;
-    color: #333;
-    font-weight: bold;
-    padding: 8px;
-    text-align: left; /* Evita que o conteúdo da célula seja quebrado em várias linhas */
-}
-
-.camp td {
-    padding: 8px;
-}
-
-.camp td:first-child,
-th:first-child {
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
-}
-
-.camp td:last-child,
-th:last-child {
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-}
-
-.inputText {
-    border-radius: 7px;
-    margin-right: 15px;
-}
-
-table {
-    border-collapse: separate;
-    border-spacing: 0 10px;
-    width: 70%; /* Definindo largura da tabela como 100% */
+    .camp {
+        margin-bottom: 15px;
+        margin-top: 15px;
+        border-collapse: collapse;
+        background-color: #f2f2f2;
+        color: #333;
+        font-weight: bold;
+        border-radius: 8px;
+        overflow-x: auto; /* Adicionando overflow-x para permitir rolagem horizontal */
+    }
     
-}
-
-td,
-a {
-    font-weight: 600;
-    font-size: 18px;
+    .camp th {
+        background-color: #f2f2f2;
+        color: #333;
+        font-weight: bold;
+        padding: 8px;
+        text-align: left; /* Evita que o conteúdo da célula seja quebrado em várias linhas */
+    }
+    
+    .camp td {
+        padding: 8px;
+    }
+    
+    .camp td:first-child,
+    th:first-child {
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+    }
+    
+    .camp td:last-child,
+    th:last-child {
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+    }
+    
+    .inputText {
+        border-radius: 7px;
+        margin-right: 15px;
+    }
+    
+    table {
+        border-collapse: separate;
+        border-spacing: 0 10px;
+        width: 70%; /* Definindo largura da tabela como 100% */
+        
+    }
+    
+    td,
+    a {
+        font-weight: 600;
+        font-size: 18px;
+    }
 }
 
 /* Estilos para telas menores que 375px */

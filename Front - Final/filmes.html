@@ -13,23 +13,25 @@
 </head>
 
 <body>
-    <div class="nav-bar">
-        <div class="logo">
-            <a href="index.html"><img src="assets/shared/logo.svg" alt="company logo"></a>
+    <header>
+        <div class="nav-bar">
+            <div class="logo">
+                <a href="index.html"><img src="assets/shared/logo.svg" alt="company logo"></a>
+            </div>
+            <div class="toggle-button-open" id="toggle-ham-menu" onclick="imgClick()">
+            </div>
+            <div class="navbar-links" id="nav-links">
+                <ul>
+                    <li id="home-nav-btn"><a href="index.html">HOME</a></li>
+                    <li id="filmes-nav-btn"><a href="filmes.html">FILMES</a></li>
+                    <li id="series-nav-btn"><a href="series.html">SÉRIES</a></li>
+                    <li id="livros-nav-btn"><a href="livros.html">LIVROS</a></li>
+                    <li id="login-nav-btn"><a href="login.html">LOGIN</a></li>
+                </ul>
+            </div>
         </div>
-        <div class="toggle-button-open" id="toggle-ham-menu" onclick="imgClick()">
-            <!--<img src="assets/shared/icon-hamburger.svg">-->
-        </div>
-        <div class="navbar-links" id="nav-links">
-            <ul>
-                <li id="home-nav-btn"><a href="index.html">HOME</a></li>
-                <li id="filmes-nav-btn"><a href="filmes.html">FILMES</a></li>
-                <li id="series-nav-btn"><a href="series.html">SÉRIES</a></li>
-                <li id="livros-nav-btn"><a href="livros.html">LIVROS</a></li>
-                <li id="login-nav-btn"><a href="login.html">LOGIN</a></li>
-            </ul>
-        </div>
-    </div>
+    </header>
+
     <main class="content">
         <!-- Recomendações Filmes -->
         <section id="recomendacoesFilmes" class="recomendacoes">
@@ -118,6 +120,51 @@
             <h1>Avaliação de Filmes</h1>
             <p style="font-weight:bold" id="paragrafoMensagemAvaliacao"></p>
 
+            <table id="tabelaFormularioAvaliacao">
+                <tr>
+                    <td rowspan="4" id="imagemCell">
+                        <img id="imagemFilmeAvaliacao" src="" alt="Imagem do Filme">
+                    </td>
+                    <td>
+                        <p style="font-weight:bold" id="filmeClicadoId" id="txtIdFilme"></p>
+                        <p id="tituloFilmeAvaliacao"></p>
+                    </td>
+                </tr>
+                <tr id="formularioCel">
+                    <tr>
+                        <td>ID:</td>
+                        <td><input type="text" id="txtIdAvaliacao" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Nota:</td>
+                        <td><input type="text" id="txtNotaFilmeAvaliacao" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Comentário:</td>
+                        <td><input type="text" id="txtComentarioFilme" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Usuário:</td>
+                        <td><input type="text" id="txtIdUsuarioA" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Filme:</td>
+                        <td><input type="text" id="filmeClicadoId" class="inputText"></td>
+                    </tr>
+                </tr>
+                
+                <td></td>
+                <td>
+                    <input type="button" value="Salvar" onclick="salvarAvaliacao()" id="btnSalvarAvaliacao" class="botao">
+                    <!-- <input type="button" value="Apagar" onclick="apagarAvaliacao()" id="btnApagarAvaliacao" class="botao">
+                    <input type="button" value="Cancelar" onclick="cancelarEdicaoAvaliacao()" id="btnCancelarAvaliacao"
+                        class="botao"> -->
+                </td>
+                </tr>
+            </table>
+
+
+            <h1>Avaliações Registradas</h1>
             <div class="table-container">
                 <table id="tabelaAvaliacaoFilme" style="display: none;">
                     <table class="camp">
@@ -132,42 +179,7 @@
                 </table>
             </div>
 
-            </div>
-            <table id="tabelaFormularioAvaliacao">
-                <tr>
-                    <td>ID:</td>
-                    <td><input type="text" id="txtIdAvaliacao" class="inputText"></td>
-                </tr>
-                <tr>
-                    <p style="font-weight:bold" id="filmeClicadoId" id="txtIdFilme"></p>
-                    <img id="imagemFilmeAvaliacao" src="" alt="Imagem do Filme">
-                    <p id="tituloFilmeAvaliacao"></p>
-                    <td>Nota:</td>
-                    <td><input type="text" id="txtNotaFilmeAvaliacao" class="inputText"></td>
-                </tr>
-                <tr>
-                    <td>Comentário:</td>
-                    <td><input type="text" id="txtComentarioFilme" class="inputText"></td>
-                </tr>
-                <tr>
-                    <td>Usuário:</td>
-                    <td><input type="text" id="txtIdUsuarioA" class="inputText"></td>
-                </tr>
-                <tr>
-                    <td>Filme:</td>
-                    <td><input type="text" id="filmeClicadoId" class="inputText"></td>
-                </tr>
-                <td></td>
-                <td>
-                    <input type="button" value="Salvar" onclick="salvarAvaliacao()" id="btnSalvarAvaliacao" class="botao">
-                    <input type="button" value="Apagar" onclick="apagarAvaliacao()" id="btnApagarAvaliacao" class="botao">
-                    <input type="button" value="Cancelar" onclick="cancelarEdicaoAvaliacao()" id="btnCancelarAvaliacao"
-                        class="botao">
-                </td>
-                </tr>
-            </table>
         </section>
-        </div>
     </main>
 
     <script src="scripts/filmeGerenciador.js"></script>

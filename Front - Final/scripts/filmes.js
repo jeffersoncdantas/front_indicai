@@ -282,6 +282,8 @@ function exibirDetalhesFilmeAvaliacao() {
     document.getElementById('filmeClicadoId').textContent = `ID do Filme: ${filmeClicadoId}`;
     document.getElementById('imagemFilmeAvaliacao').src = filmeClicadoUrl;
     document.getElementById('tituloFilmeAvaliacao').textContent = filmeClicadoTitulo;
+    document.getElementById('filmeClicadoId').value = filmeClicadoId;
+    document.getElementById('filmeClicadoId').disabled = true;
 }
 
 inicializarAvaliacao();
