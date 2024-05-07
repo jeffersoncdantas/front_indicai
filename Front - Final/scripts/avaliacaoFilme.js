@@ -104,30 +104,6 @@ function preencherFormularioAvaliacao(avaliacao) { // Aqui era filme, corrigido 
     tabelaFormularioAvaliacao.style.display = 'inline';
 }
 
-function novaAvaliacao() {
-    criandoNovaAvaliacao = true;
-    paragrafoMensagemAvaliacao.textContent = 'Pressione o botão Novo ou selecione uma Avaliação da lista:';
-    txtIdAvaliacao.value = '';
-    txtNotaFilme.value = '';
-    txtComentarioFilme.value = '';
-    txtIdUsuarioA.value = '';
-    txtIdFilme.value = '';
-
-    txtIdAvaliacao.disabled = true;
-    txtNotaFilme.disabled = true;
-    txtComentarioFilme.disabled = true;
-    txtIdUsuarioA.disabled = true;
-    txtIdFilme.disabled = true;
-
-    btnNovaAvaliacao.disabled = false;
-    btnSalvarAvaliacao.disabled = true;
-    btnApagarAvaliacao.disabled = true;
-    btnCancelarAvaliacao.disabled = true;
-
-    tabelaAvaliacaoFilmes.style.display = 'none';
-    tabelaFormularioAvaliacao.style.display = 'inline';
-}
-
 function salvarAvaliacao() {
     if (criandoNovaAvaliacao) {
         criarAvaliacao();

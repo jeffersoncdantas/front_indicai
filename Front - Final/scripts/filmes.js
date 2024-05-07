@@ -12,6 +12,21 @@ const txtElencoPrincipalFilme = document.querySelector('#txtElencoFilme');
 const txtNotaFilme = document.querySelector('#txtNotaFilme');
 var sectionFilmes = document.querySelector("#sectionFilmes");
 
+const tabelaAvaliacaoFilmes = document.querySelector('#tabelaAvaliacaoFilmes');
+const tabelaFormularioAvaliacao = document.querySelector('#tabelaFormularioAvaliacao');
+const corpoTabelaAvaliacaoFilme = document.querySelector('#corpoTabelaAvaliacaoFilme');
+const paragrafoMensagemAvaliacao = document.querySelector('#paragrafoMensagemAvaliacao');
+const txtIdAvaliacao = document.querySelector('#txtIdAvaliacao');
+const txtNotaFilmeAvaliacao = document.querySelector('#txtNotaFilme');
+const txtComentarioFilme = document.querySelector('#txtComentarioFilme');
+const txtIdUsuarioA = document.querySelector('#txtIdUsuarioA');
+
+const btnNovaAvaliacao = document.querySelector('#btnNovoFilme');
+const btnSalvarAvaliacao = document.querySelector('#btnSalvarAvaliacao');
+const btnApagarAvaliacao = document.querySelector('#btnApagarAvaliacao');
+const btnCancelarAvaliacao = document.querySelector('#btnCancelarAvaliacao');
+var criandoNovaAvaliacao = false;
+
 const btnNovoFilme = document.querySelector('#btnNovoFilme');
 const btnSalvarFilme = document.querySelector('#btnSalvarFilme');
 const btnApagarFilme = document.querySelector('#btnApagarFilme');
@@ -269,6 +284,70 @@ function exibirDetalhesFilmeAvaliacao() {
     document.getElementById('tituloFilmeAvaliacao').textContent = filmeClicadoTitulo;
 }
 
+inicializarAvaliacao();
+
+function inicializarAvaliacao() {
+    paragrafoMensagemAvaliacao.textContent = 'Preencha as informações de avaliação:';
+    txtIdAvaliacao.value = '';
+    txtNotaFilme.value = '';
+    txtComentarioFilme.value = '';
+    txtIdUsuarioA.value = '';
+    txtIdFilme.value = '';
+
+    txtIdAvaliacao.disabled =true;
+    txtNotaFilme.enabled = true;
+    txtComentarioFilme.enabled = true;
+    txtIdUsuarioA.enabled = true;
+    txtIdFilme.disabled = true;
+
+    btnSalvarAvaliacao.disabled = false;
+    btnApagarAvaliacao.disabled = false;
+    btnCancelarAvaliacao.disabled = false;
+
+    listarTodasAvaliacoes();
+}
+
+function listarTodasAvaliacoes() {
+    asyncLerAvaliacoes(preencherTabelaAvaliacoes, errorHandler);
+}
+
+function preencherTabelaAvaliacoes(avaliacoes) {
+    corpoTabelaAvaliacaoFilme.innerHTML = "";
+    var n = avaliacoes.length;
+    for (var i = 0; i < n; i++) {
+        let avaliacao = avaliacoes[i];
+        let linha = corpoTabelaAvaliacaoFilme.insertRow();
+        let celulaId = linha.insertCell();
+        let celulaNotaFilme = linha.insertCell();
+        let celulaComentario = linha.insertCell();
+        let celulaIdUsuario = linha.insertCell();
+        let celulaIdFilme = linha.insertCell();
+
+        celulaId.textContent = avaliacao.id;
+        celulaNotaFilme.textContent = avaliacao.notaFilme;
+        celulaComentario.textContent = avaliacao.comentario;
+        celulaIdUsuario.textContent = avaliacao.usuario;
+        celulaIdFilme.textContent = avaliacao.item;
+    };
+}
+
+function errorHandler(error) {
+    paragrafoMensagemAvaliacao.textContent = "Erro ao listar Filmes (código " + error.message + ")";
+}
+
+function salvarAvaliacao() {
+    const dadosAvaliacao = { // Aqui era dadosFilme, corrigido para dadosAvaliacao
+        'notaFilme': txtNotaFilme.value, // Aqui era nota, corrigido para notaFilme
+        'comentario': txtComentarioFilme.value,
+        'usuario': txtIdUsuarioA.value,
+        'item': filmeClicadoId,
+    };
+    const errorHandler = function (error) {
+        paragrafoMensagemAvaliacao.textContent = 'Erro ao criar nova Avaliação (código ' + error.message + ')';
+    }
+    asyncCriarAvaliacao(dadosAvaliacao, inicializarAvaliacao, errorHandler); // Aqui era dadosFilme, corrigido para dadosAvaliacao
+}
+
 //Funcoes Rest
 async function asyncCriarFilme(dadosFilme, proxsucesso, proxerro) {
     const URL = `https://indicai.onrender.com/api/filmes`;
@@ -326,3 +405,29 @@ async function asyncApagarFilme(id, proxsucesso, proxerro) {
         .then(resposta => proxsucesso())
         .catch(proxerro);
 }
+
+async function asyncCriarAvaliacao(dadosAvaliacao, proxsucesso, proxerro) {
+    const URL = `https://indicai.onrender.com/api/avaliacoes`;
+    const postRequest = {
+        method: 'POST',
+        body: JSON.stringify(dadosAvaliacao),
+        headers: { 'Content-type': 'application/json' }
+    };
+    fetch(URL, postRequest)
+        .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+        .then(resposta => resposta.json())
+        .then(jsonResponse => proxsucesso())
+        .catch(proxerro);
+}
+
+async function asyncLerAvaliacoes(proxsucesso, proxerro) {
+    const URL = `https://indicai.onrender.com/api/avaliacoes`;
+    fetch(URL)
+        .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+        .then(resposta => resposta.json())
+        .then(jsonResponse => proxsucesso(jsonResponse))
+        .catch(proxerro);
+}
+
+
+

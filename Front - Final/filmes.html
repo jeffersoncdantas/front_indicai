@@ -116,11 +116,10 @@
         <section id="sectionAvaliação" style="display: none;">
             <input type="button" value="Voltar" onclick="reloadPage()" id="btnVoltar" class="botao">
             <h1>Avaliação de Filmes</h1>
-            <p style="font-weight:bold" id="paragrafoMensagemFilmes"></p>
+            <p style="font-weight:bold" id="paragrafoMensagemAvaliacao"></p>
 
             <div class="table-container">
                 <table id="tabelaAvaliacaoFilme" style="display: none;">
-                    <input type="button" value="Novo" onclick="novaAvaliacao()" id="btnNovoFilme" class="botao">
                     <table class="camp">
                         <tr>
                             <th>Nota</th>
@@ -144,7 +143,7 @@
                     <img id="imagemFilmeAvaliacao" src="" alt="Imagem do Filme">
                     <p id="tituloFilmeAvaliacao"></p>
                     <td>Nota:</td>
-                    <td><input type="text" id="txtNotaFilme" class="inputText"></td>
+                    <td><input type="text" id="txtNotaFilmeAvaliacao" class="inputText"></td>
                 </tr>
                 <tr>
                     <td>Comentário:</td>
@@ -156,7 +155,7 @@
                 </tr>
                 <tr>
                     <td>Filme:</td>
-                    <td><input type="text" id="txtIdFilme" class="inputText"></td>
+                    <td><input type="text" id="filmeClicadoId" class="inputText"></td>
                 </tr>
                 <td></td>
                 <td>
@@ -173,7 +172,6 @@
 
     <script src="scripts/filmeGerenciador.js"></script>
     <script src="scripts/filmes.js"></script>
-    <script src="scripts/avaliacaoFilme.js"></script>
     <script src="scripts/script.js"></script>
 </body>
 
