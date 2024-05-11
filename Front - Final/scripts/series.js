@@ -1,4 +1,4 @@
-const tabelaSeries = document.querySelector('tabelaSeries');
+const tabelaSeries = document.querySelector('#tabelaSeries');
 const tabelaFormularioSeries = document.querySelector('#tabelaFormularioSeries');
 const corpoTabelaSeries = document.querySelector('#corpoTabelaSeries');
 const paragrafoMensagemSeries = document.querySelector('#paragrafoMensagemSeries');
@@ -6,7 +6,7 @@ const txtIdSerie = document.querySelector('#txtIdSerie');
 const txtTituloSerie = document.querySelector('#txtTituloSerie');
 const txtPaisSerie = document.querySelector('#txtPaisSerie');
 const txtAnoLancamentoSerie = document.querySelector('#txtAnoLancamentoSerie');
-const txtUrlCapaSerie = document.querySelector('txtUrlCapaSerie');
+const txtUrlCapaSerie = document.querySelector('#txtUrlCapaSerie');
 const txtDiretorSerie = document.querySelector('#txtDiretorSerie');
 const txtElencoSerie = document.querySelector('#txtElencoSerie')
 const txtNumTemp = document.querySelector('#txtNumTemp');
@@ -31,21 +31,22 @@ const btnApagarSerie = document.querySelector('#btnApagarSerie');
 const btnCancelarSerie = document.querySelector('#btnCancelarSerie');
 var criandoNovaSerie = false;
 
-incializarSerie();
+inicializarSerie();
 
-function incializarSerie(){
+function inicializarSerie(){
     criandoNovaSerie = false;
     paragrafoMensagemSeries.textContent = 'Pressione o botão Novo ou selecione uma Série da lista:';
 
     txtIdSerie.value = '';
-    txtTituloSerie = '';
-    txtPaisSerie = '';
-    txtAnoLancamentoSerie = '';
-    txtUrlCapaSerie = '';
-    txtDiretorSerie = '';
-    txtElencoSerie = '';
-    txtNumTemp = '';
-    txtNotaSerie = '';
+    txtTituloSerie.value = '';
+    txtPaisSerie.value = '';
+    txtAnoLancamentoSerie.value = '';
+    txtUrlCapaSerie.value = '';
+    txtDiretorSerie.value = '';
+    txtElencoSerie.value = '';  
+    txtNumTemp.value = '';
+    txtNotaSerie.value = '';
+
 
     txtIdSerie.disabled = true;
     txtTituloSerie.disabled = true;
@@ -127,14 +128,14 @@ function preencherFormularioSerie(serie) {
     txtNotaSerie.value = serie.nota;
 
     txtIdSerie.disabled = true;
-    txtTituloSerie.disabled = true;
-    txtPaisSerie.disabled = true;
-    txtAnoLancamentoSerie.disabled = true;
-    txtUrlCapaSerie.disabled = true;
-    txtDiretorSerie.disabled = true;
-    txtElencoSerie.disabled = true;
-    txtNumTemp.disabled = true;
-    txtNotaSerie.disabled = true;
+    txtTituloSerie.disabled = false;
+    txtPaisSerie.disabled = false;
+    txtAnoLancamentoSerie.disabled = false;
+    txtUrlCapaSerie.disabled = false;
+    txtDiretorSerie.disabled = false;
+    txtElencoSerie.disabled = false;
+    txtNumTemp.disabled = false;
+    txtNotaSerie.disabled = false;
 
     btnNovoSerie.disabled = true;
     btnSalvarSerie.disabled = false;
@@ -150,14 +151,14 @@ function novaSerie() {
     criandoNovaSerie = true;
 
     txtIdSerie.value = '';
-    txtTituloSerie = '';
-    txtPaisSerie = '';
-    txtAnoLancamentoSerie = '';
-    txtUrlCapaSerie = '';
-    txtDiretorSerie = '';
-    txtElencoSerie = '';
-    txtNumTemp = '';
-    txtNotaSerie = '';
+    txtTituloSerie.value = ''; // Corrigido: Adicionado .value
+    txtPaisSerie.value = ''; // Corrigido: Adicionado .value
+    txtAnoLancamentoSerie.value = ''; // Corrigido: Adicionado .value
+    txtUrlCapaSerie.value = ''; // Corrigido: Adicionado .value
+    txtDiretorSerie.value = ''; // Corrigido: Adicionado .value
+    txtElencoSerie.value = ''; // Corrigido: Adicionado .value
+    txtNumTemp.value = ''; // Corrigido: Adicionado .value
+    txtNotaSerie.value = ''; // Corrigido: Adicionado .value
 
     txtIdSerie.disabled = true;
     txtTituloSerie.disabled = false;
@@ -194,6 +195,7 @@ function criarSerie() {
         'urlCapa' : txtUrlCapaSerie.value,
         'diretor': txtDiretorSerie.value,
         'elencoPrincipal': txtElencoSerie.value,
+        'numeroTemporadas': txtNumTemp.value,
         'nota': txtNotaSerie.value
     };
     const errorHandler = function (error) {
@@ -213,6 +215,7 @@ function alterarSerie() {
         'urlCapa' : txtUrlCapaSerie.value,
         'diretor': txtDiretorSerie.value,
         'elencoPrincipal': txtElencoSerie.value,
+        'numeroTemporadas': txtNumTemp.value,
         'nota': txtNotaSerie.value
     };
     asyncAlterarSerie(dadosSerie, inicializarSerie, errorHandler);
@@ -308,8 +311,6 @@ function inicializarAvaliacao() {
     txtIdSerie.disabled = true;
 
     btnSalvarAvaliacao.disabled = false;
-    btnApagarAvaliacao.disabled = false;
-    btnCancelarAvaliacao.disabled = false;
 
     listarTodasAvaliacoes();
 }

@@ -52,7 +52,7 @@
             </div>
             <div class="table-container">
                 <table id="tabelaSeries" style="display: none;">
-                    <input type="button" value="Novo" onclick="novoSeries()" id="btnNovoSerie" class="botao">
+                    <input type="button" value="Novo" onclick="novaSerie()" id="btnNovoSerie" class="botao">
                     <table class="camp">
                         <tr>
                             <th>ID</th>
@@ -101,7 +101,7 @@
                 </tr>
                 <tr>
                     <td>Número de Temporadas:</td>
-                    <td><input type="text" id="txtNumTempSerie" class="inputText"></td>
+                    <td><input type="text" id="txtNumTemp" class="inputText"></td>
                 </tr>
                 <tr>
                     <td>Nota:</td>
@@ -161,9 +161,6 @@
                 <td></td>
                 <td>
                     <input type="button" value="Salvar" onclick="salvarAvaliacao()" id="btnSalvarAvaliacao" class="botao">
-                    <!-- <input type="button" value="Apagar" onclick="apagarAvaliacao()" id="btnApagarAvaliacao" class="botao">
-                    <input type="button" value="Cancelar" onclick="cancelarEdicaoAvaliacao()" id="btnCancelarAvaliacao"
-                        class="botao"> -->
                 </td>
                 </tr>
             </table>
@@ -187,7 +184,7 @@
         </section>
     </main>
 
-    <script src="scripts/filmeGerenciador.js"></script>
+    <script src="scripts/gerenciador.js"></script>
     <script src="scripts/series.js"></script>
     <script src="scripts/script.js"></script>
 </body>

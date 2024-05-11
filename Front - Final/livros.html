@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <title>Gerenciador</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="navbar.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="stylesheet" href="filmes.css" type="text/css">
+
+</head>
+
+<body>
+    <header>
+        <div class="nav-bar">
+            <div class="logo">
+                <a href="index.html"><img src="assets/shared/logo.svg" alt="company logo"></a>
+            </div>
+            <div class="toggle-button-open" id="toggle-ham-menu" onclick="imgClick()">
+            </div>
+            <div class="navbar-links" id="nav-links">
+                <ul>
+                    <li id="home-nav-btn"><a href="index.html">HOME</a></li>
+                    <li id="filmes-nav-btn"><a href="filmes.html">FILMES</a></li>
+                    <li id="series-nav-btn"><a href="series.html">SÉRIES</a></li>
+                    <li id="livros-nav-btn"><a href="livros.html">LIVROS</a></li>
+                    <li id="login-nav-btn"><a href="login.html">LOGIN</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Recomendações Livros -->
+        <section id="recomendacoesLivros" class="recomendacoes">
+            <div class="container">
+                <h1 class="titulosH1">Destaques da Semana</h1>
+                <a href="#" class="botao" id="btnGerenciarLivros">Gerenciar Livros</a>
+                <br>
+                <div id="livros-container" class="container"></div>
+        </section>
+
+        <section id="sectionLivros" style="display: none;">
+            <input type="button" value="Voltar" onclick="reloadPage()" id="btnVoltar" class="botao">
+            <h1>Avaliação de Livros</h1>
+            <p style="font-weight:bold" id="paragrafoMensagemLivros"></p>
+
+            <div class="table-container">
+
+            </div>
+            <div class="table-container">
+                <table id="tabelaLivros" style="display: none;">
+                    <input type="button" value="Novo" onclick="novoLivro()" id="btnNovoLivro" class="botao">
+                    <table class="camp">
+                        <tr>
+                            <th>ID</th>
+                            <th>Titulo</th>
+                            <th>País</th>
+                            <th>Ano de Lançamento</th>
+                            <th>URL Capa</th>
+                            <th>Autores</th>
+                            <th>Editora</th>
+                            <th>Nota</th>
+                        </tr>
+                        <tbody id="corpoTabelaLivros"> </tbody>
+                    </table>
+                </table>
+            </div>
+
+            <table id="tabelaFormularioLivros" style="display: none">
+                <tr>
+                    <td>ID:</td>
+                    <td><input type="text" id="txtIdLivro" class="inputText"></td>
+                </tr>
+                <tr>
+                    <td>Título:</td>
+                    <td><input type="text" id="txtTituloLivro" class="inputText"></td>
+                </tr>
+                <tr>
+                    <td>País:</td>
+                    <td><input type="text" id="txtPaisLivro" class="inputText"></td>
+                </tr>
+                <tr>
+                    <td>Ano de Lançamento:</td>
+                    <td><input type="text" id="txtAnoLancamentoLivro" class="inputText"></td>
+                </tr>
+                <tr>
+                    <td>URL Capa:</td>
+                    <td><input type="text" id="txtUrlCapaLivro" class="inputText"></td>
+                </tr>
+                <tr>
+                    <td>Autores:</td>
+                    <td><input type="text" id="txtAutoresLivro" class="inputText"></td>
+                </tr>
+                <tr>
+                    <td>Editora:</td>
+                    <td><input type="text" id="txtEditoraLivro" class="inputText"></td>
+                </tr>
+                <tr>
+                    <td>Nota:</td>
+                    <td><input type="text" id="txtNotaLivro" class="inputText"></td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="button" value="Salvar" onclick="salvarLivro()" id="btnSalvarLivro" class="botao">
+                        <input type="button" value="Apagar" onclick="apagarLivro()" id="btnApagarLivro" class="botao">
+                        <input type="button" value="Cancelar" onclick="cancelarEdicaoLivro()" id="btnCancelarLivro"
+                            class="botao">
+                    </td>
+                </tr>
+            </table>
+        </section>
+
+        <section id="sectionAvaliação" style="display: none;">
+            <input type="button" value="Voltar" onclick="reloadPage()" id="btnVoltar" class="botao">
+            <h1>Avaliação de Livros</h1>
+            <p style="font-weight:bold" id="paragrafoMensagemAvaliacao"></p>
+
+            <table id="tabelaFormularioAvaliacao">
+                <tr>
+                    <td rowspan="4" id="imagemCell">
+                        <img id="imagemLivroAvaliacao" src="" alt="Imagem do Livro">
+                    </td>
+                    <td>
+                        <p style="font-weight:bold" id="livroClicadoId" id="txtIdLivro"></p>
+                        <p id="tituloLivroAvaliacao"></p>
+                    </td>
+                </tr>
+                <tr id="formularioCel">
+                    <tr>
+                        <td>ID:</td>
+                        <td><input type="text" id="txtIdAvaliacao" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Nota:</td>
+                        <td><input type="text" id="txtNotaLivroAvaliacao" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Comentário:</td>
+                        <td><input type="text" id="txtComentarioLivro" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Usuário:</td>
+                        <td><input type="text" id="txtIdUsuarioA" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Livro:</td>
+                        <td><input type="text" id="livroClicadoId" class="inputText"></td>
+                    </tr>
+                </tr>
+                
+                <td></td>
+                <td>
+                    <input type="button" value="Salvar" onclick="salvarAvaliacao()" id="btnSalvarAvaliacao" class="botao">
+                    <input type="button" value="Apagar" onclick="apagarAvaliacao()" id="btnApagarAvaliacao" class="botao">
+                    <input type="button" value="Cancelar" onclick="cancelarEdicaoAvaliacao()" id="btnCancelarAvaliacao"
+                        class="botao">
+                </td>
+                </tr>
+            </table>
+            
+            <h1>Avaliações do Livro</h1>
+            <div class="table-container">
+                <table id="tabelaAvaliacaoLivro" style="display: none;">
+                    <table class="camp">
+                        <tr>
+                            <th>Nota</th>
+                            <th>Comentário</th>
+                            <th>Usuário</th>
+                            <th>ID do Livro</th>
+                        </tr>
+                        <tbody id="corpoTabelaAvaliacaoLivro"> </tbody>
+                    </table>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="scripts/gerenciador.js"></script>
+    <script src="scripts/livros.js"></script>
+    <script src="scripts/script.js"></script>
+
+</body>
+</html>

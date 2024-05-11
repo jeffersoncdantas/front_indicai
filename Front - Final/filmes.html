@@ -13,23 +13,25 @@
 </head>
 
 <body>
-    <div class="nav-bar">
-        <div class="logo">
-            <a href="index.html"><img src="assets/shared/logo.svg" alt="company logo"></a>
+    <header>
+        <div class="nav-bar">
+            <div class="logo">
+                <a href="index.html"><img src="assets/shared/logo.svg" alt="company logo"></a>
+            </div>
+            <div class="toggle-button-open" id="toggle-ham-menu" onclick="imgClick()">
+            </div>
+            <div class="navbar-links" id="nav-links">
+                <ul>
+                    <li id="home-nav-btn"><a href="index.html">HOME</a></li>
+                    <li id="filmes-nav-btn"><a href="filmes.html">FILMES</a></li>
+                    <li id="series-nav-btn"><a href="series.html">SÉRIES</a></li>
+                    <li id="livros-nav-btn"><a href="livros.html">LIVROS</a></li>
+                    <li id="login-nav-btn"><a href="login.html">LOGIN</a></li>
+                </ul>
+            </div>
         </div>
-        <div class="toggle-button-open" id="toggle-ham-menu" onclick="imgClick()">
-            <!--<img src="assets/shared/icon-hamburger.svg">-->
-        </div>
-        <div class="navbar-links" id="nav-links">
-            <ul>
-                <li id="home-nav-btn"><a href="index.html">HOME</a></li>
-                <li id="filmes-nav-btn"><a href="filmes.html">FILMES</a></li>
-                <li id="series-nav-btn"><a href="series.html">SÉRIES</a></li>
-                <li id="livros-nav-btn"><a href="livros.html">LIVROS</a></li>
-                <li id="login-nav-btn"><a href="login.html">LOGIN</a></li>
-            </ul>
-        </div>
-    </div>
+    </header>
+    
     <main class="content">
         <!-- Recomendações Filmes -->
         <section id="recomendacoesFilmes" class="recomendacoes">
@@ -38,8 +40,8 @@
                 <a href="#" class="botao" id="btnGerenciarFilmes">Gerenciar Filmes</a>
                 <br>
                 <div id="filmes-container" class="container"></div>
-
         </section>
+        
         <section id="sectionFilmes" style="display: none;">
             <input type="button" value="Voltar" onclick="reloadPage()" id="btnVoltar" class="botao">
             <h1>Avaliação de Filmes</h1>
@@ -179,7 +181,7 @@
         </section>
     </main>
 
-    <script src="scripts/filmeGerenciador.js"></script>
+    <script src="scripts/gerenciador.js"></script>
     <script src="scripts/filmes.js"></script>
     <script src="scripts/script.js"></script>
 </body>
