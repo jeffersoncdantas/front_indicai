@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <title>Gerenciador</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="navbar.css" type="text/css">
+    <link rel="stylesheet" href="homepage.css" type="text/css">
+    <link rel="stylesheet" href="painelGerenciador.css" type="text/css">
+
+</head>
+
+<body>
+    <header>
+        <div class="nav-bar">
+            <div class="logo">
+                <a href="index.html"><img src="assets/shared/logo.svg" alt="company logo"></a>
+            </div>
+            <div class="toggle-button-open" id="toggle-ham-menu" onclick="imgClick()">
+            </div>
+            <div class="navbar-links" id="nav-links">
+                <ul>
+                    <li id="home-nav-btn"><a href="index.html">HOME</a></li>
+                    <li id="filmes-nav-btn"><a href="filmes.html">FILMES</a></li>
+                    <li id="series-nav-btn"><a href="series.html">SÉRIES</a></li>
+                    <li id="livros-nav-btn"><a href="livros.html">LIVROS</a></li>
+                    <li id="login-nav-btn"><a href="login.html">LOGIN</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    
+    <main class="content">
+        <div class="transparencia">
+            <section id="landing">
+                <h1>Gestão de Itens Cadastrados</h1>
+                <ul>
+                    <button id="btnGerenciarFilmes">Gerenciar Filmes</button>
+                    <button id="btnGerenciarSeries">Gerenciar Series</button>
+                    <button id="btnGerenciarLivros">Gerenciar Livros</button>
+                    <button id="btnGerenciarGeneros">Gerenciar Generos</button>
+                    <button id="btnGerenciarUsuarios">Gerenciar Usuarios</button>
+                </ul>
+            </section>
+
+            <section id="sectionFilmes" style="display: none">
+                <input type="button" value="Voltar" id="btnVoltar" onclick="voltarPagInicial()">
+                <h1>Gerenciamento de Filmes</h1>
+                <p style="font-weight:bold" id="paragrafoMensagemFilmes"></p>
+                
+                <table id="tabelaFilmes">
+                    <input type="button" value="Novo" onclick="novoFilme()" id="btnNovoFilme" class="botao">
+                    <table class="camp" id ="listaFilmes">
+                        <tr>
+                            <th>ID</th>
+                            <th>Titulo</th>
+                            <th>País</th>
+                            <th>Ano de Lançamento</th>
+                            <th>Diretor</th>
+                            <th>Elenco Principal</th>
+                            <th>Gênero</th>
+                        </tr>
+                        <tbody id="corpoTabelaFilmes"> </tbody>
+                    </table>
+                </table>
+
+                <table id="tabelaFormularioFilmes">
+                    <tr>
+                        <td>ID: </td>
+                        <td><input type="text" id="txtIdFilme" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Titulo: </td>
+                        <td><input type="text" id="txtTituloFilme" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>País: </td>
+                        <td><input type="text" id="txtPaisFilme" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Ano de Lançamento: </td>
+                        <td><input type="text" id="txtAnoFilme" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>URL Capa: </td>
+                        <td><input type="text" id="txtCapaFilme" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Diretor: </td>
+                        <td><input type="text" id="txtDiretorFilme" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Elenco Principal: </td>
+                        <td><input type="text" id="txtElencoFilme" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Gênero: </td>
+                        <td><select id="selectGeneroFilme" class="inputText"></select></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="button" value="Salvar" onclick="salvarFilme()" id="btnSalvarFilme" class="botao">
+                            <input type="button" value="Apagar" onclick="apagarFilme()" id="btnApagarFilme" class="botao">
+                            <input type="button" value="Cancelar" onclick="cancelarEdicaoFilme()" id="btnCancelarFilme"
+                                class="botao">
+                        </td>
+                    </tr>
+                </table>
+            </section>
+
+            <section id="sectionSeries" style="display: none">
+                <input type="button" value="Voltar" id="btnVoltar" onclick="voltarPagInicial()">
+                <h1>Gerenciamento de Series</h1>
+                <p style="font-weight:bold" id="paragrafoMensagemSeries"></p>
+                
+                <table id="tabelaSeries">
+                    <input type="button" value="Novo" onclick="novaSerie()" id="btnNovaSerie" class="botao">
+                    <table class="camp">
+                        <tr>
+                            <th>ID</th>
+                            <th>Titulo</th>
+                            <th>País</th>
+                            <th>Ano de Lançamento</th>
+                            <th>Diretor</th>
+                            <th>Elenco Principal</th>
+                            <th>Numero de Temporadas</th>
+                            <th>Gênero</th>
+                        </tr>
+                        <tbody id="corpoTabelaSeries"> </tbody>
+                    </table>
+                </table>
+
+                <table id="tabelaFormularioSeries">
+                    <tr>
+                        <td>ID: </td>
+                        <td><input type="text" id="txtIdSerie" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Titulo: </td>
+                        <td><input type="text" id="txtTituloSerie" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>País: </td>
+                        <td><input type="text" id="txtPaisSerie" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Ano de Lançamento: </td>
+                        <td><input type="text" id="txtAnoSerie" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>URL Capa: </td>
+                        <td><input type="text" id="txtCapaSerie" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Diretor: </td>
+                        <td><input type="text" id="txtDiretorSerie" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Elenco Principal: </td>
+                        <td><input type="text" id="txtElencoSerie" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Número de Temporadas: </td>
+                        <td><input type="text" id="txtNumeroTemporadas" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Gênero: </td>
+                        <td><select id="selectGeneroSerie" class="inputText"></select></td>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="button" value="Salvar" onclick="salvarSerie()" id="btnSalvarSerie"
+                                class="botao">
+                            <input type="button" value="Apagar" onclick="apagarSerie()" id="btnApagarSerie"
+                                class="botao">
+                            <input type="button" value="Cancelar" onclick="cancelarEdicaoSerie()"
+                                id="btnCancelarSerie" class="botao">
+                        </td>
+                    </tr>
+                </table>
+            </section>
+
+            <section id="sectionLivros" style="display: none">
+                <input type="button" value="Voltar" id="btnVoltar" onclick="voltarPagInicial()">
+                <h1>Gerenciamento de Livros</h1>
+                <p style="font-weight:bold" id="paragrafoMensagemLivros"></p>
+                
+                <table id="tabelaLivros">
+                    <input type="button" value="Novo" onclick="novoLivro()" id="btnNovoLivro" class="botao">
+                    <table class="camp">
+                        <tr>
+                            <th>ID</th>
+                            <th>Titulo</th>
+                            <th>País</th>
+                            <th>Ano de Lançamento</th>
+                            <th>Autores</th>
+                            <th>Editora</th>
+                            <th>Gênero</th>
+                        </tr>
+                        <tbody id="corpoTabelaLivros"> </tbody>
+                    </table>
+                </table>
+
+                <table id="tabelaFormularioLivros">
+                    <tr>
+                        <td>ID: </td>
+                        <td><input type="text" id="txtIdLivro" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Titulo: </td>
+                        <td><input type="text" id="txtTituloLivro" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>País: </td>
+                        <td><input type="text" id="txtPaisLivro" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Ano de Lançamento: </td>
+                        <td><input type="text" id="txtAnoLivro" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>URL Capa: </td>
+                        <td><input type="text" id="txtUrlCapaLivro" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Autores: </td>
+                        <td><input type="text" id="txtAutoresLivro" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Editora: </td>
+                        <td><input type="text" id="txtEditoraLivro" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Gênero: </td>
+                        <td><select id="selectGeneroLivro" class="inputText"></select></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="button" value="Salvar" onclick="salvarLivro()" id="btnSalvarLivro"
+                                class="botao">
+                            <input type="button" value="Apagar" onclick="apagarLivro()" id="btnApagarLivro"
+                                class="botao">
+                            <input type="button" value="Cancelar" onclick="cancelarEdicaoLivro()"
+                                id="btnCancelarLivro" class="botao">
+                        </td>
+                    </tr>
+                </table>
+            </section>
+            <section id="sectionGeneros" style="display: none">
+                <input type="button" value="Voltar" id="btnVoltar" onclick="voltarPagInicial()">
+                <h1>Gerenciamento de Generos</h1>
+                <p style="font-weight:bold" id="paragrafoMensagemGeneros"></p>
+                
+                <table id="tabelaGeneros">
+                    <input type="button" value="Novo" onclick="novoGenero()" id="btnNovoGenero" class="botao">
+                    <table class="camp">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                        </tr>
+                        <tbody id="corpoTabelaGeneros"> </tbody>
+                    </table>
+                </table>
+    
+                <table id="tabelaFormularioGeneros">
+                    <tr>
+                        <td>ID: </td>
+                        <td><input type="text" id="txtIdGenero" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Nome: </td>
+                        <td><input type="text" id="txtNomeGenero" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="button" value="Salvar" onclick="salvarGenero()" id="btnSalvarGenero"
+                                class="botao">
+                            <input type="button" value="Apagar" onclick="apagarGenero()" id="btnApagarGenero"
+                                class="botao">
+                            <input type="button" value="Cancelar" onclick="cancelarEdicaoGenero()"
+                                id="btnCancelarGenero" class="botao">
+                        </td>
+                    </tr>
+                </table>
+            </section>
+
+            <section id="sectionUsuarios" style="display: none">
+                <input type="button" value="Voltar" id="btnVoltar" onclick="voltarPagInicial()">
+                <h1>Gerenciamento de Usuarios</h1>
+                <p style="font-weight:bold" id="paragrafoMensagemUsuarios"></p>
+                
+                <table id="tabelaUsuarios">
+                    <input type="button" value="Novo" onclick="novoUsuario()" id="btnNovoUsuario" class="botao">
+                    <table class="camp">
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Cidade</th>
+                            <th>Estado</th>
+                            <th>Ano Nascimento</th>
+                            <th>Role</th>
+                            <th>Amigos</th>
+                        </tr>
+                        <tbody id="corpoTabelaUsuarios"> </tbody>
+                    </table>
+                </table>
+            </section>
+        </div>        
+
+    </main>
+
+    <script src="scripts/painelGerenciador.js"></script>
+    <script src="scripts/gerenciadorFilmes.js"></script>
+    <script src="scripts/gerenciadorSeries.js"></script>
+    <script src="scripts/gerenciadorLivros.js"></script>
+    <script src="scripts/gerenciadorGeneros.js"></script>
+    <script src="scripts/gerenciadorUsuarios.js"></script>
+ 
+</body>
+
+</html>
