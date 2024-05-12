@@ -264,3 +264,28 @@ label {
     width: 100%; 
     margin-left: 2rem;
 }
+.avaliacao-comentario {
+    display: flex; /* Usa um layout flexível */
+    align-items: center; /* Alinha os itens verticalmente */
+    border: 1px solid #ccc; /* Borda cinza */
+    border-radius: 5px; /* Cantos arredondados */
+    padding: 10px; /* Espaçamento interno */
+    margin-bottom: 10px; /* Espaçamento inferior */
+    width: 50%;
+}
+
+.avaliacao-comentario img {
+    margin: 0;
+    width: 70px; /* Define a largura da imagem */
+    height: auto; /* Mantém a proporção da imagem */
+    margin-right: 20px; /* Adiciona um pequeno espaço entre a imagem e o texto */
+}
+
+.avaliacao-comentario .conteudo {
+    flex-grow: 1; /* Faz com que o conteúdo ocupe todo o espaço disponível */
+    margin-top: 0;
+}
+
+.avaliacao-comentario p {
+    margin: 10px 0; /* Espaçamento entre os parágrafos dentro do comentário */
+}
