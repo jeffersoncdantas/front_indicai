@@ -36,89 +36,12 @@
         <!-- Recomendações Séries -->
         <section id="recomendacoesSeries" class="recomendacoes">
             <div class="container">
-                <h1 class="titulosH1">Destaques da Semana</h1>
-                <a href="#" class="botao" id="btnGerenciarSeries">Gerenciar Series</a>
-                <br>
-                <div id="series-container" class="container"></div>
-        </section>
-
-        <section id="sectionSeries" style="display: none;">
-            <input type="button" value="Voltar" onclick="reloadPage()" id="btnVoltar" class="botao">
-            <h1>Avaliação de Séries</h1>
-            <p style="font-weight:bold" id="paragrafoMensagemSeries"></p>
-
-            <div class="table-container">
-
+                <div class="destaques-container">
+                    <h1 class="titulosH1">Destaques da Semana</h1>
+                </div>
+                <div id="series-container" class="cards-container"></div>
             </div>
-            <div class="table-container">
-                <table id="tabelaSeries" style="display: none;">
-                    <input type="button" value="Novo" onclick="novaSerie()" id="btnNovoSerie" class="botao">
-                    <table class="camp">
-                        <tr>
-                            <th>ID</th>
-                            <th>Titulo</th>
-                            <th>País</th>
-                            <th>Ano de Lançamento</th>
-                            <th>URL Capa</th>
-                            <th>Diretor</th>
-                            <th>Elenco Principal</th>
-                            <th>Número de Temporadas</th>
-                            <th>Nota</th>
-                        </tr>
-                        <tbody id="corpoTabelaSeries"> </tbody>
-                    </table>
-                </table>
-            </div>
-
-            <table id="tabelaFormularioSeries" style="display: none">
-                <tr>
-                    <td>ID:</td>
-                    <td><input type="text" id="txtIdSerie" class="inputText"></td>
-                </tr>
-                <tr>
-                    <td>Título:</td>
-                    <td><input type="text" id="txtTituloSerie" class="inputText"></td>
-                </tr>
-                <tr>
-                    <td>País:</td>
-                    <td><input type="text" id="txtPaisSerie" class="inputText"></td>
-                </tr>
-                <tr>
-                    <td>Ano de Lançamento:</td>
-                    <td><input type="text" id="txtAnoLancamentoSerie" class="inputText"></td>
-                </tr>
-                <tr>
-                    <td>URL Capa:</td>
-                    <td><input type="text" id="txtUrlCapaSerie" class="inputText"></td>
-                </tr>
-                <tr>
-                    <td>Diretor:</td>
-                    <td><input type="text" id="txtDiretorSerie" class="inputText"></td>
-                </tr>
-                <tr>
-                    <td>Elenco Principal:</td>
-                    <td><input type="text" id="txtElencoSerie" class="inputText"></td>
-                </tr>
-                <tr>
-                    <td>Número de Temporadas:</td>
-                    <td><input type="text" id="txtNumTemp" class="inputText"></td>
-                </tr>
-                <tr>
-                    <td>Nota:</td>
-                    <td><input type="text" id="txtNotaSerie" class="inputText"></td>
-                </tr>
-
-                <tr>
-                    <td></td>
-                    <td>
-                        <input type="button" value="Salvar" onclick="salvarSerie()" id="btnSalvarSerie" class="botao">
-                        <input type="button" value="Apagar" onclick="apagarSerie()" id="btnApagarSerie" class="botao">
-                        <input type="button" value="Cancelar" onclick="cancelarEdicaoSerie()" id="btnCancelarSerie"
-                            class="botao">
-                    </td>
-                </tr>
-            </table>
-        </section>
+        </section> 
 
         <section id="sectionAvaliação" style="display: none;">
             <input type="button" value="Voltar" onclick="reloadPage()" id="btnVoltar" class="botao">
@@ -127,43 +50,43 @@
 
             <table id="tabelaFormularioAvaliacao">
                 <tr>
-                    <td rowspan="4" id="imagemCell">
+                    <td id="imagemCell">
                         <img id="imagemSerieAvaliacao" src="" alt="Imagem da Serie">
                     </td>
-                    <td>
+                    <td id="formularioCel">
+                        <h1 id="tituloSerieAvaliacao"></h1>
                         <p style="font-weight:bold" id="serieClicadoId" id="txtIdSerie"></p>
-                        <p id="tituloSerieAvaliacao"></p>
+                        <table>
+                            <tr>
+                                <td>ID:</td>
+                                <td><input type="text" id="txtIdAvaliacao" class="inputText"></td>
+                            </tr>
+                            <tr>
+                                <td>Nota:</td>
+                                <td><input type="text" id="txtNotaSerieAvaliacao" class="inputText"></td>
+                            </tr>
+                            <tr>
+                                <td>Comentário:</td>
+                                <td><input type="text" id="txtComentarioSerie" class="inputText textAreaInput"></td>
+                            </tr>
+                            <tr>
+                                <td>Usuário:</td>
+                                <td><input type="text" id="txtIdUsuarioA" class="inputText"></td>
+                            </tr>
+                            <tr>
+                                <td>Filme:</td>
+                                <td><input type="text" id="txtIdSerie" class="inputText"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="button" value="Salvar" onclick="salvarAvaliacao()"
+                                        id="btnSalvarAvaliacao" class="botao">
+                                </td>
+                            </tr>
+                        </table>
                     </td>
                 </tr>
-                <tr id="formularioCel">
-                    <tr>
-                        <td>ID:</td>
-                        <td><input type="text" id="txtIdAvaliacao" class="inputText"></td>
-                    </tr>
-                    <tr>
-                        <td>Nota:</td>
-                        <td><input type="text" id="txtNotaSerieAvaliacao" class="inputText"></td>
-                    </tr>
-                    <tr>
-                        <td>Comentário:</td>
-                        <td><input type="text" id="txtComentarioSerie" class="inputText"></td>
-                    </tr>
-                    <tr>
-                        <td>Usuário:</td>
-                        <td><input type="text" id="txtIdUsuarioA" class="inputText"></td>
-                    </tr>
-                    <tr>
-                        <td>Série:</td>
-                        <td><input type="text" id="serieClicadoId" class="inputText"></td>
-                    </tr>
-                </tr>
-                
-                <td></td>
-                <td>
-                    <input type="button" value="Salvar" onclick="salvarAvaliacao()" id="btnSalvarAvaliacao" class="botao">
-                </td>
-                </tr>
             </table>
+
 
 
             <h1>Avaliações Registradas</h1>
@@ -184,7 +107,6 @@
         </section>
     </main>
 
-    <script src="scripts/gerenciador.js"></script>
     <script src="scripts/series.js"></script>
     <script src="scripts/script.js"></script>
 </body>

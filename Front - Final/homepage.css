@@ -4,15 +4,15 @@
 }
 
 body {
-    background-image: url('assets/bg/netflix-bg.png');
-    background-size: cover;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
+	background-image: url('assets/bg/netflix-bg.png');
+	background-size: cover;
+	height: 100vh;
+	margin: 0;
+	padding: 0;
 }
 
-.showcase{
-    font-family: "Barlow Condensed", sans-serif;
+.showcase {
+	font-family: "Barlow Condensed", sans-serif;
 }
 
 .showcase-content {
@@ -67,15 +67,35 @@ body {
 	padding-top: 0.5rem;
 }
 
-.tabs .container > div {
+.tabs .container>div {
 	padding: 1.5rem 0;
 }
 
-.tabs .container > div:hover {
+.tabs .container>div:hover {
 	color: #fff;
 	cursor: pointer;
 }
 
 .tab-border {
 	border-bottom: var(--primary-color) 4px solid;
+}
+
+.botao {
+	font-weight: 900;
+	font-size: 25px;
+	border-radius: 15px;
+	border: 1px solid rgba(190, 255, 85, 0.8);
+	background: rgba(190, 255, 85, 0.8);
+	color: #333;
+	border: none;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	padding: 10px;
+	text-decoration: none;
+}
+
+.botao:hover {
+	background: rgba(20, 20, 20, .8);
+	color: white;
 }

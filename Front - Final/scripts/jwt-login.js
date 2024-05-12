@@ -66,6 +66,15 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log(localStorage.getItem("idUsuario"))
             console.log(localStorage.getItem("username"))
 
+            const roleUsuario = data.role;
+            if(roleUsuario  === 'ADMIN'){
+                // Se o papel for ADMIN, redireciona para painelGerenciador.html
+                window.location.href = 'painelGerenciador.html';
+            } else {
+                // Se não, redireciona para index.html
+                window.location.href = 'index.html';
+            }
+
 
         })
         .catch(error => {
@@ -118,3 +127,4 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+

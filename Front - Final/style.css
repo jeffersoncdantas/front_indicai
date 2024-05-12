@@ -37,15 +37,7 @@ body {
     color: white;
 }
 
-.transparencia {
-    background: rgba(255, 255, 255, 0.5);
-    width: 50em;
-    border-radius: 20px;
-    box-sizing: border-box;
-    padding: 15px;
-}
-
-.botao {
+.botao, #btnVoltar {
     font-weight: 900;
     font-size: 25px;
     border-radius: 15px;
@@ -71,64 +63,92 @@ body {
     color: #ffffff;
 }
 
-/*CSS da Tabela*/
-.table-container {
-    overflow-x: auto;
-    .camp {
-        margin-bottom: 15px;
-        margin-top: 15px;
-        border-collapse: collapse;
-        background-color: #f2f2f2;
-        color: #333;
-        font-weight: bold;
-        border-radius: 8px;
-        overflow-x: auto; /* Adicionando overflow-x para permitir rolagem horizontal */
+/*CSS de Avaliação*/
+
+#sectionAvaliação {
+    margin-left: 2rem;
+}
+
+#tabelaFormularioAvaliacao {
+    border: 2px solid #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 800px; 
+    margin: 0 auto; 
+}
+
+#tabelaFormularioAvaliacao tr {
+    padding: 10px;
+    flex: 1 1 100%;
+    display: flex;
+}
+
+#tabelaFormularioAvaliacao td {
+    vertical-align: top;
+}
+
+#imagemFilmeAvaliacao, #imagemSerieAvaliacao, #imagemLivroAvaliacao {
+    width: 30rem;
+    float: left;
+    border-radius: 15px;
+}
+
+#tituloFilmeAvaliacao, #tituloSerieAvaliacao, #tituloLivroAvaliacao {
+    font-weight: bold;
+    margin-top: 0;
+}
+
+.inputText {
+    width: calc(50% - 10px);
+    padding: 5px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+label {
+    display: block;
+    flex: 1 0 100%;
+}
+
+#formularioCel {
+    width: 80%;
+    float: right;
+    margin-left: 0.5rem;
+}
+
+.textAreaInput {
+    width: calc(100% - 10px); 
+    padding: 5px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    height: 150px; 
+}
+
+
+@media screen and (max-width: 900px) {
+    #tabelaFormularioAvaliacao {
+        width: 80%; 
     }
-    
-    .camp th {
-        background-color: #f2f2f2;
-        color: #333;
-        font-weight: bold;
-        padding: 8px;
-        text-align: left; /* Evita que o conteúdo da célula seja quebrado em várias linhas */
+
+    #imagemFilmeAvaliacao, #imagemSerieAvaliacao, #imagemLivroAvaliacao {
+        width: 100%; 
+        margin-left: 0; 
     }
-    
-    .camp td {
-        padding: 8px;
+
+    #formularioCel {
+        width: 100%; 
+        float: none; 
     }
-    
-    .camp td:first-child,
-    th:first-child {
-        border-top-left-radius: 8px;
-        border-bottom-left-radius: 8px;
-    }
-    
-    .camp td:last-child,
-    th:last-child {
-        border-top-right-radius: 8px;
-        border-bottom-right-radius: 8px;
-    }
-    
+
     .inputText {
-        border-radius: 7px;
-        margin-right: 15px;
-    }
-    
-    table {
-        border-collapse: separate;
-        border-spacing: 0 10px;
-        width: 70%; /* Definindo largura da tabela como 100% */
-        
-    }
-    
-    td,
-    a {
-        font-weight: 600;
-        font-size: 18px;
+        width: calc(100% - 10px); 
     }
 }
 
-/* Estilos para telas menores que 375px */
 @media only screen and (max-width: 375px) {
     .table-container {
         overflow-x: auto;
@@ -147,7 +167,6 @@ body {
     }
 }
 
-/* Estilos para telas entre 375px e 767px */
 @media only screen and (min-width: 376px) and (max-width: 767px) {
     .table-container {
         overflow-x: auto;
@@ -166,7 +185,6 @@ body {
     }
 }
 
-/* Estilos para telas entre 768px e 1279px */
 @media only screen and (min-width: 768px) and (max-width: 1279px) {
     .table-container {
         overflow-x: auto;
@@ -185,7 +203,6 @@ body {
     }
 }
 
-/* Estilos para telas maiores ou iguais a 1280px */
 @media only screen and (min-width: 1280px) {
     .table-container {
         overflow-x: auto;
@@ -204,20 +221,46 @@ body {
     }
 }
 
-
-
-#btnVoltar {
-    font-weight: 900;
-    padding: 10px 5px;
-    font-size: 15px;
-    border-radius: 15px;
-    border: 1px solid rgba(190, 255, 85, 0.8);
-    background: rgba(190, 255, 85, 0.8);
-    color: #333;
-    padding: 10px 50px;
-    border: none;
-    cursor: pointer;
-    transition: .4s;
-    margin-top: 10px;
+.linkTitulo {
+    color: #fff; 
+    font-size: 22px; 
+    text-decoration: none;
+    font-weight: bold; 
 }
 
+.linkTitulo:hover {
+    color: rgba(190, 255, 85, 0.8);
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    text-align: center; 
+}
+
+.card img {
+    margin-bottom: 10px; 
+}
+
+
+.titulosH1 {
+    margin: 2rem; 
+    font-size: 40px;
+}
+
+.recomendacoes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.destaques-container,
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%; 
+    margin-left: 2rem;
+}
