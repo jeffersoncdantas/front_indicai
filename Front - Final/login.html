@@ -33,13 +33,13 @@
                             <input id="password" type="password" class="form-input" placeholder="Senha">
                         </div>
                         <button type="submit" class="form-button">Logar</button>
-                        <p class="mobile-text">
+                        <p class="mobile-text" id="register-text">
                             Não tem conta?
                             <a href="#" id="open-register-mobile">Registre-se</a>
                         </p>
                     </form>
                     <form class="form form-register" id="signup-form">
-                        <h2 class="form-title">Criar Conta</h2>
+                        <h2 class="form-title-light">Criar Conta</h2>
                         <div id="message-cadastro"></div>
                         <div class="form-input-container">
                             <input id="username-cd" type="text" class="form-input" placeholder="Username">
@@ -49,7 +49,7 @@
                             <input id="password-cd"type="password" class="form-input" placeholder="Senha">
                         </div>
                         <button type="submit" class="form-button" id="submit-cadastro">Cadastrar</button>
-                        <p class="mobile-text">
+                        <p class="mobile-text" id="login-text">
                             Já tem conta?
                             <a href="#" id="open-login-mobile">Login</a>
                         </p>
@@ -69,9 +69,38 @@
                 </div>
             </div>
         </section>
+
+        <section id="itensAvaliados" class="avaliados" style="display: none;">
+            <div class="container">
+                <div class="perfil-container">
+                    <img src="assets/shared/profile.svg" alt="Foto do Perfil Usuário">
+                    <p style="font-weight:bold" id="txtNomeUsuario"></p>
+                    <p style="font-weight:bold" id="txtIdUsuarioA"></p>
+                </div>
+
+                <div class="avaliados-container">
+                    <h1 class="titulosH1">Filmes Avaliados</h1>
+                </div>
+                <div id="filmesAvaliados-container" class="avaliados-container"></div>
+            
+                <div class="avaliados-container">
+                    <h1 class="titulosH1">Séries Avaliadas</h1>
+                </div>
+                <div id="seriesAvaliados-container" class="avaliados-container"></div>
+           
+                <div class="avaliados-container">
+                    <h1 class="titulosH1">Livros Avaliados</h1>
+                </div>
+                <div id="livrosAvaliados-container" class="avaliados-container"></div>
+            </div>
+        </section> 
     </main>
+
     <script src="scripts/loginGerenciador.js"></script>
     <script src="scripts/jwt-login.js"></script>
+    <script src="scripts/filmes.js"></script>
+    <script src="scripts/series.js"></script>
+    <script src="scripts/livros.js"></script>
 </body>
 
 </html>

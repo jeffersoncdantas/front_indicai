@@ -104,7 +104,7 @@ function exibirDetalhesSerieAvaliacao() {
     document.getElementById('serieClicadoId').value = serieClicadoId;
     document.getElementById('serieClicadoId').disabled = true;
 
-    listarTodasAvaliacoes(filmeClicadoId);
+    listarTodasAvaliacoes(serieClicadoId);
 
 }
 
@@ -143,24 +143,56 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function preencherTabelaAvaliacoes(avaliacoes) {
-    corpoTabelaAvaliacaoSerie.innerHTML = "";
-    var n = avaliacoes.length;
-    for (var i = 0; i < n; i++) {
-        let avaliacao = avaliacoes[i];
+    const corpoTabelaAvaliacaoSerie = document.getElementById('corpoTabelaAvaliacaoSerie');
+    corpoTabelaAvaliacaoSerie.innerHTML = ""; // Limpa o conteúdo atual da tabela
 
+    const nomeUsuario = localStorage.getItem("username");
+
+    avaliacoes.forEach(avaliacao => {
         if (avaliacao.item.id === serieClicadoId) {
-            let linha = corpoTabelaAvaliacaoSerie.insertRow();
-            let celulaNotaSerie = linha.insertCell();
-            let celulaComentario = linha.insertCell();
-            let celulaIdUsuario = linha.insertCell();
-            let celulaIdSerie = linha.insertCell();
+            // Cria um novo elemento <div> para representar a avaliação como um comentário
+            const comentario = document.createElement('div');
+            comentario.classList.add('avaliacao-comentario');
 
-            celulaNotaSerie.textContent = avaliacao.nota;
-            celulaComentario.textContent = avaliacao.comentario;
-            celulaIdUsuario.textContent = avaliacao.usuario.id;
-            celulaIdSerie.textContent = avaliacao.item.id;
+            const imagemSerie = document.createElement('img');
+            imagemSerie.src = serieClicadoUrl;
+            imagemSerie.alt = serieClicadoTitulo;
+            comentario.appendChild(imagemSerie);
+
+            const conteudo = document.createElement('div'); // Novo elemento para o conteúdo
+            conteudo.classList.add('conteudo');
+
+            const tituloSerie = document.createElement('h3');
+            tituloSerie.textContent = `${serieClicadoTitulo}`;
+            conteudo.appendChild(tituloSerie);
+
+            // Adiciona a nota da avaliação ao conteúdo
+            const nota = document.createElement('p');
+            nota.textContent = `Nota: ${avaliacao.nota}`;
+            conteudo.appendChild(nota);
+
+            // Adiciona o comentário ao conteúdo
+            const textoComentario = document.createElement('p');
+            textoComentario.textContent = `Comentário: ${avaliacao.comentario}`;
+            conteudo.appendChild(textoComentario);
+
+            // Adiciona o nome do usuário ao conteúdo
+            // const idUsuario = document.createElement('p');
+            // idUsuario.textContent = `Avaliação feita por: ${avaliacao.usuario.id}`;
+            // conteudo.appendChild(idUsuario);
+
+            // Adiciona o nome do usuário ao conteúdo
+            const nomeUsuarioTexto = document.createElement('p');
+            nomeUsuarioTexto.textContent = `Avaliação feita por: ${nomeUsuario} (${avaliacao.usuario.id})`;
+            conteudo.appendChild(nomeUsuarioTexto);
+
+            // Adiciona o conteúdo ao comentário
+            comentario.appendChild(conteudo);
+
+            // Adiciona o comentário ao corpo da tabela
+            corpoTabelaAvaliacaoSerie.appendChild(comentario);
         }
-    };
+    });
 }
 
 

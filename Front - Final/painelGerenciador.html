@@ -31,7 +31,7 @@
             </div>
         </div>
     </header>
-    
+
     <main class="content">
         <div class="transparencia">
             <section id="landing">
@@ -46,13 +46,13 @@
             </section>
 
             <section id="sectionFilmes" style="display: none">
-                <input type="button" value="Voltar" id="btnVoltar" onclick="voltarPagInicial()">
+                <input type="button" value="Voltar" id="btnVoltar" onclick="reloadPage()">
                 <h1>Gerenciamento de Filmes</h1>
                 <p style="font-weight:bold" id="paragrafoMensagemFilmes"></p>
-                
+
                 <table id="tabelaFilmes">
                     <input type="button" value="Novo" onclick="novoFilme()" id="btnNovoFilme" class="botao">
-                    <table class="camp" id ="listaFilmes">
+                    <table class="camp" id="listaFilmes">
                         <tr>
                             <th>ID</th>
                             <th>Titulo</th>
@@ -102,8 +102,10 @@
                     <tr>
                         <td></td>
                         <td>
-                            <input type="button" value="Salvar" onclick="salvarFilme()" id="btnSalvarFilme" class="botao">
-                            <input type="button" value="Apagar" onclick="apagarFilme()" id="btnApagarFilme" class="botao">
+                            <input type="button" value="Salvar" onclick="salvarFilme()" id="btnSalvarFilme"
+                                class="botao">
+                            <input type="button" value="Apagar" onclick="apagarFilme()" id="btnApagarFilme"
+                                class="botao">
                             <input type="button" value="Cancelar" onclick="cancelarEdicaoFilme()" id="btnCancelarFilme"
                                 class="botao">
                         </td>
@@ -112,10 +114,10 @@
             </section>
 
             <section id="sectionSeries" style="display: none">
-                <input type="button" value="Voltar" id="btnVoltar" onclick="voltarPagInicial()">
+                <input type="button" value="Voltar" id="btnVoltar" onclick="reloadPage()">
                 <h1>Gerenciamento de Series</h1>
                 <p style="font-weight:bold" id="paragrafoMensagemSeries"></p>
-                
+
                 <table id="tabelaSeries">
                     <input type="button" value="Novo" onclick="novaSerie()" id="btnNovaSerie" class="botao">
                     <table class="camp">
@@ -178,18 +180,18 @@
                                 class="botao">
                             <input type="button" value="Apagar" onclick="apagarSerie()" id="btnApagarSerie"
                                 class="botao">
-                            <input type="button" value="Cancelar" onclick="cancelarEdicaoSerie()"
-                                id="btnCancelarSerie" class="botao">
+                            <input type="button" value="Cancelar" onclick="cancelarEdicaoSerie()" id="btnCancelarSerie"
+                                class="botao">
                         </td>
                     </tr>
                 </table>
             </section>
 
             <section id="sectionLivros" style="display: none">
-                <input type="button" value="Voltar" id="btnVoltar" onclick="voltarPagInicial()">
+                <input type="button" value="Voltar" id="btnVoltar" onclick="reloadPage()">
                 <h1>Gerenciamento de Livros</h1>
                 <p style="font-weight:bold" id="paragrafoMensagemLivros"></p>
-                
+
                 <table id="tabelaLivros">
                     <input type="button" value="Novo" onclick="novoLivro()" id="btnNovoLivro" class="botao">
                     <table class="camp">
@@ -246,17 +248,17 @@
                                 class="botao">
                             <input type="button" value="Apagar" onclick="apagarLivro()" id="btnApagarLivro"
                                 class="botao">
-                            <input type="button" value="Cancelar" onclick="cancelarEdicaoLivro()"
-                                id="btnCancelarLivro" class="botao">
+                            <input type="button" value="Cancelar" onclick="cancelarEdicaoLivro()" id="btnCancelarLivro"
+                                class="botao">
                         </td>
                     </tr>
                 </table>
             </section>
             <section id="sectionGeneros" style="display: none">
-                <input type="button" value="Voltar" id="btnVoltar" onclick="voltarPagInicial()">
+                <input type="button" value="Voltar" id="btnVoltar" onclick="reloadPage()">
                 <h1>Gerenciamento de Generos</h1>
                 <p style="font-weight:bold" id="paragrafoMensagemGeneros"></p>
-                
+
                 <table id="tabelaGeneros">
                     <input type="button" value="Novo" onclick="novoGenero()" id="btnNovoGenero" class="botao">
                     <table class="camp">
@@ -267,7 +269,7 @@
                         <tbody id="corpoTabelaGeneros"> </tbody>
                     </table>
                 </table>
-    
+
                 <table id="tabelaFormularioGeneros">
                     <tr>
                         <td>ID: </td>
@@ -292,10 +294,10 @@
             </section>
 
             <section id="sectionUsuarios" style="display: none">
-                <input type="button" value="Voltar" id="btnVoltar" onclick="voltarPagInicial()">
+                <input type="button" value="Voltar" id="btnVoltar" onclick="reloadPage()">
                 <h1>Gerenciamento de Usuarios</h1>
                 <p style="font-weight:bold" id="paragrafoMensagemUsuarios"></p>
-                
+
                 <table id="tabelaUsuarios">
                     <input type="button" value="Novo" onclick="novoUsuario()" id="btnNovoUsuario" class="botao">
                     <table class="camp">
@@ -312,7 +314,7 @@
                     </table>
                 </table>
             </section>
-        </div>        
+        </div>
 
     </main>
 
@@ -323,7 +325,7 @@
     <script src="scripts/gerenciadorLivros.js"></script>
     <script src="scripts/gerenciadorGeneros.js"></script>
     <script src="scripts/gerenciadorUsuarios.js"></script>
- 
+
 </body>
 
 </html>

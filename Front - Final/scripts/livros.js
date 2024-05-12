@@ -139,35 +139,18 @@ function listarTodasAvaliacoes(idLivro) {
 document.addEventListener('DOMContentLoaded', function () {
     // Verifica se o usuário está logado
     const idUsuario = localStorage.getItem("idUsuario");
+    const nomeUsuario = localStorage.getItem("username");
     if (idUsuario) {
         // Se estiver logado, defina o valor do campo txtIdUsuarioA como ID do usuário
         document.getElementById('txtIdUsuarioA').value = idUsuario;
     }
 });
 
-// function preencherTabelaAvaliacoes(avaliacoes) {
-//     corpoTabelaAvaliacaoLivro.innerHTML = "";
-//     var n = avaliacoes.length;
-//     for (var i = 0; i < n; i++) {
-//         let avaliacao = avaliacoes[i];
-//         // Verifica se o ID do livro na avaliação é igual ao ID do livro clicado
-//         if (avaliacao.item.id === livroClicadoId) {
-//             let linha = corpoTabelaAvaliacaoLivro.insertRow();
-//             let celulaNotaLivro = linha.insertCell();
-//             let celulaComentario = linha.insertCell();
-//             let celulaIdUsuario = linha.insertCell();
-//             let celulaIdLivro = linha.insertCell();
-
-//             celulaNotaLivro.textContent = avaliacao.nota;
-//             celulaComentario.textContent = avaliacao.comentario;
-//             celulaIdUsuario.textContent = avaliacao.usuario.id;
-//             celulaIdLivro.textContent = avaliacao.item.id;
-//         }
-//     };
-// }
 function preencherTabelaAvaliacoes(avaliacoes) {
     const corpoTabelaAvaliacaoLivro = document.getElementById('corpoTabelaAvaliacaoLivro');
     corpoTabelaAvaliacaoLivro.innerHTML = ""; // Limpa o conteúdo atual da tabela
+
+    const nomeUsuario = localStorage.getItem("username");
 
     avaliacoes.forEach(avaliacao => {
         if (avaliacao.item.id === livroClicadoId) {
@@ -198,9 +181,14 @@ function preencherTabelaAvaliacoes(avaliacoes) {
             conteudo.appendChild(textoComentario);
 
             // Adiciona o nome do usuário ao conteúdo
-            const nomeUsuario = document.createElement('p');
-            nomeUsuario.textContent = `Usuário: ${avaliacao.usuario.id}`;
-            conteudo.appendChild(nomeUsuario);
+            // const idUsuario = document.createElement('p');
+            // idUsuario.textContent = `Avaliação feita por: ${avaliacao.usuario.id}`;
+            // conteudo.appendChild(idUsuario);
+
+            // Adiciona o nome do usuário ao conteúdo
+            const nomeUsuarioTexto = document.createElement('p');
+            nomeUsuarioTexto.textContent = `Avaliação feita por: ${nomeUsuario} (${avaliacao.usuario.id})`;
+            conteudo.appendChild(nomeUsuarioTexto);
 
             // Adiciona o conteúdo ao comentário
             comentario.appendChild(conteudo);
@@ -211,62 +199,61 @@ function preencherTabelaAvaliacoes(avaliacoes) {
     });
 }
 
+function errorHandler(error) {
+    paragrafoMensagemAvaliacao.textContent = "Erro ao listar Livros (código " + error.message + ")";
+}
 
-    function errorHandler(error) {
-        paragrafoMensagemAvaliacao.textContent = "Erro ao listar Livros (código " + error.message + ")";
+function salvarAvaliacao() {
+    const dadosAvaliacao = {
+        'nota': txtNotaLivroAvaliacao.value,
+        'comentario': txtComentarioLivro.value,
+        'usuario': { "id": txtIdUsuarioA.value },
+        'item': { "id": livroClicadoId },
+    };
+    const errorHandler = function (error) {
+        paragrafoMensagemAvaliacao.textContent = 'Erro ao criar nova Avaliação (código ' + error.message + ')';
     }
+    asyncCriarAvaliacao(dadosAvaliacao, inicializarAvaliacao, errorHandler); // Aqui era dadosFilme, corrigido para dadosAvaliacao
+}
 
-    function salvarAvaliacao() {
-        const dadosAvaliacao = {
-            'nota': txtNotaLivroAvaliacao.value,
-            'comentario': txtComentarioLivro.value,
-            'usuario': { "id": txtIdUsuarioA.value },
-            'item': { "id": livroClicadoId },
-        };
-        const errorHandler = function (error) {
-            paragrafoMensagemAvaliacao.textContent = 'Erro ao criar nova Avaliação (código ' + error.message + ')';
-        }
-        asyncCriarAvaliacao(dadosAvaliacao, inicializarAvaliacao, errorHandler); // Aqui era dadosFilme, corrigido para dadosAvaliacao
-    }
+//Funcoes Rest
+async function asyncLerLivros(proxsucesso, proxerro) {
+    const URL = `https://indicai.onrender.com/api/livros`;
+    fetch(URL)
+        .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+        .then(resposta => resposta.json())
+        .then(jsonResponse => proxsucesso(jsonResponse))
+        .catch(proxerro)
+}
 
-    //Funcoes Rest
-    async function asyncLerLivros(proxsucesso, proxerro) {
-        const URL = `https://indicai.onrender.com/api/livros`;
-        fetch(URL)
-            .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
-            .then(resposta => resposta.json())
-            .then(jsonResponse => proxsucesso(jsonResponse))
-            .catch(proxerro)
-    }
+async function asyncLerLivroById(id, proxsucesso, proxerro) {
+    const URL = `https://indicai.onrender.com/api/livros/${id}`;
+    fetch(URL)
+        .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+        .then(resposta => resposta.json())
+        .then(jsonResponse => proxsucesso(jsonResponse))
+        .catch(proxerro);
+}
 
-    async function asyncLerLivroById(id, proxsucesso, proxerro) {
-        const URL = `https://indicai.onrender.com/api/livros/${id}`;
-        fetch(URL)
-            .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
-            .then(resposta => resposta.json())
-            .then(jsonResponse => proxsucesso(jsonResponse))
-            .catch(proxerro);
-    }
+async function asyncCriarAvaliacao(dadosAvaliacao, proxsucesso, proxerro) {
+    const URL = `https://indicai.onrender.com/api/avaliacoes`;
+    const postRequest = {
+        method: 'POST',
+        body: JSON.stringify(dadosAvaliacao),
+        headers: { 'Content-type': 'application/json' }
+    };
+    fetch(URL, postRequest)
+        .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+        .then(resposta => resposta.json())
+        .then(jsonResponse => proxsucesso())
+        .catch(proxerro);
+}
 
-    async function asyncCriarAvaliacao(dadosAvaliacao, proxsucesso, proxerro) {
-        const URL = `https://indicai.onrender.com/api/avaliacoes`;
-        const postRequest = {
-            method: 'POST',
-            body: JSON.stringify(dadosAvaliacao),
-            headers: { 'Content-type': 'application/json' }
-        };
-        fetch(URL, postRequest)
-            .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
-            .then(resposta => resposta.json())
-            .then(jsonResponse => proxsucesso())
-            .catch(proxerro);
-    }
-
-    async function asyncLerAvaliacoes(idLivro, proxsucesso, proxerro) {
-        const URL = `https://indicai.onrender.com/api/avaliacoes?item=${idLivro}`;
-        fetch(URL)
-            .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
-            .then(resposta => resposta.json())
-            .then(jsonResponse => proxsucesso(jsonResponse))
-            .catch(proxerro);
-    }
+async function asyncLerAvaliacoes(idLivro, proxsucesso, proxerro) {
+    const URL = `https://indicai.onrender.com/api/avaliacoes?item=${idLivro}`;
+    fetch(URL)
+        .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+        .then(resposta => resposta.json())
+        .then(jsonResponse => proxsucesso(jsonResponse))
+        .catch(proxerro);
+}

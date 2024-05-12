@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    disableNavbarLinks();
 
     const loginForm = document.getElementById('login-form');
     var messageElement = document.getElementById('message-login');
@@ -35,8 +34,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
             //Salva o username em localStorage para uso localStorage.getItem("username")
             localStorage.setItem('username', username);
-
-            enableNavbarLinks();
 
             // Redirecione o usuário para a página desejada após o login
             //window.location.href = 'index.html';
