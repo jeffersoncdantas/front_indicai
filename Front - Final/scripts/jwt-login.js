@@ -35,16 +35,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 //Salva o username em localStorage para uso localStorage.getItem("username")
                 localStorage.setItem('username', username);
 
-                // Remove a classe de desativação dos itens da barra de navegação
-                const navItems = document.querySelectorAll('.nav-item-disabled');
-                navItems.forEach(item => {
-                    item.classList.remove('nav-item-disabled');
-                });
-
-
-                // Redirecione o usuário para a página desejada após o login
-                //window.location.href = 'index.html';
-
             })
             .catch(error => {
                 console.error('Login failed:', error);
@@ -75,12 +65,22 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log(localStorage.getItem("username"))
 
                 const roleUsuario = data.role;
+                const navItem = document.getElementById('.navbar-links');
+
                 if (roleUsuario === 'ADMIN') {
                     // Se o papel for ADMIN, redireciona para painelGerenciador.html
                     window.location.href = 'painelGerenciador.html';
+                    painelNavBtn.style.display = 'block';
+
+                    navItem.style.pointerEvents = 'auto';
+                    navItem.style.opacity = '1';
                 } else {
                     // Se não, redireciona para index.html
                     window.location.href = 'index.html';
+                    painelNavBtn.style.display = 'none';
+
+                    navItem.style.pointerEvents = 'auto';
+                    navItem.style.opacity = '1';
                 }
 
 
