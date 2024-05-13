@@ -99,3 +99,8 @@ body {
 	background: rgba(20, 20, 20, .8);
 	color: white;
 }
+
+.nav-item-disabled{
+    pointer-events: none;
+    opacity: 0.5;
+}
