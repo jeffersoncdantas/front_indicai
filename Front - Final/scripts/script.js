@@ -49,7 +49,6 @@ function setActiveNavBtn() {
 }
 
 // Define o botão de navegação ativo ao carregar a página
-setActiveNavBtn();
 //End of navigation bar js
 document.addEventListener('DOMContentLoaded', function() {
     const loginContainer = document.getElementById('login-container');

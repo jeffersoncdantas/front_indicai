@@ -109,6 +109,7 @@ function exibirDetalhesFilmeAvaliacao() {
 inicializarAvaliacao();
 
 function inicializarAvaliacao() {
+    criandoNovaAvaliacao = false;
     paragrafoMensagemAvaliacao.textContent = 'Preencha as informações de avaliação:';
     txtIdAvaliacao.value = '';
     txtNotaFilmeAvaliacao.value = '';
@@ -251,13 +252,3 @@ async function asyncLerAvaliacoes(idFilme, proxsucesso, proxerro) {
         .then(jsonResponse => proxsucesso(jsonResponse))
         .catch(proxerro);
 }
-
-async function asyncLerFilmesAvaliados(idDoUsuario, proxsucesso, proxerro) {
-    const URL = `https://indicai.onrender.com/api/avaliacoes?item=${idDoUsuario}`;
-    fetch(URL)
-        .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
-        .then(resposta => resposta.json())
-        .then(jsonResponse => proxsucesso(jsonResponse))
-        .catch(proxerro);
-}
-

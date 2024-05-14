@@ -9,18 +9,31 @@
     <link rel="stylesheet" href="style.css" type="text/css">
     <link rel="stylesheet" href="login.css" type="text/css">
     <link rel="stylesheet" href="navbar.css" type="text/css">
+    <link rel="stylesheet" href="filmes.css" type="text/css">
 </head>
 
 <body>
-    <main>
-        <header>
-            <div class="nav-bar">
-                <div class="logo">
-                    <a href="index.html"><img src="assets/shared/logo.svg" alt="company logo"></a>
-                </div>
+    <header>
+        <div class="nav-bar">
+            <div class="logo">
+                <a href="index.html"><img src="assets/shared/logo.svg" alt="company logo"></a>
             </div>
-        </header>
+            <div class="toggle-button-open" id="toggle-ham-menu" onclick="imgClick()">
+            </div>
+            <div class="navbar-links" id="nav-links">
+                <ul>
+                    <li id="painel-nav-btn" style="display: none;"><a href="painelGerenciador.html">PAINEL</a></li>
+                    <li id="home-nav-btn" style="display: none;"><a href="index.html">HOME</a></li>
+                    <li id="filmes-nav-btn" style="display: none;"><a href="filmes.html">FILMES</a></li>
+                    <li id="series-nav-btn" style="display: none;"><a href="series.html">SÉRIES</a></li>
+                    <li id="livros-nav-btn" style="display: none;"><a href="livros.html">LIVROS</a></li>
+                    <li id="login-nav-btn" style="display: none;"><a href="login.html">SAIR</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
 
+    <main>
         <!-- Tela de Login -->
         <section id="sectionLoginSignUp" class="sectionLoginSignUp">
             <div class="login-container" id="login-container">
@@ -46,7 +59,7 @@
                             <input id="cidade-cd" type="text" class="form-input" placeholder="Cidade">
                             <input id="estado-cd" type="text" class="form-input" placeholder="Estado">
                             <input id="nascimento-cd" type="number" class="form-input" placeholder="Ano Nascimento">
-                            <input id="password-cd"type="password" class="form-input" placeholder="Senha">
+                            <input id="password-cd" type="password" class="form-input" placeholder="Senha">
                         </div>
                         <button type="submit" class="form-button" id="submit-cadastro">Cadastrar</button>
                         <p class="mobile-text" id="login-text">
@@ -70,37 +83,29 @@
             </div>
         </section>
 
-        <section id="itensAvaliados" class="avaliados" style="display: none;">
-            <div class="container">
-                <div class="perfil-container">
-                    <img src="assets/shared/profile.svg" alt="Foto do Perfil Usuário">
-                    <p style="font-weight:bold" id="txtNomeUsuario"></p>
-                    <p style="font-weight:bold" id="txtIdUsuarioA"></p>
-                </div>
+        <section id="containerPerfil" style="display: none;">
+            <div class="perfil-container">
+                <img src="assets/shared/profile.svg" alt="Foto do Perfil Usuário">
+                <p style="font-weight:bold" id="txtNomeUsuario"></p>
+                <p style="font-weight:bold" id="txtIdUsuario"></p>
 
-                <div class="avaliados-container">
-                    <h1 class="titulosH1">Filmes Avaliados</h1>
-                </div>
-                <div id="filmesAvaliados-container" class="avaliados-container"></div>
-            
-                <div class="avaliados-container">
-                    <h1 class="titulosH1">Séries Avaliadas</h1>
-                </div>
-                <div id="seriesAvaliados-container" class="avaliados-container"></div>
-           
-                <div class="avaliados-container">
-                    <h1 class="titulosH1">Livros Avaliados</h1>
-                </div>
-                <div id="livrosAvaliados-container" class="avaliados-container"></div>
+                <input type="button" value="Sair" onclick="deslogar()" id="logout-button" class="botao">
             </div>
-        </section> 
+            <section id="recomendacoesFilmes" class="recomendacoes">
+                <div class="container">
+                    <div class="destaques-container">
+                        <h1 class="titulosH1">Avaliações</h1>
+                    </div>
+                    <div id="filmes-container" class="cards-container"></div>
+                </div>
+            </section>
+        </section>
+
     </main>
 
     <script src="scripts/loginGerenciador.js"></script>
     <script src="scripts/jwt-login.js"></script>
-    <script src="scripts/filmes.js"></script>
-    <script src="scripts/series.js"></script>
-    <script src="scripts/livros.js"></script>
+    <script src="scripts/teste.js"></script>
 </body>
 
 </html>

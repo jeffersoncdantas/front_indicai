@@ -222,3 +222,12 @@
          color: var(--text-color-dark);
      }
  }
+.perfil-container{
+    float: right;
+    margin-right: 2rem;
+    margin-top: 2rem;
+
+    img{
+        width: 50%;
+    }
+}
