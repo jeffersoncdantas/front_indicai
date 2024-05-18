@@ -19,6 +19,7 @@ const btnSalvarSerie = document.querySelector('#btnSalvarSerie');
 const btnApagarSerie = document.querySelector('#btnApagarSerie');
 const btnCancelarSerie = document.querySelector('#btnCancelarSerie');
 var criandoNovaSerie = false;
+var token = localStorage.getItem("token");
 
 const urlPrincipalSerie = "https://indicai.onrender.com";
 inicializarSerie();
@@ -250,7 +251,10 @@ async function asyncCriarSeries(dadosSeries, proxsucesso, proxerro) {
     const postRequest = {
         method: 'POST',
         body: JSON.stringify(dadosSeries),
-        headers: { 'Content-type': 'application/json' }
+        headers: { 
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
     };
     fetch(URL, postRequest)
         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
@@ -261,7 +265,11 @@ async function asyncCriarSeries(dadosSeries, proxsucesso, proxerro) {
 
 async function asyncLerSeries(proxsucesso, proxerro) {
     const URL = `${urlPrincipalSerie}/api/series`;
-    fetch(URL)
+    fetch(URL, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
         .then(resposta => resposta.json())
         .then(jsonResponse => proxsucesso(jsonResponse))
@@ -270,7 +278,11 @@ async function asyncLerSeries(proxsucesso, proxerro) {
 
 async function asyncLerSerieById(id, proxsucesso, proxerro) {
     const URL = `${urlPrincipalSerie}/api/series/${id}`;
-    fetch(URL)
+    fetch(URL, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
         .then(resposta => resposta.json())
         .then(jsonResponse => proxsucesso(jsonResponse))
@@ -282,7 +294,10 @@ async function asyncAlterarSerie(dadosSerie, proxsucesso, proxerro) {
     const putRequest = {
         method: 'PUT',
         body: JSON.stringify(dadosSerie),
-        headers: { 'Content-type': 'application/json' }
+        headers: { 
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
     };
     fetch(URL, putRequest)
         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
@@ -294,7 +309,10 @@ async function asyncAlterarSerie(dadosSerie, proxsucesso, proxerro) {
 async function asyncApagarSerie(id, proxsucesso, proxerro) {
     const URL = `${urlPrincipalSerie}/api/series/${id}`;
     const deleteRequest = {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
     };
     fetch(URL, deleteRequest)
         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
@@ -304,9 +322,79 @@ async function asyncApagarSerie(id, proxsucesso, proxerro) {
 
 async function asyncLerGenerosSerie(proxsucesso, proxerro) {
     const URL = `${urlPrincipalSerie}/api/generos`;
-    fetch(URL)
+    fetch(URL, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; }) 
         .then(resposta => resposta.json())
         .then(jsonResponse => proxsucesso(jsonResponse))
         .catch(proxerro);
 }
+
+// async function asyncCriarSeries(dadosSeries, proxsucesso, proxerro) {
+//     const URL = `${urlPrincipalSerie}/api/series`;
+//     const postRequest = {
+//         method: 'POST',
+//         body: JSON.stringify(dadosSeries),
+//         headers: { 'Content-type': 'application/json' }
+//     };
+//     fetch(URL, postRequest)
+//         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+//         .then(resposta => resposta.json())
+//         .then(jsonResponse => proxsucesso())
+//         .catch(proxerro);
+// }
+
+// async function asyncLerSeries(proxsucesso, proxerro) {
+//     const URL = `${urlPrincipalSerie}/api/series`;
+//     fetch(URL)
+//         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+//         .then(resposta => resposta.json())
+//         .then(jsonResponse => proxsucesso(jsonResponse))
+//         .catch(proxerro);
+// }
+
+// async function asyncLerSerieById(id, proxsucesso, proxerro) {
+//     const URL = `${urlPrincipalSerie}/api/series/${id}`;
+//     fetch(URL)
+//         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+//         .then(resposta => resposta.json())
+//         .then(jsonResponse => proxsucesso(jsonResponse))
+//         .catch(proxerro);
+// }
+
+// async function asyncAlterarSerie(dadosSerie, proxsucesso, proxerro) {
+//     const URL = `${urlPrincipalSerie}/api/series/${dadosSerie.id}`;
+//     const putRequest = {
+//         method: 'PUT',
+//         body: JSON.stringify(dadosSerie),
+//         headers: { 'Content-type': 'application/json' }
+//     };
+//     fetch(URL, putRequest)
+//         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+//         .then(resposta => resposta.json())
+//         .then(jsonResponse => proxsucesso())
+//         .catch(proxerro);
+// }
+
+// async function asyncApagarSerie(id, proxsucesso, proxerro) {
+//     const URL = `${urlPrincipalSerie}/api/series/${id}`;
+//     const deleteRequest = {
+//         method: 'DELETE'
+//     };
+//     fetch(URL, deleteRequest)
+//         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+//         .then(resposta => proxsucesso())
+//         .catch(proxerro);
+// }
+
+// async function asyncLerGenerosSerie(proxsucesso, proxerro) {
+//     const URL = `${urlPrincipalSerie}/api/generos`;
+//     fetch(URL)
+//         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; }) 
+//         .then(resposta => resposta.json())
+//         .then(jsonResponse => proxsucesso(jsonResponse))
+//         .catch(proxerro);
+// }

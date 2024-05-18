@@ -6,6 +6,8 @@ menu1.src = "assets/shared/icon-hamburger.svg";
 var menu2 = new Image;
 menu2.src = "assets/shared/icon-close.svg";
 
+var token = localStorage.getItem("token");
+
 // Elementos do DOM
 var navLinks = document.getElementById("nav-links");
 var hamMenuIcon = document.getElementById("toggle-ham-menu").appendChild(menu1);

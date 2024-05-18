@@ -21,6 +21,8 @@ var criandoNovaAvaliacao = false;
 
 var criandoNovoFilme = false;
 
+var token = localStorage.getItem("token");
+
 
 inicializarFilme();
 
@@ -47,7 +49,7 @@ let filmeClicadoTitulo = null;
 
 function exibirFilmes(filmes) {
     const filmesContainer = document.getElementById('filmes-container');
-    filmesContainer.innerHTML = ""; 
+    filmesContainer.innerHTML = "";
 
     filmes.forEach(filme => {
         // Cria um elemento card para cada filme
@@ -66,7 +68,7 @@ function exibirFilmes(filmes) {
         linkTitulo.textContent = filme.titulo;
         linkTitulo.href = `#`;
         linkTitulo.classList.add('linkTitulo');
-        linkTitulo.addEventListener('click', function(event) {
+        linkTitulo.addEventListener('click', function (event) {
             // Impede o comportamento padrão do link 
             event.preventDefault();
             filmeClicadoId = filme.id;
@@ -74,7 +76,7 @@ function exibirFilmes(filmes) {
             filmeClicadoTitulo = filme.titulo;
 
             txtIdFilme.value = filmeClicadoId;
-            
+
             document.getElementById('recomendacoesFilmes').style.display = 'none';
             document.getElementById('sectionAvaliação').style.display = 'block';
             exibirDetalhesFilmeAvaliacao();
@@ -117,7 +119,7 @@ function inicializarAvaliacao() {
     txtIdUsuarioA.value = '';
     txtIdFilme.value = '';
 
-    txtIdAvaliacao.disabled =true;
+    txtIdAvaliacao.disabled = true;
     txtNotaFilmeAvaliacao.enabled = true;
     txtComentarioFilme.enabled = true;
     txtIdUsuarioA.disabled = true;
@@ -132,7 +134,7 @@ function listarTodasAvaliacoes(idFilme) {
     asyncLerAvaliacoes(idFilme, preencherTabelaAvaliacoes, errorHandler);
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Verifica se o usuário está logado
     const idUsuario = localStorage.getItem("idUsuario");
     if (idUsuario) {
@@ -182,7 +184,7 @@ function preencherTabelaAvaliacoes(avaliacoes) {
 
             // Adiciona o nome do usuário ao conteúdo
             const nomeUsuarioTexto = document.createElement('p');
-            nomeUsuarioTexto.textContent = `Avaliação feita por: ${nomeUsuario} (${avaliacao.usuario.id})`;
+            nomeUsuarioTexto.textContent = `Avaliação feita por: ${avaliacao.usuario.username} (${avaliacao.usuario.id})`;
             conteudo.appendChild(nomeUsuarioTexto);
 
             // Adiciona o conteúdo ao comentário
@@ -199,22 +201,40 @@ function errorHandler(error) {
 }
 
 function salvarAvaliacao() {
-    const dadosAvaliacao = { 
-        'nota': txtNotaFilmeAvaliacao.value, 
+    const dadosAvaliacao = {
+        'nota': txtNotaFilmeAvaliacao.value,
         'comentario': txtComentarioFilme.value,
-        'usuario': {"id": txtIdUsuarioA.value},
-        'item': {"id": filmeClicadoId},
+        'usuario': { "id": txtIdUsuarioA.value },
+        'item': { "id": filmeClicadoId },
     };
     const errorHandler = function (error) {
         paragrafoMensagemAvaliacao.textContent = 'Erro ao criar nova Avaliação (código ' + error.message + ')';
     }
-    asyncCriarAvaliacao(dadosAvaliacao, inicializarAvaliacao, errorHandler); 
+    asyncCriarAvaliacao(dadosAvaliacao, inicializarAvaliacao, errorHandler);
 }
 
 //Funcoes Rest
+
+async function asyncLerAvaliacoes(idFilme, proxsucesso, proxerro) {
+    const URL = `https://indicai.onrender.com/api/avaliacoes?item=${idFilme}`;
+    fetch(URL, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+        .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+        .then(resposta => resposta.json())
+        .then(jsonResponse => proxsucesso(jsonResponse))
+        .catch(proxerro);
+}
+
 async function asyncLerFilmes(proxsucesso, proxerro) {
     const URL = `https://indicai.onrender.com/api/filmes`;
-    fetch(URL)
+    fetch(URL, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
         .then(resposta => resposta.json())
         .then(jsonResponse => proxsucesso(jsonResponse))
@@ -223,19 +243,27 @@ async function asyncLerFilmes(proxsucesso, proxerro) {
 
 async function asyncLerFilmeById(id, proxsucesso, proxerro) {
     const URL = `https://indicai.onrender.com/api/filmes/${id}`;
-    fetch(URL)
+    fetch(URL, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
         .then(resposta => resposta.json())
         .then(jsonResponse => proxsucesso(jsonResponse))
         .catch(proxerro);
 }
 
+
 async function asyncCriarAvaliacao(dadosAvaliacao, proxsucesso, proxerro) {
     const URL = `https://indicai.onrender.com/api/avaliacoes`;
     const postRequest = {
         method: 'POST',
         body: JSON.stringify(dadosAvaliacao),
-        headers: { 'Content-type': 'application/json' }
+        headers: { 
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${token}`
+         }
     };
     fetch(URL, postRequest)
         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
@@ -244,11 +272,29 @@ async function asyncCriarAvaliacao(dadosAvaliacao, proxsucesso, proxerro) {
         .catch(proxerro);
 }
 
-async function asyncLerAvaliacoes(idFilme, proxsucesso, proxerro) {
-    const URL = `https://indicai.onrender.com/api/avaliacoes?item=${idFilme}`;
-    fetch(URL)
-        .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
-        .then(resposta => resposta.json())
-        .then(jsonResponse => proxsucesso(jsonResponse))
-        .catch(proxerro);
-}
+// async function asyncLerAvaliacoes(idFilme, proxsucesso, proxerro) {
+//     const URL = `https://indicai.onrender.com/api/avaliacoes?item=${idFilme}`;
+//     fetch(URL)
+//         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+//         .then(resposta => resposta.json())
+//         .then(jsonResponse => proxsucesso(jsonResponse))
+//         .catch(proxerro);
+// }
+
+// async function asyncLerFilmes(proxsucesso, proxerro) {
+//     const URL = `https://indicai.onrender.com/api/filmes`;
+//     fetch(URL)
+//         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+//         .then(resposta => resposta.json())
+//         .then(jsonResponse => proxsucesso(jsonResponse))
+//         .catch(proxerro)
+// }
+
+// async function asyncLerFilmeById(id, proxsucesso, proxerro) {
+//     const URL = `https://indicai.onrender.com/api/filmes/${id}`;
+//     fetch(URL)
+//         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+//         .then(resposta => resposta.json())
+//         .then(jsonResponse => proxsucesso(jsonResponse))
+//         .catch(proxerro);
+// }

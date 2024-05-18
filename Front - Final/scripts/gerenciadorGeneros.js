@@ -12,6 +12,7 @@ const btnSalvarGenero = document.querySelector('#btnSalvarGenero');
 const btnApagarGenero = document.querySelector('#btnApagarGenero');
 const btnCancelarGenero = document.querySelector('#btnCancelarGenero');
 let criandoNovoGenero = false;
+var token = localStorage.getItem("token");
 
 const urlPrincipalGenero = "https://indicai.onrender.com";
 
@@ -154,7 +155,10 @@ async function asyncCriarGenero(dadosGenero, proxsucesso, proxerro) {
         const postRequest = {
             method: 'POST',
             body: JSON.stringify(dadosGenero),
-            headers: { 'Content-type': 'application/json' }
+            headers: { 
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
         };
         const resposta = await fetch(URL, postRequest);
         if (!resposta.ok) {
@@ -170,7 +174,11 @@ async function asyncCriarGenero(dadosGenero, proxsucesso, proxerro) {
 async function asyncLerGeneros(proxsucesso, proxerro) {
     try {
         const URL = `${urlPrincipalGenero}/api/generos`;
-        const resposta = await fetch(URL);
+        const resposta = await fetch(URL, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
         if (!resposta.ok) {
             throw new Error(resposta.status);
         }
@@ -184,7 +192,11 @@ async function asyncLerGeneros(proxsucesso, proxerro) {
 async function asyncLerGeneroById(id, proxsucesso, proxerro) {
     try {
         const URL = `${urlPrincipalGenero}/api/generos/${id}`;
-        const resposta = await fetch(URL);
+        const resposta = await fetch(URL, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
         if (!resposta.ok) {
             throw new Error(resposta.status);
         }
@@ -201,7 +213,10 @@ async function asyncAlterarGenero(dadosGenero, proxsucesso, proxerro) {
         const putRequest = {
             method: 'PUT',
             body: JSON.stringify(dadosGenero),
-            headers: { 'Content-type': 'application/json' }
+            headers: { 
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
         };
         const resposta = await fetch(URL, putRequest);
         if (!resposta.ok) {
@@ -218,7 +233,10 @@ async function asyncApagarGenero(id, proxsucesso, proxerro) {
     try {
         const URL = `${urlPrincipalGenero}/api/generos/${id}`;
         const deleteRequest = {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
         };
         const resposta = await fetch(URL, deleteRequest);
         if (!resposta.ok) {
@@ -229,3 +247,86 @@ async function asyncApagarGenero(id, proxsucesso, proxerro) {
         proxerro(error);
     }
 }
+
+
+// async function asyncCriarGenero(dadosGenero, proxsucesso, proxerro) {
+//     try {
+//         const URL = `${urlPrincipalGenero}/api/generos`;
+//         const postRequest = {
+//             method: 'POST',
+//             body: JSON.stringify(dadosGenero),
+//             headers: { 'Content-type': 'application/json' }
+//         };
+//         const resposta = await fetch(URL, postRequest);
+//         if (!resposta.ok) {
+//             throw new Error(resposta.status);
+//         }
+//         const jsonResponse = await resposta.json();
+//         proxsucesso(jsonResponse);
+//     } catch (error) {
+//         proxerro(error);
+//     }
+// }
+
+// async function asyncLerGeneros(proxsucesso, proxerro) {
+//     try {
+//         const URL = `${urlPrincipalGenero}/api/generos`;
+//         const resposta = await fetch(URL);
+//         if (!resposta.ok) {
+//             throw new Error(resposta.status);
+//         }
+//         const jsonResponse = await resposta.json();
+//         proxsucesso(jsonResponse);
+//     } catch (error) {
+//         proxerro(error);
+//     }
+// }
+
+// async function asyncLerGeneroById(id, proxsucesso, proxerro) {
+//     try {
+//         const URL = `${urlPrincipalGenero}/api/generos/${id}`;
+//         const resposta = await fetch(URL);
+//         if (!resposta.ok) {
+//             throw new Error(resposta.status);
+//         }
+//         const jsonResponse = await resposta.json();
+//         proxsucesso(jsonResponse);
+//     } catch (error) {
+//         proxerro(error);
+//     }
+// }
+
+// async function asyncAlterarGenero(dadosGenero, proxsucesso, proxerro) {
+//     try {
+//         const URL = `${urlPrincipalGenero}/api/generos/${dadosGenero.id}`;
+//         const putRequest = {
+//             method: 'PUT',
+//             body: JSON.stringify(dadosGenero),
+//             headers: { 'Content-type': 'application/json' }
+//         };
+//         const resposta = await fetch(URL, putRequest);
+//         if (!resposta.ok) {
+//             throw new Error(resposta.status);
+//         }
+//         const jsonResponse = await resposta.json();
+//         proxsucesso(jsonResponse);
+//     } catch (error) {
+//         proxerro(error);
+//     }
+// }
+
+// async function asyncApagarGenero(id, proxsucesso, proxerro) {
+//     try {
+//         const URL = `${urlPrincipalGenero}/api/generos/${id}`;
+//         const deleteRequest = {
+//             method: 'DELETE'
+//         };
+//         const resposta = await fetch(URL, deleteRequest);
+//         if (!resposta.ok) {
+//             throw new Error(resposta.status);
+//         }
+//         proxsucesso();
+//     } catch (error) {
+//         proxerro(error);
+//     }
+// }

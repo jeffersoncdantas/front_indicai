@@ -18,6 +18,7 @@ const btnSalvarLivro = document.querySelector('#btnSalvarLivro');
 const btnApagarLivro = document.querySelector('#btnApagarLivro');
 const btnCancelarLivro = document.querySelector('#btnCancelarLivro');
 let criandoNovoLivro = false;
+var token = localStorage.getItem("token");
 
 const urlPrincipalLivro = "https://indicai.onrender.com";
 
@@ -240,7 +241,10 @@ async function asyncCriarLivros(dadosLivro, proxsucesso, proxerro) {
     const postRequest = {
         method: 'POST',
         body: JSON.stringify(dadosLivro),
-        headers: { 'Content-type': 'application/json' }
+        headers: { 
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
     };
     fetch(URL, postRequest)
         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
@@ -251,7 +255,11 @@ async function asyncCriarLivros(dadosLivro, proxsucesso, proxerro) {
 
 async function asyncLerLivros(proxsucesso, proxerro) {
     const URL = `${urlPrincipalLivro}/api/livros`;
-    fetch(URL)
+    fetch(URL, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
         .then(resposta => resposta.json())
         .then(jsonResponse => proxsucesso(jsonResponse))
@@ -260,7 +268,11 @@ async function asyncLerLivros(proxsucesso, proxerro) {
 
 async function asyncLerLivroById(id, proxsucesso, proxerro) {
     const URL = `${urlPrincipalLivro}/api/livros/${id}`;
-    fetch(URL)
+    fetch(URL, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
         .then(resposta => resposta.json())
         .then(jsonResponse => proxsucesso(jsonResponse))
@@ -272,7 +284,10 @@ async function asyncAlterarLivro(dadosLivro, proxsucesso, proxerro) {
     const putRequest = {
         method: 'PUT',
         body: JSON.stringify(dadosLivro),
-        headers: { 'Content-type': 'application/json' }
+        headers: { 
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
     };
     fetch(URL, putRequest)
         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
@@ -284,7 +299,10 @@ async function asyncAlterarLivro(dadosLivro, proxsucesso, proxerro) {
 async function asyncApagarLivro(id, proxsucesso, proxerro) {
     const URL = `${urlPrincipalLivro}/api/livros/${id}`;
     const deleteRequest = {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
     };
     fetch(URL, deleteRequest)
         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
@@ -294,9 +312,79 @@ async function asyncApagarLivro(id, proxsucesso, proxerro) {
 
 async function asyncLerGenerosLivro(proxsucesso, proxerro) {
     const URL = `${urlPrincipalLivro}/api/generos`;
-    fetch(URL)
+    fetch(URL, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; }) 
         .then(resposta => resposta.json())
         .then(jsonResponse => proxsucesso(jsonResponse))
         .catch(proxerro);
 }
+
+// async function asyncCriarLivros(dadosLivro, proxsucesso, proxerro) {
+//     const URL = `${urlPrincipalLivro}/api/livros`;
+//     const postRequest = {
+//         method: 'POST',
+//         body: JSON.stringify(dadosLivro),
+//         headers: { 'Content-type': 'application/json' }
+//     };
+//     fetch(URL, postRequest)
+//         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+//         .then(resposta => resposta.json())
+//         .then(jsonResponse => proxsucesso())
+//         .catch(proxerro);
+// }
+
+// async function asyncLerLivros(proxsucesso, proxerro) {
+//     const URL = `${urlPrincipalLivro}/api/livros`;
+//     fetch(URL)
+//         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+//         .then(resposta => resposta.json())
+//         .then(jsonResponse => proxsucesso(jsonResponse))
+//         .catch(proxerro);
+// }
+
+// async function asyncLerLivroById(id, proxsucesso, proxerro) {
+//     const URL = `${urlPrincipalLivro}/api/livros/${id}`;
+//     fetch(URL)
+//         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+//         .then(resposta => resposta.json())
+//         .then(jsonResponse => proxsucesso(jsonResponse))
+//         .catch(proxerro);
+// }
+
+// async function asyncAlterarLivro(dadosLivro, proxsucesso, proxerro) {
+//     const URL = `${urlPrincipalLivro}/api/livros/${dadosLivro.id}`;
+//     const putRequest = {
+//         method: 'PUT',
+//         body: JSON.stringify(dadosLivro),
+//         headers: { 'Content-type': 'application/json' }
+//     };
+//     fetch(URL, putRequest)
+//         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+//         .then(resposta => resposta.json())
+//         .then(jsonResponse => proxsucesso())
+//         .catch(proxerro);
+// }
+
+// async function asyncApagarLivro(id, proxsucesso, proxerro) {
+//     const URL = `${urlPrincipalLivro}/api/livros/${id}`;
+//     const deleteRequest = {
+//         method: 'DELETE'
+//     };
+//     fetch(URL, deleteRequest)
+//         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+//         .then(resposta => proxsucesso())
+//         .catch(proxerro);
+// }
+
+// async function asyncLerGenerosLivro(proxsucesso, proxerro) {
+//     const URL = `${urlPrincipalLivro}/api/generos`;
+//     fetch(URL)
+//         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; }) 
+//         .then(resposta => resposta.json())
+//         .then(jsonResponse => proxsucesso(jsonResponse))
+//         .catch(proxerro);
+// }

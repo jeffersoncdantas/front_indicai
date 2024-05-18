@@ -23,6 +23,8 @@ const btnApagarLivro = document.querySelector('#btnApagarLivro');
 const btnCancelarLivro = document.querySelector('#btnCancelarLivro');
 var criandoNovoLivro = false;
 
+var token = localStorage.getItem("token");
+
 inicializarLivro();
 
 function inicializarLivro() {
@@ -187,7 +189,7 @@ function preencherTabelaAvaliacoes(avaliacoes) {
 
             // Adiciona o nome do usuário ao conteúdo
             const nomeUsuarioTexto = document.createElement('p');
-            nomeUsuarioTexto.textContent = `Avaliação feita por: ${nomeUsuario} (${avaliacao.usuario.id})`;
+            nomeUsuarioTexto.textContent = `Avaliação feita por: ${avaliacao.usuario.username} (${avaliacao.usuario.id})`;
             conteudo.appendChild(nomeUsuarioTexto);
 
             // Adiciona o conteúdo ao comentário
@@ -217,43 +219,100 @@ function salvarAvaliacao() {
 }
 
 //Funcoes Rest
+
 async function asyncLerLivros(proxsucesso, proxerro) {
-    const URL = `https://indicai.onrender.com/api/livros`;
-    fetch(URL)
-        .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
-        .then(resposta => resposta.json())
-        .then(jsonResponse => proxsucesso(jsonResponse))
-        .catch(proxerro)
-}
+        const URL = `https://indicai.onrender.com/api/livros`;
+        fetch(URL, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+            .then(resposta => resposta.json())
+            .then(jsonResponse => proxsucesso(jsonResponse))
+            .catch(proxerro)
+    }
+    
+    async function asyncLerLivroById(id, proxsucesso, proxerro) {
+        const URL = `https://indicai.onrender.com/api/livros/${id}`;
+        fetch(URL, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+            .then(resposta => resposta.json())
+            .then(jsonResponse => proxsucesso(jsonResponse))
+            .catch(proxerro);
+    }
+    
+    async function asyncCriarAvaliacao(dadosAvaliacao, proxsucesso, proxerro) {
+        const URL = `https://indicai.onrender.com/api/avaliacoes`;
+        const postRequest = {
+            method: 'POST',
+            body: JSON.stringify(dadosAvaliacao),
+            headers: { 
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        };
+        fetch(URL, postRequest)
+            .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+            .then(resposta => resposta.json())
+            .then(jsonResponse => proxsucesso())
+            .catch(proxerro);
+    }
+    
+    async function asyncLerAvaliacoes(idLivro, proxsucesso, proxerro) {
+        const URL = `https://indicai.onrender.com/api/avaliacoes?item=${idLivro}`;
+        fetch(URL, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+            .then(resposta => resposta.json())
+            .then(jsonResponse => proxsucesso(jsonResponse))
+            .catch(proxerro);
+    }
 
-async function asyncLerLivroById(id, proxsucesso, proxerro) {
-    const URL = `https://indicai.onrender.com/api/livros/${id}`;
-    fetch(URL)
-        .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
-        .then(resposta => resposta.json())
-        .then(jsonResponse => proxsucesso(jsonResponse))
-        .catch(proxerro);
-}
+// async function asyncLerLivros(proxsucesso, proxerro) {
+//     const URL = `https://indicai.onrender.com/api/livros`;
+//     fetch(URL)
+//         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+//         .then(resposta => resposta.json())
+//         .then(jsonResponse => proxsucesso(jsonResponse))
+//         .catch(proxerro)
+// }
 
-async function asyncCriarAvaliacao(dadosAvaliacao, proxsucesso, proxerro) {
-    const URL = `https://indicai.onrender.com/api/avaliacoes`;
-    const postRequest = {
-        method: 'POST',
-        body: JSON.stringify(dadosAvaliacao),
-        headers: { 'Content-type': 'application/json' }
-    };
-    fetch(URL, postRequest)
-        .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
-        .then(resposta => resposta.json())
-        .then(jsonResponse => proxsucesso())
-        .catch(proxerro);
-}
+// async function asyncLerLivroById(id, proxsucesso, proxerro) {
+//     const URL = `https://indicai.onrender.com/api/livros/${id}`;
+//     fetch(URL)
+//         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+//         .then(resposta => resposta.json())
+//         .then(jsonResponse => proxsucesso(jsonResponse))
+//         .catch(proxerro);
+// }
 
-async function asyncLerAvaliacoes(idLivro, proxsucesso, proxerro) {
-    const URL = `https://indicai.onrender.com/api/avaliacoes?item=${idLivro}`;
-    fetch(URL)
-        .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
-        .then(resposta => resposta.json())
-        .then(jsonResponse => proxsucesso(jsonResponse))
-        .catch(proxerro);
-}
+// async function asyncCriarAvaliacao(dadosAvaliacao, proxsucesso, proxerro) {
+//     const URL = `https://indicai.onrender.com/api/avaliacoes`;
+//     const postRequest = {
+//         method: 'POST',
+//         body: JSON.stringify(dadosAvaliacao),
+//         headers: { 'Content-type': 'application/json' }
+//     };
+//     fetch(URL, postRequest)
+//         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+//         .then(resposta => resposta.json())
+//         .then(jsonResponse => proxsucesso())
+//         .catch(proxerro);
+// }
+
+// async function asyncLerAvaliacoes(idLivro, proxsucesso, proxerro) {
+//     const URL = `https://indicai.onrender.com/api/avaliacoes?item=${idLivro}`;
+//     fetch(URL)
+//         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+//         .then(resposta => resposta.json())
+//         .then(jsonResponse => proxsucesso(jsonResponse))
+//         .catch(proxerro);
+// }

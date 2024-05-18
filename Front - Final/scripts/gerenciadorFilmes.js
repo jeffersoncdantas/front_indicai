@@ -18,6 +18,7 @@ const btnSalvarFilme = document.querySelector('#btnSalvarFilme');
 const btnApagarFilme = document.querySelector('#btnApagarFilme');
 const btnCancelarFilme = document.querySelector('#btnCancelarFilme');
 var criandoNovoFilme = false;
+var token = localStorage.getItem("token");
 
 const urlPrincipalFilme = "https://indicai.onrender.com";
 
@@ -242,68 +243,156 @@ function preencherSelectGenerosFilme(generosFilme){
 }
 
 //Funcoes Rest
+
 async function asyncCriarFilmes(dadosFilmes, proxsucesso, proxerro) {
-    const URL = `${urlPrincipalFilme}/api/filmes`;
-    const postRequest = {
-        method: 'POST',
-        body: JSON.stringify(dadosFilmes),
-        headers: { 'Content-type': 'application/json' }
-    };
-    fetch(URL, postRequest)
-        .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
-        .then(resposta => resposta.json())
-        .then(jsonResponse => proxsucesso())
-        .catch(proxerro);
-}
+        const URL = `${urlPrincipalFilme}/api/filmes`;
+        const postRequest = {
+            method: 'POST',
+            body: JSON.stringify(dadosFilmes),
+            headers: { 
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        };
+        fetch(URL, postRequest)
+            .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+            .then(resposta => resposta.json())
+            .then(jsonResponse => proxsucesso())
+            .catch(proxerro);
+    }
+    
+    async function asyncLerFilmes(proxsucesso, proxerro) {
+        const URL = `${urlPrincipalFilme}/api/filmes`;
+        fetch(URL, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+            .then(resposta => resposta.json())
+            .then(jsonResponse => proxsucesso(jsonResponse))
+            .catch(proxerro);
+    }
+    
+    async function asyncLerFilmeById(id, proxsucesso, proxerro) {
+        const URL = `${urlPrincipalFilme}/api/filmes/${id}`;
+        fetch(URL, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+            .then(resposta => resposta.json())
+            .then(jsonResponse => proxsucesso(jsonResponse))
+            .catch(proxerro);
+    }
+    
+    async function asyncAlterarFilme(dadosFilme, proxsucesso, proxerro) {
+        const URL = `${urlPrincipalFilme}/api/filmes/${dadosFilme.id}`;
+        const putRequest = {
+            method: 'PUT',
+            body: JSON.stringify(dadosFilme),
+            headers: { 
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        };
+        fetch(URL, putRequest)
+            .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+            .then(resposta => resposta.json())
+            .then(jsonResponse => proxsucesso())
+            .catch(proxerro);
+    }
+    
+    async function asyncApagarFilme(id, proxsucesso, proxerro) {
+        const URL = `${urlPrincipalFilme}/api/filmes/${id}`;
+        const deleteRequest = {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        };
+        fetch(URL, deleteRequest)
+            .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+            .then(resposta => proxsucesso())
+            .catch(proxerro);
+    }
+    
+    async function asyncLerGenerosFilme(proxsucesso, proxerro) {
+        const URL = `${urlPrincipalFilme}/api/generos`;
+        fetch(URL, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; }) 
+            .then(resposta => resposta.json())
+            .then(jsonResponse => proxsucesso(jsonResponse))
+            .catch(proxerro);
+    }
 
-async function asyncLerFilmes(proxsucesso, proxerro) {
-    const URL = `${urlPrincipalFilme}/api/filmes`;
-    fetch(URL)
-        .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
-        .then(resposta => resposta.json())
-        .then(jsonResponse => proxsucesso(jsonResponse))
-        .catch(proxerro);
-}
+// async function asyncCriarFilmes(dadosFilmes, proxsucesso, proxerro) {
+//     const URL = `${urlPrincipalFilme}/api/filmes`;
+//     const postRequest = {
+//         method: 'POST',
+//         body: JSON.stringify(dadosFilmes),
+//         headers: { 'Content-type': 'application/json' }
+//     };
+//     fetch(URL, postRequest)
+//         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+//         .then(resposta => resposta.json())
+//         .then(jsonResponse => proxsucesso())
+//         .catch(proxerro);
+// }
 
-async function asyncLerFilmeById(id, proxsucesso, proxerro) {
-    const URL = `${urlPrincipalFilme}/api/filmes/${id}`;
-    fetch(URL)
-        .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
-        .then(resposta => resposta.json())
-        .then(jsonResponse => proxsucesso(jsonResponse))
-        .catch(proxerro);
-}
+// async function asyncLerFilmes(proxsucesso, proxerro) {
+//     const URL = `${urlPrincipalFilme}/api/filmes`;
+//     fetch(URL)
+//         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+//         .then(resposta => resposta.json())
+//         .then(jsonResponse => proxsucesso(jsonResponse))
+//         .catch(proxerro);
+// }
 
-async function asyncAlterarFilme(dadosFilme, proxsucesso, proxerro) {
-    const URL = `${urlPrincipalFilme}/api/filmes/${dadosFilme.id}`;
-    const putRequest = {
-        method: 'PUT',
-        body: JSON.stringify(dadosFilme),
-        headers: { 'Content-type': 'application/json' }
-    };
-    fetch(URL, putRequest)
-        .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
-        .then(resposta => resposta.json())
-        .then(jsonResponse => proxsucesso())
-        .catch(proxerro);
-}
+// async function asyncLerFilmeById(id, proxsucesso, proxerro) {
+//     const URL = `${urlPrincipalFilme}/api/filmes/${id}`;
+//     fetch(URL)
+//         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+//         .then(resposta => resposta.json())
+//         .then(jsonResponse => proxsucesso(jsonResponse))
+//         .catch(proxerro);
+// }
 
-async function asyncApagarFilme(id, proxsucesso, proxerro) {
-    const URL = `${urlPrincipalFilme}/api/filmes/${id}`;
-    const deleteRequest = {
-        method: 'DELETE'
-    };
-    fetch(URL, deleteRequest)
-        .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
-        .then(resposta => proxsucesso())
-        .catch(proxerro);
-}
+// async function asyncAlterarFilme(dadosFilme, proxsucesso, proxerro) {
+//     const URL = `${urlPrincipalFilme}/api/filmes/${dadosFilme.id}`;
+//     const putRequest = {
+//         method: 'PUT',
+//         body: JSON.stringify(dadosFilme),
+//         headers: { 'Content-type': 'application/json' }
+//     };
+//     fetch(URL, putRequest)
+//         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+//         .then(resposta => resposta.json())
+//         .then(jsonResponse => proxsucesso())
+//         .catch(proxerro);
+// }
 
-async function asyncLerGenerosFilme(proxsucesso, proxerro) {
-    const URL = `${urlPrincipalFilme}/api/generos`;
-    fetch(URL)
-        .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; }) 
-        .then(resposta => resposta.json())
-        .then(jsonResponse => proxsucesso(jsonResponse))
-        .catch(proxerro);
-}
+// async function asyncApagarFilme(id, proxsucesso, proxerro) {
+//     const URL = `${urlPrincipalFilme}/api/filmes/${id}`;
+//     const deleteRequest = {
+//         method: 'DELETE'
+//     };
+//     fetch(URL, deleteRequest)
+//         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+//         .then(resposta => proxsucesso())
+//         .catch(proxerro);
+// }
+
+// async function asyncLerGenerosFilme(proxsucesso, proxerro) {
+//     const URL = `${urlPrincipalFilme}/api/generos`;
+//     fetch(URL)
+//         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; }) 
+//         .then(resposta => resposta.json())
+//         .then(jsonResponse => proxsucesso(jsonResponse))
+//         .catch(proxerro);
+// }

@@ -4,6 +4,7 @@ const corpoTabelaUsuarios = document.querySelector('#corpoTabelaUsuarios');
 const paragrafoMensagemUsuarios = document.querySelector('#paragrafoMensagemUsuarios');
 
 const urlPrincipalUsuario = "https://indicai.onrender.com";
+var token = localStorage.getItem("token");
 
 inicializarUsuario();
 
@@ -31,7 +32,6 @@ function preencherTabelaUsuarios(usuarios) {
         const celulaEstado = linha.insertCell();
         const celulaAnoNascimento = linha.insertCell();
         const celulaRole = linha.insertCell();
-        const celulaAmigos = linha.insertCell();
 
         const alink = document.createElement('a');
         alink.textContent = usuario.id;
@@ -43,7 +43,6 @@ function preencherTabelaUsuarios(usuarios) {
         celulaEstado.textContent = usuario.estado;
         celulaAnoNascimento.textContent = usuario.anoNascimento;
         celulaRole.textContent = usuario.role;
-        celulaAmigos.textContent = usuario.amigos.join(", ");
     }
 }
 
@@ -51,16 +50,35 @@ function cancelarEdicaoUsuario() {
     inicializarUsuario();
 }
 
+
 async function asyncLerUsuarios(proxsucesso, proxerro) {
-    try {
-        const URL = `${urlPrincipalUsuario}/api/usuarios`;
-        const resposta = await fetch(URL);
-        if (!resposta.ok) {
-            throw new Error(resposta.status);
+        try {
+            const URL = `${urlPrincipalUsuario}/api/usuarios`;
+            const resposta = await fetch(URL, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            if (!resposta.ok) {
+                throw new Error(resposta.status);
+            }
+            const jsonResponse = await resposta.json();
+            proxsucesso(jsonResponse);
+        } catch (error) {
+            proxerro(error);
         }
-        const jsonResponse = await resposta.json();
-        proxsucesso(jsonResponse);
-    } catch (error) {
-        proxerro(error);
     }
-}
+
+// async function asyncLerUsuarios(proxsucesso, proxerro) {
+//     try {
+//         const URL = `${urlPrincipalUsuario}/api/usuarios`;
+//         const resposta = await fetch(URL);
+//         if (!resposta.ok) {
+//             throw new Error(resposta.status);
+//         }
+//         const jsonResponse = await resposta.json();
+//         proxsucesso(jsonResponse);
+//     } catch (error) {
+//         proxerro(error);
+//     }
+// }

@@ -25,15 +25,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 return response.json();
             })
             .then(data => {
-                messageElement.innerHTML = "Usuário logado";
-                // Aqui recebe o token JWT da resposta da API
                 const token = data.token;
-
-                // Salva o token JWT em localStorage para uso localStorage.getItem("token")
                 localStorage.setItem('token', token);
-
-                //Salva o username em localStorage para uso localStorage.getItem("username")
                 localStorage.setItem('username', username);
+
+                // Defina o HTML do elemento para incluir a tag de imagem com a URL do GIF
+                messageElement.innerHTML = '<img src="./assets/await.gif" alt="GIF animado" style="width: 100px; height: 90px;">';
 
                 //Recuperar os dados do usuário pelo username
                 fetch(`https://indicai.onrender.com/api/usuarios/username/${username}`, {
@@ -46,10 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         return response.json();
                     })
                     .then(data => {
-                        //Aqui recebe o ID do usuário
                         const idUsuario = data.id;
-
-                        //Salva o ID do usuário em localStorage para uso localStorage.getItem("idUsuario")
                         localStorage.setItem('idUsuario', idUsuario);
 
                         document.getElementById('username').value = '';
@@ -60,6 +54,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         txtNomeUsuario.textContent = `Nome de Usuário: ${username}`;
                         txtIdUsuario.textContent = `ID do Usuário: ${idUsuario}`;
+
+                        inicializarItens();
 
                         const roleUsuario = data.role;
 
@@ -83,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 seriesNavBtn.style.display = 'block';
                                 livrosNavBtn.style.display = 'block';
                                 loginNavBtn.style.display = 'block';
-                                sectionLoginSignUp.style.display='none';
+                                sectionLoginSignUp.style.display = 'none';
                                 containerPerfil.style.display = 'block';
 
                             } else {
@@ -95,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 seriesNavBtn.style.display = 'block';
                                 livrosNavBtn.style.display = 'block';
                                 loginNavBtn.style.display = 'block';
-                                sectionLoginSignUp.style.display='none';
+                                sectionLoginSignUp.style.display = 'none';
                                 containerPerfil.style.display = 'block';
 
                             }
@@ -116,6 +112,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     });
 });
+
+
+
 
 document.addEventListener('DOMContentLoaded', function () {
     const signupForm = document.getElementById('signup-form');
@@ -184,4 +183,60 @@ function deslogar() {
     localStorage.clear();
     // Recarrega a página para efetuar o logout
     window.location.reload();
+}
+
+//JavaScript dentro da pasta Teste
+
+var token = localStorage.getItem("token");
+
+function inicializarItens() {
+    listarAvaliacoesDoUsuario();
+}
+
+function listarAvaliacoesDoUsuario() {
+    asyncLerAvaliacoesDoUsuario(preencherTabelaFilme);
+}
+
+function preencherTabelaFilme(avaliacoes) {
+    exibirAvaliacoesDoUsuario(avaliacoes);
+}
+
+function exibirAvaliacoesDoUsuario(avaliacoes) {
+    const filmesContainer = document.getElementById('filmes-container');
+    filmesContainer.innerHTML = ""; 
+
+
+    avaliacoes.forEach(avaliacao => {
+        // Verifica se a avaliação foi feita pelo usuário logado
+        // if (avaliacao.usuario.id === idUsuario) {
+            // Cria um elemento card para cada filme
+            const card = document.createElement('div');
+            card.classList.add('card');
+            card.dataset.idItem = avaliacao.item.id;
+
+            // Adiciona outras informações do filme ao card
+            const nota = document.createElement('p');
+            nota.textContent = `Nota: ${avaliacao.nota}`;
+            card.appendChild(nota);
+
+            const comentario = document.createElement('p');
+            comentario.textContent = `Comentário: ${avaliacao.comentario}`;
+            card.appendChild(comentario);
+
+            const usuario = document.createElement('p');
+            usuario.textContent = `Usuário: ${avaliacao.usuario.id}`
+            card.appendChild(usuario);
+            
+            // Adiciona o card ao container de filmes
+            filmesContainer.appendChild(card);
+    });
+}
+
+async function asyncLerAvaliacoesDoUsuario(proxsucesso, proxerro) {
+    var idUsuario = localStorage.getItem("idUsuario");
+    const URL = `https://indicai.onrender.com/api/avaliacoes/usuario/${idUsuario}`;
+    fetch(URL)
+        .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta.json(); })
+        .then(jsonResponse => proxsucesso(jsonResponse))
+        .catch(proxerro);
 }

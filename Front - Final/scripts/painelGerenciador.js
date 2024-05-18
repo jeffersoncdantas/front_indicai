@@ -15,6 +15,8 @@ var sectionUsuarios= document.querySelector("#sectionUsuarios");
 
 var landing = document.querySelector("#landing");
 
+var token = localStorage.getItem("token");
+
 btnGerenciarFilmes.addEventListener("click", function(){
 landing.style.display = "none";
 sectionSeries.style.display = "none";
