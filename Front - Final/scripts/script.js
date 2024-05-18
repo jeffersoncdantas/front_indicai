@@ -1,5 +1,3 @@
-console.log("Script loaded nav bar");
-
 // Carrega as imagens do menu
 var menu1 = new Image;
 menu1.src = "assets/shared/icon-hamburger.svg";
@@ -52,29 +50,29 @@ function setActiveNavBtn() {
 
 // Define o botão de navegação ativo ao carregar a página
 //End of navigation bar js
-document.addEventListener('DOMContentLoaded', function() {
-    const loginContainer = document.getElementById('login-container');
+// document.addEventListener('DOMContentLoaded', function() {
+//     const loginContainer = document.getElementById('login-container');
 
-    const moveOverlay = () => loginContainer.classList.toggle('move');
+//     const moveOverlay = () => loginContainer.classList.toggle('move');
 
-    const openRegister = document.getElementById('open-register');
-    const openLogin = document.getElementById('open-login');
-    const openRegisterMobile = document.getElementById('open-register-mobile');
-    const openLoginMobile = document.getElementById('open-login-mobile');
+//     const openRegister = document.getElementById('open-register');
+//     const openLogin = document.getElementById('open-login');
+//     const openRegisterMobile = document.getElementById('open-register-mobile');
+//     const openLoginMobile = document.getElementById('open-login-mobile');
 
-    if (openRegister) {
-        openRegister.addEventListener('click', moveOverlay);
-    }
-    if (openLogin) {
-        openLogin.addEventListener('click', moveOverlay);
-    }
-    if (openRegisterMobile) {
-        openRegisterMobile.addEventListener('click', moveOverlay);
-    }
-    if (openLoginMobile) {
-        openLoginMobile.addEventListener('click', moveOverlay);
-    }
-});
+//     if (openRegister) {
+//         openRegister.addEventListener('click', moveOverlay);
+//     }
+//     if (openLogin) {
+//         openLogin.addEventListener('click', moveOverlay);
+//     }
+//     if (openRegisterMobile) {
+//         openRegisterMobile.addEventListener('click', moveOverlay);
+//     }
+//     if (openLoginMobile) {
+//         openLoginMobile.addEventListener('click', moveOverlay);
+//     }
+// });
 
 function reloadPage() {
     location.reload();

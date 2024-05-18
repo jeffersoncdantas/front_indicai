@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const txtIdUsuario = document.getElementById('txtIdUsuario');
     const sectionLoginSignUp = document.getElementById('sectionLoginSignUp');
     const containerPerfil = document.getElementById('containerPerfil');
+    const usuariosCadastrados = document.getElementById('usuariosCadastrados');
 
     // Verifica se o usuário está logado
     const token = localStorage.getItem('token');
@@ -44,8 +45,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (painelNavBtn) {
                     if (roleUsuario === 'ADMIN') {
                         painelNavBtn.style.display = 'block';
+                        usuariosCadastrados.style.display = 'block';
                     } else {
                         painelNavBtn.style.display = 'none';
+                        usuariosCadastrados.style.display = 'none';
                     }
                     filmesNavBtn.style.display = 'block';
                     seriesNavBtn.style.display = 'block';
@@ -131,21 +134,25 @@ document.addEventListener('DOMContentLoaded', function () {
                         if (painelNavBtn) {
                             if (roleUsuario === 'ADMIN') {
                                 // Se o papel for ADMIN, redireciona para painelGerenciador.html
+                                window.location.href = 'painelGerenciador.html';
                                 painelNavBtn.style.display = 'block';
                                 loginNavBtn.style.display = 'block';
                                 filmesNavBtn.style.display = 'none'; // Oculta os botões de filmes, séries e livros
                                 seriesNavBtn.style.display = 'none';
                                 livrosNavBtn.style.display = 'none';
+                                usuariosCadastrados.style.display = 'block';
+                                containerPerfil.style.display = 'none';
                             } else {
                                 painelNavBtn.style.display = 'none';
                                 filmesNavBtn.style.display = 'block';
                                 seriesNavBtn.style.display = 'block';
                                 livrosNavBtn.style.display = 'block';
                                 loginNavBtn.style.display = 'block';
+                                usuariosCadastrados.style.display = 'none';
+                                containerPerfil.style.display = 'block';
                             }
                         }
                         sectionLoginSignUp.style.display = 'none';
-                        containerPerfil.style.display = 'block';
 
                     })
                     .catch(error => {
@@ -348,7 +355,6 @@ function preencherTabelaAvaliacoes(avaliacoes) {
     });
 }
 
-
 function errorHandler(error) {
     console.error("Erro ao listar Itens (código " + error.message + ")");
 }
@@ -358,6 +364,72 @@ function voltarRecomendacoes() {
     document.getElementById('avalicaoItem').style.display = 'none';
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+    const containerUsuarios= document.getElementById('usuarios-container');
+
+    // Verifica se o usuário está logado como ADMIN
+    const token = localStorage.getItem('token');
+    const username = localStorage.getItem('username');
+    const idUsuario = localStorage.getItem('idUsuario');
+
+    if (token && username && idUsuario) {
+        fetch('https://indicai.onrender.com/api/usuarios', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch users');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Limpa o conteúdo atual da seção de usuários cadastrados
+            containerUsuarios.innerHTML = "";
+
+            // Itera sobre cada usuário e cria um card para exibi-lo
+            data.forEach(usuario => {
+                const usuarioCard = criarUsuarioCard(usuario);
+                containerUsuarios.appendChild(usuarioCard);
+            });
+        })
+        .catch(error => {
+            console.error('Failed to fetch users:', error);
+        });
+    } else {
+        console.error('Usuário não autorizado.');
+    }
+});
+
+function criarUsuarioCard(usuario) {
+    // Cria um elemento card para representar o usuário
+    const card = document.createElement('div');
+    card.classList.add('card');
+
+    // Adiciona o nome do usuário ao card
+    const nomeUsuario = document.createElement('p');
+    nomeUsuario.textContent = `Nome de Usuário: ${usuario.username}`;
+    card.appendChild(nomeUsuario);
+
+    // Adiciona a cidade do usuário ao card
+    const cidadeUsuario = document.createElement('p');
+    cidadeUsuario.textContent = `Cidade: ${usuario.cidade}`;
+    card.appendChild(cidadeUsuario);
+
+    // Adiciona o estado do usuário ao card
+    const estadoUsuario = document.createElement('p');
+    estadoUsuario.textContent = `Estado: ${usuario.estado}`;
+    card.appendChild(estadoUsuario);
+
+    // Adiciona o ano de nascimento do usuário ao card
+    const anoNascimentoUsuario = document.createElement('p');
+    anoNascimentoUsuario.textContent = `Ano de Nascimento: ${usuario.anoNascimento}`;
+    card.appendChild(anoNascimentoUsuario);
+
+    return card;
+}
 
 async function asyncLerAvaliacoesDoUsuario(proxsucesso, proxerro) {
     var idUsuario = localStorage.getItem("idUsuario");
@@ -375,8 +447,7 @@ async function asyncLerAvaliacoes(idItem, proxsucesso, proxerro) {
             'Authorization': `Bearer ${localStorage.getItem("token")}`
         }
     })
-        .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
-        .then(resposta => resposta.json())
+        .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta.json(); })
         .then(jsonResponse => proxsucesso(jsonResponse))
         .catch(proxerro);
 }

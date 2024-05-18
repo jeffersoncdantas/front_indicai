@@ -239,17 +239,19 @@
      margin-right: 2rem;
      margin-top: 2rem;
 
-     img {
-         width: 50%;
+     .imgUsuario {
+         width: 40%;
+         align-items: center;
+         justify-content: center;
      }
  }
 
  #message-login {
-     color: black;
+     color: #b19cd9;
  }
 
  #message-cadastro {
-     color: black;
+     color: #b19cd9;
  }
 
  #corpoTabelaAvaliacao {
@@ -259,3 +261,4 @@
  #btnVoltar {
      margin-left: 2rem;
  }
+ 

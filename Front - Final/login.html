@@ -87,12 +87,22 @@
 
         <section id="containerPerfil" style="display: none;">
             <div class="perfil-container">
-                <img src="assets/shared/profile.svg" alt="Foto do Perfil Usuário">
+                <img src="assets/shared/profile.svg" alt="Foto do Perfil Usuário" class="imgUsuario">
                 <p style="font-weight:bold" id="txtNomeUsuario"></p>
                 <p style="font-weight:bold" id="txtIdUsuario"></p>
 
                 <input type="button" value="Sair" onclick="deslogar()" id="logout-button" class="botao">
             </div>
+
+            <section id="usuariosCadastrados" class="recomendacoes">
+                <div class="container">
+                    <div class="usuarios-container">
+                        <h1 class="titulosH1">Usuários Cadastrados</h1>
+                    </div>
+                    <div id="usuarios-container" class="usuarios-container"></div>
+                </div>
+            </section>
+
             <section id="recomendacoesItens" class="recomendacoes">
                 <div class="container">
                     <div class="destaques-container">
@@ -115,7 +125,7 @@
 
     <script src="scripts/loginGerenciador.js"></script>
     <script src="scripts/jwt-login.js"></script>
-    <script src="scripts/script.js"></script>
+    <script src="scripts/script.js"></script> 
 </body>
 
 </html>

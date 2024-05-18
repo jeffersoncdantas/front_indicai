@@ -294,3 +294,10 @@ label {
 .avaliacao-comentario p {
     margin: 10px 0; 
 }
+
+#usuarios-container {
+    display: flex;
+    flex-wrap: wrap; /* Isso permite que os cards quebrem para a próxima linha quando não houver mais espaço */
+    justify-content: space-between; /* Isso distribuirá os cards horizontalmente */
+    margin-left: 1rem;
+}
