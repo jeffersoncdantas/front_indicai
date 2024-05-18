@@ -215,6 +215,43 @@ function salvarAvaliacao() {
     asyncCriarAvaliacao(dadosAvaliacao, inicializarAvaliacao, errorHandler);
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+    // Verifica se o usuário está logado
+    const idUsuario = localStorage.getItem("idUsuario");
+    if (idUsuario) {
+        // Define o valor do campo txtIdUsuarioA como ID do usuário
+        document.getElementById('txtIdUsuarioA').value = idUsuario;
+
+        // Verifica o tipo de usuário
+        fetch(`https://indicai.onrender.com/api/usuarios/${idUsuario}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch user information');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const roleUsuario = data.role;
+                const painelNavBtn = document.getElementById('painel-nav-btn');
+
+                if (painelNavBtn) {
+                    if (roleUsuario === 'ADMIN') {
+                        painelNavBtn.style.display = 'block';
+                    } else {
+                        painelNavBtn.style.display = 'none';
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Failed to fetch user information:', error);
+            });
+    }
+});
 //Funcoes Rest
 
 async function asyncLerSeries(proxsucesso, proxerro) {

@@ -7,6 +7,17 @@
      --icon-color: #F3F3F3;
  }
 
+ html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.full-height-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
 
  .sectionLoginSignUp {
      margin-top: 5rem;
@@ -222,20 +233,29 @@
          color: var(--text-color-dark);
      }
  }
-.perfil-container{
-    float: right;
-    margin-right: 2rem;
-    margin-top: 2rem;
 
-    img{
-        width: 50%;
-    }
-}
+ .perfil-container {
+     float: right;
+     margin-right: 2rem;
+     margin-top: 2rem;
 
-#message-login{
-    color: black;
-}
+     img {
+         width: 50%;
+     }
+ }
 
-#message-cadastro{
-    color: black;
-}
+ #message-login {
+     color: black;
+ }
+
+ #message-cadastro {
+     color: black;
+ }
+
+ #corpoTabelaAvaliacao {
+     margin-left: 2rem;
+ }
+
+ #btnVoltar {
+     margin-left: 2rem;
+ }

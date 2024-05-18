@@ -23,11 +23,11 @@
             <div class="navbar-links" id="nav-links">
                 <ul>
                     <li id="painel-nav-btn" style="display: none;"><a href="painelGerenciador.html">PAINEL</a></li>
-                    <li id="home-nav-btn" style="display: none;"><a href="index.html">HOME</a></li>
+                    <!-- <li id="home-nav-btn" style="display: none;"><a href="index.html">HOME</a></li> -->
                     <li id="filmes-nav-btn" style="display: none;"><a href="filmes.html">FILMES</a></li>
                     <li id="series-nav-btn" style="display: none;"><a href="series.html">SÉRIES</a></li>
                     <li id="livros-nav-btn" style="display: none;"><a href="livros.html">LIVROS</a></li>
-                    <li id="login-nav-btn" style="display: none;"><a href="login.html">SAIR</a></li>
+                    <li id="login-nav-btn" style="display: none;"><a href="login.html">MEU PERFIL</a></li>
                 </ul>
             </div>
         </div>
@@ -35,53 +35,55 @@
 
     <main>
         <!-- Tela de Login -->
-        <section id="sectionLoginSignUp" class="sectionLoginSignUp">
-            <div class="login-container" id="login-container">
-                <div class="form-container">
-                    <form class="form form-login" id="login-form">
-                        <h2 class="form-title">Login</h2>
-                        <div id="message-login"></div>
-                        <div class="form-input-container">
-                            <input id="username" type="username" class="form-input" placeholder="Username">
-                            <input id="password" type="password" class="form-input" placeholder="Senha">
-                        </div>
-                        <button type="submit" class="form-button">Logar</button>
-                        <p class="mobile-text" id="register-text">
-                            Não tem conta?
-                            <a href="#" id="open-register-mobile">Registre-se</a>
-                        </p>
-                    </form>
-                    <form class="form form-register" id="signup-form">
-                        <h2 class="form-title-light">Criar Conta</h2>
-                        <div id="message-cadastro"></div>
-                        <div class="form-input-container">
-                            <input id="username-cd" type="text" class="form-input" placeholder="Username">
-                            <input id="cidade-cd" type="text" class="form-input" placeholder="Cidade">
-                            <input id="estado-cd" type="text" class="form-input" placeholder="Estado">
-                            <input id="nascimento-cd" type="number" class="form-input" placeholder="Ano Nascimento">
-                            <input id="password-cd" type="password" class="form-input" placeholder="Senha">
-                        </div>
-                        <button type="submit" class="form-button" id="submit-cadastro">Cadastrar</button>
-                        <p class="mobile-text" id="login-text">
-                            Já tem conta?
-                            <a href="#" id="open-login-mobile">Login</a>
-                        </p>
-                    </form>
-                </div>
-                <div class="overlay-container">
-                    <div class="overlay">
-                        <h2 class="form-title form-title-light">Já tem conta?</h2>
-                        <p class="form-text">Faça login com as suas informações</p>
-                        <button class="form-button form-button-light" id="open-login">Entrar</button>
+        <div class="full-height-container">
+            <section id="sectionLoginSignUp" class="sectionLoginSignUp">
+                <div class="login-container" id="login-container">
+                    <div class="form-container">
+                        <form class="form form-login" id="login-form">
+                            <h2 class="form-title">Login</h2>
+                            <div id="message-login"></div>
+                            <div class="form-input-container">
+                                <input id="username" type="username" class="form-input" placeholder="Username">
+                                <input id="password" type="password" class="form-input" placeholder="Senha">
+                            </div>
+                            <button type="submit" class="form-button">Logar</button>
+                            <p class="mobile-text" id="register-text">
+                                Não tem conta?
+                                <a href="#" id="open-register-mobile">Registre-se</a>
+                            </p>
+                        </form>
+                        <form class="form form-register" id="signup-form">
+                            <h2 class="form-title-light">Criar Conta</h2>
+                            <div id="message-cadastro"></div>
+                            <div class="form-input-container">
+                                <input id="username-cd" type="text" class="form-input" placeholder="Username">
+                                <input id="cidade-cd" type="text" class="form-input" placeholder="Cidade">
+                                <input id="estado-cd" type="text" class="form-input" placeholder="Estado">
+                                <input id="nascimento-cd" type="number" class="form-input" placeholder="Ano Nascimento">
+                                <input id="password-cd" type="password" class="form-input" placeholder="Senha">
+                            </div>
+                            <button type="submit" class="form-button" id="submit-cadastro">Cadastrar</button>
+                            <p class="mobile-text" id="login-text">
+                                Já tem conta?
+                                <a href="#" id="open-login-mobile">Login</a>
+                            </p>
+                        </form>
                     </div>
-                    <div class="overlay">
-                        <h2 class="form-title form-title-light">Cadastre-se</h2>
-                        <p class="form-text">Cadastro rápido e fácil</p>
-                        <button class="form-button form-button-light" id="open-register">Cadastrar</button>
+                    <div class="overlay-container">
+                        <div class="overlay">
+                            <h2 class="form-title form-title-light">Já tem conta?</h2>
+                            <p class="form-text">Faça login com as suas informações</p>
+                            <button class="form-button form-button-light" id="open-login">Entrar</button>
+                        </div>
+                        <div class="overlay">
+                            <h2 class="form-title form-title-light">Cadastre-se</h2>
+                            <p class="form-text">Cadastro rápido e fácil</p>
+                            <button class="form-button form-button-light" id="open-register">Cadastrar</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
 
         <section id="containerPerfil" style="display: none;">
             <div class="perfil-container">
@@ -91,20 +93,29 @@
 
                 <input type="button" value="Sair" onclick="deslogar()" id="logout-button" class="botao">
             </div>
-            <section id="recomendacoesFilmes" class="recomendacoes">
+            <section id="recomendacoesItens" class="recomendacoes">
                 <div class="container">
                     <div class="destaques-container">
                         <h1 class="titulosH1">Avaliações</h1>
                     </div>
-                    <div id="filmes-container" class="cards-container"></div>
+                    <div id="items-container" class="cards-container"></div>
+                </div>
+            </section>
+
+            <section id="avalicaoItem" style="display: none;">
+                <input type="button" value="Voltar" onclick="voltarRecomendacoes()" id="btnVoltar" class="botao">
+                <h1 class="titulosH1">Avaliações Registradas</h1>
+                <div class="table-container" id="corpoTabelaAvaliacao">
                 </div>
             </section>
         </section>
+
 
     </main>
 
     <script src="scripts/loginGerenciador.js"></script>
     <script src="scripts/jwt-login.js"></script>
+    <script src="scripts/script.js"></script>
 </body>
 
 </html>
