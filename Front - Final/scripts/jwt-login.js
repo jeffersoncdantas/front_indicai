@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const username = localStorage.getItem('username');
     const idUsuario = localStorage.getItem('idUsuario');
 
+    
+
     if (token && username && idUsuario) {
         sectionLoginSignUp.style.display = 'none';
         containerPerfil.style.display = 'block';
@@ -133,8 +135,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         if (painelNavBtn) {
                             if (roleUsuario === 'ADMIN') {
+                                
+                                
+
                                 // Se o papel for ADMIN, redireciona para painelGerenciador.html
                                 window.location.href = 'painelGerenciador.html';
+                                exibirUsuarios();
                                 painelNavBtn.style.display = 'block';
                                 loginNavBtn.style.display = 'block';
                                 filmesNavBtn.style.display = 'none'; // Oculta os botões de filmes, séries e livros
@@ -246,6 +252,10 @@ function preencherTabelaFilme(avaliacoes) {
 let itemClicadoId = null;
 let itemClicadoUrl = null;
 let itemClicadoTitulo = null;
+
+// document.addEventListener('DOMContentLoaded', function () {
+//     exibirUsuarios();
+// });
 
 function exibirAvaliacoesDoUsuario(avaliacoes) {
     const itensContainer = document.getElementById('items-container');
@@ -362,11 +372,16 @@ function errorHandler(error) {
 function voltarRecomendacoes() {
     document.getElementById('recomendacoesItens').style.display = 'block';
     document.getElementById('avalicaoItem').style.display = 'none';
-}
+}   
 
 document.addEventListener('DOMContentLoaded', function () {
-    const containerUsuarios= document.getElementById('usuarios-container');
+    exibirUsuarios();
+});
 
+function exibirUsuarios() {
+    console.log("chamei")
+    const containerUsuarios = document.getElementById('usuarios-container');
+    const containerTitulo = document.getElementById('usuarios-containerr')
     // Verifica se o usuário está logado como ADMIN
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('username');
@@ -389,6 +404,12 @@ document.addEventListener('DOMContentLoaded', function () {
             // Limpa o conteúdo atual da seção de usuários cadastrados
             containerUsuarios.innerHTML = "";
 
+            // Adiciona o título do filme ao contêiner
+            const tituloUsers= document.createElement('h1');
+            tituloUsers.classList.add('titulosH1');
+            tituloUsers.textContent = "Usuarios Cadastrados"; // Supondo que o título do filme esteja no campo titulo
+            containerTitulo.appendChild(tituloUsers);
+
             // Itera sobre cada usuário e cria um card para exibi-lo
             data.forEach(usuario => {
                 const usuarioCard = criarUsuarioCard(usuario);
@@ -401,7 +422,50 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
         console.error('Usuário não autorizado.');
     }
-});
+}
+
+// function exibirUsuarios() {
+//     // document.addEventListener('DOMContentLoaded', function () {
+//         const containerUsuarios= document.getElementById('usuarios-container');
+    
+//         // Verifica se o usuário está logado como ADMIN
+//         const token = localStorage.getItem('token');
+//         const username = localStorage.getItem('username');
+//         const idUsuario = localStorage.getItem('idUsuario');
+    
+//         if (token && username && idUsuario) {
+//             fetch('https://indicai.onrender.com/api/usuarios', {
+//                 method: 'GET',
+//                 headers: {
+//                     'Authorization': `Bearer ${token}`
+//                 }
+//             })
+//             .then(response => {
+//                 if (!response.ok) {
+//                     throw new Error('Failed to fetch users');
+//                 }
+//                 return response.json();
+//             })
+//             .then(data => {
+//                 // Limpa o conteúdo atual da seção de usuários cadastrados
+//                 containerUsuarios.innerHTML = "";
+    
+//                 // Itera sobre cada usuário e cria um card para exibi-lo
+//                 data.forEach(usuario => {
+//                     const usuarioCard = criarUsuarioCard(usuario);
+//                     containerUsuarios.appendChild(usuarioCard);
+//                 });
+//             })
+//             .catch(error => {
+//                 console.error('Failed to fetch users:', error);
+//             });
+//         } else {
+//             console.error('Usuário não autorizado.');
+//         }
+//     // });
+
+// }
+
 
 function criarUsuarioCard(usuario) {
     // Cria um elemento card para representar o usuário
@@ -434,7 +498,11 @@ function criarUsuarioCard(usuario) {
 async function asyncLerAvaliacoesDoUsuario(proxsucesso, proxerro) {
     var idUsuario = localStorage.getItem("idUsuario");
     const URL = `https://indicai.onrender.com/api/avaliacoes/usuario/${idUsuario}`;
-    fetch(URL)
+    fetch(URL, {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem("token")}`
+        }
+    })
         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta.json(); })
         .then(jsonResponse => proxsucesso(jsonResponse))
         .catch(proxerro);
