@@ -23,7 +23,6 @@ var criandoNovoFilme = false;
 
 var token = localStorage.getItem("token");
 
-
 inicializarFilme();
 
 function inicializarFilme() {
@@ -46,6 +45,8 @@ function errorHandler(error) {
 let filmeClicadoId = null;
 let filmeClicadoUrl = null;
 let filmeClicadoTitulo = null;
+//let generoFilme = null;
+
 
 function exibirFilmes(filmes) {
     const filmesContainer = document.getElementById('filmes-container');
@@ -74,6 +75,8 @@ function exibirFilmes(filmes) {
             filmeClicadoId = filme.id;
             filmeClicadoUrl = filme.urlCapa;
             filmeClicadoTitulo = filme.titulo;
+            var generoFilme = filme.genero.name;
+            exibirDetalhesRecomendacoesFilme(generoFilme);
 
             txtIdFilme.value = filmeClicadoId;
 
@@ -95,6 +98,8 @@ function exibirFilmes(filmes) {
 
         // Adiciona o card ao container de filmes
         filmesContainer.appendChild(card);
+
+       
     });
 }
 
@@ -128,6 +133,7 @@ function inicializarAvaliacao() {
     btnSalvarAvaliacao.disabled = false;
 
     listarTodasAvaliacoes();
+    
 }
 
 function listarTodasAvaliacoes(idFilme) {
@@ -195,6 +201,40 @@ function preencherTabelaAvaliacoes(avaliacoes) {
         }
     });
 }
+
+// function preencherTabelaRecomendacoes(filmes) {
+//     const corpoTabelaRecomendacoesFilmes = document.getElementById('corpoTabelaRecomendacoesFilmes');
+//     corpoTabelaRecomendacoesFilmes.innerHTML = ""; // Limpa o conteúdo atual da tabela
+
+//     filmes.forEach(filme => {
+//         // Cria um novo elemento <div> para representar o filme
+//         const filmeDiv = document.createElement('div');
+//         filmeDiv.classList.add('filme-item');
+
+//         const imagemFilme = document.createElement('img');
+//         imagemFilme.src = filme.urlImagem; // Supondo que a URL da imagem esteja no campo urlImagem
+//         imagemFilme.alt = filme.titulo; // Supondo que o título do filme esteja no campo titulo
+//         filmeDiv.appendChild(imagemFilme);
+
+//         const conteudo = document.createElement('div'); // Novo elemento para o conteúdo
+//         conteudo.classList.add('conteudo');
+
+//         const tituloFilme = document.createElement('h3');
+//         tituloFilme.textContent = filme.titulo; // Supondo que o título do filme esteja no campo titulo
+//         conteudo.appendChild(tituloFilme);
+
+//         // Adiciona a descrição do filme ao conteúdo
+//         const descricao = document.createElement('p');
+//         descricao.textContent = filme.descricao; // Supondo que a descrição do filme esteja no campo descricao
+//         conteudo.appendChild(descricao);
+
+//         // Adiciona o conteúdo ao filmeDiv
+//         filmeDiv.appendChild(conteudo);
+
+//         // Adiciona o filmeDiv ao corpo da tabela
+//         corpoTabelaRecomendacoesFilmes.appendChild(filmeDiv);
+//     });
+// }
 
 function errorHandler(error) {
     paragrafoMensagemAvaliacao.textContent = "Erro ao listar Filmes (código " + error.message + ")";
@@ -298,16 +338,29 @@ async function asyncCriarAvaliacao(dadosAvaliacao, proxsucesso, proxerro) {
     const postRequest = {
         method: 'POST',
         body: JSON.stringify(dadosAvaliacao),
-        headers: { 
+        headers: {
             'Content-type': 'application/json',
             'Authorization': `Bearer ${token}`
-         }
+        }
     };
     fetch(URL, postRequest)
         .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
         .then(resposta => resposta.json())
         .then(jsonResponse => proxsucesso())
         .catch(proxerro);
+}
+
+async function buscarFilmesPorGenero(genero) {
+    try {
+        const response = await fetch(`http://localhost:8080/api/filmes?genero=${genero}`);
+        if (!response.ok) {
+            throw new Error(`Erro ao buscar filmes: ${response.status}`);
+        }
+        const filmes = await response.json();
+        return filmes;
+    } catch (error) {
+        console.error('Erro ao buscar filmes:', error);
+    }
 }
 
 // async function asyncLerAvaliacoes(idFilme, proxsucesso, proxerro) {
@@ -336,3 +389,62 @@ async function asyncCriarAvaliacao(dadosAvaliacao, proxsucesso, proxerro) {
 //         .then(jsonResponse => proxsucesso(jsonResponse))
 //         .catch(proxerro);
 // }
+
+//Tentei fazer aqui pra ele mostrar as recomendações do filme
+
+function exibirDetalhesRecomendacoesFilme(generoFilme) {
+    listarTodasRecomendacoesFilme(generoFilme);
+}
+
+function listarTodasRecomendacoesFilme(generoFilme) {
+    asyncLerRecomendacoes(generoFilme, preencherTabelaRecomendacoesFilme, errorHandler);
+}
+
+function preencherTabelaRecomendacoesFilme(recomendacao) {
+    const corpoTabelaRecomendacoesFilmes = document.getElementById('corpoTabelaRecomendacoesFilmes');
+    corpoTabelaRecomendacoesFilmes.innerHTML = ""; // Limpa o conteúdo atual da tabela
+
+    recomendacao.forEach(filme => {
+        // Cria um novo elemento <div> para representar o filme
+        const recomendacaoDiv = document.createElement('div');
+        recomendacaoDiv.classList.add('card');
+
+        // Cria um contêiner para a imagem e o título
+        const conteudoRecomendacao = document.createElement('div');
+        conteudoRecomendacao.classList.add('filmes-container');
+
+        // Adiciona o título do filme ao contêiner
+        const tituloFilme = document.createElement('h3');
+        tituloFilme.textContent = filme.titulo; // Supondo que o título do filme esteja no campo titulo
+        conteudoRecomendacao.appendChild(tituloFilme);
+
+        // Adiciona a imagem do filme ao contêiner
+        const imagemFilme = document.createElement('img');
+        imagemFilme.src = filme.urlCapa; // Supondo que a URL da imagem esteja no campo urlImagem
+        imagemFilme.alt = filme.titulo; // Supondo que o título do filme esteja no campo titulo
+        conteudoRecomendacao.appendChild(imagemFilme);
+
+        // Adiciona o contêiner ao div principal da recomendação
+        recomendacaoDiv.appendChild(conteudoRecomendacao);
+
+        // Adiciona o div de recomendação ao corpo da tabela
+        corpoTabelaRecomendacoesFilmes.appendChild(recomendacaoDiv);
+    });
+}
+
+function errorHandler(error) {
+    paragrafoMensagemAvaliacao.textContent = "Erro ao listar recomendacao (código " + error.message + ")";
+}
+
+async function asyncLerRecomendacoes(generoFilme, proxsucesso, proxerro) {
+    const URL = `https://indicai.onrender.com/api/filmes?genero=${generoFilme}`;
+    fetch(URL, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+        .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+        .then(resposta => resposta.json())
+        .then(jsonResponse => proxsucesso(jsonResponse))
+        .catch(proxerro);
+}

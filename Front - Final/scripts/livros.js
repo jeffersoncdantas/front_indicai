@@ -79,6 +79,9 @@ function exibirLivros(livros) {
             livroClicadoUrl = livro.urlCapa;
             livroClicadoTitulo = livro.titulo;
 
+            var generoLivro = livro.genero.name;
+            exibirDetalhesRecomendacoesLivro(generoLivro);
+
             txtIdLivro.value = livroClicadoId;
 
             document.getElementById('recomendacoesLivros').style.display = 'none';
@@ -215,7 +218,7 @@ function salvarAvaliacao() {
     const errorHandler = function (error) {
         paragrafoMensagemAvaliacao.textContent = 'Erro ao criar nova Avaliação (código ' + error.message + ')';
     }
-    asyncCriarAvaliacao(dadosAvaliacao, inicializarAvaliacao, errorHandler); // Aqui era dadosFilme, corrigido para dadosAvaliacao
+    asyncCriarAvaliacao(dadosAvaliacao, inicializarAvaliacao, errorHandler); // Aqui era dadosLivro, corrigido para dadosAvaliacao
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -354,3 +357,60 @@ async function asyncLerLivros(proxsucesso, proxerro) {
 //         .then(jsonResponse => proxsucesso(jsonResponse))
 //         .catch(proxerro);
 // }
+
+function exibirDetalhesRecomendacoesLivro(generoLivro) {
+    listarTodasRecomendacoesLivro(generoLivro);
+}
+
+function listarTodasRecomendacoesLivro(generoLivro) {
+    asyncLerRecomendacoesLivros(generoLivro, preencherTabelaRecomendacoesLivro, errorHandler);
+}
+
+function preencherTabelaRecomendacoesLivro(recomendacao) {
+    const corpoTabelaRecomendacoesLivros = document.getElementById('corpoTabelaRecomendacoesLivros');
+    corpoTabelaRecomendacoesLivros.innerHTML = ""; // Limpa o conteúdo atual da tabela
+
+    recomendacao.forEach(Livro => {
+        // Cria um novo elemento <div> para representar o Livro
+        const recomendacaoDiv = document.createElement('div');
+        recomendacaoDiv.classList.add('card');
+
+        // Cria um contêiner para a imagem e o título
+        const conteudoRecomendacao = document.createElement('div');
+        conteudoRecomendacao.classList.add('livros-container');
+
+        // Adiciona o título do Livro ao contêiner
+        const tituloLivro = document.createElement('h3');
+        tituloLivro.textContent = Livro.titulo; // Supondo que o título do Livro esteja no campo titulo
+        conteudoRecomendacao.appendChild(tituloLivro);
+
+        // Adiciona a imagem do Livro ao contêiner
+        const imagemLivro = document.createElement('img');
+        imagemLivro.src = Livro.urlCapa; // Supondo que a URL da imagem esteja no campo urlImagem
+        imagemLivro.alt = Livro.titulo; // Supondo que o título do Livro esteja no campo titulo
+        conteudoRecomendacao.appendChild(imagemLivro);
+
+        // Adiciona o contêiner ao div principal da recomendação
+        recomendacaoDiv.appendChild(conteudoRecomendacao);
+
+        // Adiciona o div de recomendação ao corpo da tabela
+        corpoTabelaRecomendacoesLivros.appendChild(recomendacaoDiv);
+    });
+}
+
+function errorHandler(error) {
+    paragrafoMensagemAvaliacao.textContent = "Erro ao listar recomendacao (código " + error.message + ")";
+}
+
+async function asyncLerRecomendacoesLivros(generoLivro, proxsucesso, proxerro) {
+    const URL = `https://indicai.onrender.com/api/livros?genero=${generoLivro}`;
+    fetch(URL, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+        .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+        .then(resposta => resposta.json())
+        .then(jsonResponse => proxsucesso(jsonResponse))
+        .catch(proxerro);
+}

@@ -75,6 +75,9 @@ function exibirSeries(series) {
             serieClicadoUrl = serie.urlCapa;
             serieClicadoTitulo = serie.titulo;
 
+            var generoSerie = serie.genero.name;
+            exibirDetalhesRecomendacoesSerie(generoSerie);
+
             txtIdSerie.value = serieClicadoId;
 
             document.getElementById('recomendacoesSeries').style.display = 'none';
@@ -353,3 +356,59 @@ async function asyncLerAvaliacoes(idSerie, proxsucesso, proxerro) {
 //         .catch(proxerro);
 // }
 
+function exibirDetalhesRecomendacoesSerie(generoSerie) {
+    listarTodasRecomendacoesSerie(generoSerie);
+}
+
+function listarTodasRecomendacoesSerie(generoSerie) {
+    asyncLerRecomendacoesSeries(generoSerie, preencherTabelaRecomendacoesSerie, errorHandler);
+}
+
+function preencherTabelaRecomendacoesSerie(recomendacao) {
+    const corpoTabelaRecomendacoesSeries = document.getElementById('corpoTabelaRecomendacoesSeries');
+    corpoTabelaRecomendacoesSeries.innerHTML = ""; // Limpa o conteúdo atual da tabela
+
+    recomendacao.forEach(Serie => {
+        // Cria um novo elemento <div> para representar o Serie
+        const recomendacaoDiv = document.createElement('div');
+        recomendacaoDiv.classList.add('card');
+
+        // Cria um contêiner para a imagem e o título
+        const conteudoRecomendacao = document.createElement('div');
+        conteudoRecomendacao.classList.add('Series-container');
+
+        // Adiciona o título do Serie ao contêiner
+        const tituloSerie = document.createElement('h3');
+        tituloSerie.textContent = Serie.titulo; // Supondo que o título do Serie esteja no campo titulo
+        conteudoRecomendacao.appendChild(tituloSerie);
+
+        // Adiciona a imagem do Serie ao contêiner
+        const imagemSerie = document.createElement('img');
+        imagemSerie.src = Serie.urlCapa; // Supondo que a URL da imagem esteja no campo urlImagem
+        imagemSerie.alt = Serie.titulo; // Supondo que o título do Serie esteja no campo titulo
+        conteudoRecomendacao.appendChild(imagemSerie);
+
+        // Adiciona o contêiner ao div principal da recomendação
+        recomendacaoDiv.appendChild(conteudoRecomendacao);
+
+        // Adiciona o div de recomendação ao corpo da tabela
+        corpoTabelaRecomendacoesSeries.appendChild(recomendacaoDiv);
+    });
+}
+
+function errorHandler(error) {
+    paragrafoMensagemAvaliacao.textContent = "Erro ao listar recomendacao (código " + error.message + ")";
+}
+
+async function asyncLerRecomendacoesSeries(generoSerie, proxsucesso, proxerro) {
+    const URL = `https://indicai.onrender.com/api/series?genero=${generoSerie}`;
+    fetch(URL, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+        .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+        .then(resposta => resposta.json())
+        .then(jsonResponse => proxsucesso(jsonResponse))
+        .catch(proxerro);
+}
